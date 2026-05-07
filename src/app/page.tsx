@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import {
   type Locale,
   localeLabels,
@@ -160,10 +161,10 @@ export default function Home() {
             </div>
 
             <nav className="hidden items-center gap-9 text-sm text-white/70 md:flex">
-              <a className="hover:text-[#C9A84C] transition-colors" href="#why-fsa">{t.nav_programs}</a>
-              <a className="hover:text-[#C9A84C] transition-colors" href="#programs">{t.nav_philosophy}</a>
-              <a className="hover:text-[#C9A84C] transition-colors" href="#parents">{t.nav_parents}</a>
-              <a className="hover:text-[#C9A84C] transition-colors" href="#coaches">{t.nav_contact}</a>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/programs">{t.nav_programs}</Link>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/#why-fsa">{t.nav_philosophy}</Link>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/parents">{t.nav_parents}</Link>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/contact">{t.nav_contact}</Link>
             </nav>
 
             <div className="flex items-center gap-3">
