@@ -92,83 +92,51 @@ export default function Home() {
 
   const pillars = [t.pillar1, t.pillar2, t.pillar3, t.pillar4];
 
-  // ── Static data for new sections ─────────────────────────────────────────
+  // ── SVG icon helpers ──────────────────────────────────────────────────────
+  const IconGlobe = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>);
+  const IconCpu  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>);
+  const IconLayers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>);
+  const IconMic  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0M12 21v-4M8 21h8"/></svg>);
+  const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>);
+  const IconFile = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>);
+  const IconMsg  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
+  const IconUsers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>);
+  const IconBook = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>);
+  const IconTarget = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
+  const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>);
+
+  // ── Section data (fully translated) ──────────────────────────────────────
   const whyCards = [
-    {
-      icon: "🌐",
-      title: "Global Communication",
-      desc: "Students develop the confidence to speak, present, and collaborate in English — skills that open doors in any country or career.",
-    },
-    {
-      icon: "🤖",
-      title: "AI & Research Literacy",
-      desc: "We teach students to use AI tools responsibly, frame research questions, and synthesise information like professionals.",
-    },
-    {
-      icon: "📁",
-      title: "Portfolio-Based Learning",
-      desc: "Every course produces real outputs — slides, reports, videos, and pitches — that students keep and showcase.",
-    },
+    { icon: <IconGlobe />, title: t.why_card1_title, desc: t.why_card1_desc },
+    { icon: <IconCpu  />, title: t.why_card2_title, desc: t.why_card2_desc },
+    { icon: <IconLayers />, title: t.why_card3_title, desc: t.why_card3_desc },
   ];
 
   const programs = [
-    {
-      id: "future-communicator",
-      name: "Future Communicator",
-      ages: "Ages 10–13",
-      skills: ["Public speaking", "Structured storytelling", "English fluency"],
-      accent: "from-[#0B2352] to-[#0C1B36]",
-    },
-    {
-      id: "ai-research-builder",
-      name: "AI & Research Builder",
-      ages: "Ages 12–16",
-      skills: ["AI tool usage", "Research methodology", "Critical analysis"],
-      accent: "from-[#0C1B36] to-[#071226]",
-    },
-    {
-      id: "portfolio-project-studio",
-      name: "Portfolio Project Studio",
-      ages: "Ages 14–18",
-      skills: ["Project management", "Presentation design", "Portfolio creation"],
-      accent: "from-[#071226] to-[#0B2352]",
-    },
+    { id: "future-communicator",    name: t.prog1_name, ages: t.prog1_ages, skills: [t.prog1_skill1, t.prog1_skill2, t.prog1_skill3], accent: "from-[#0B2352] to-[#0C1B36]" },
+    { id: "ai-research-builder",    name: t.prog2_name, ages: t.prog2_ages, skills: [t.prog2_skill1, t.prog2_skill2, t.prog2_skill3], accent: "from-[#0C1B36] to-[#071226]" },
+    { id: "portfolio-project-studio", name: t.prog3_name, ages: t.prog3_ages, skills: [t.prog3_skill1, t.prog3_skill2, t.prog3_skill3], accent: "from-[#071226] to-[#0B2352]" },
   ];
 
   const outcomes = [
-    { icon: "🎤", text: "Present confidently in English" },
-    { icon: "🤖", text: "Use AI responsibly and effectively" },
-    { icon: "🔬", text: "Research and structure ideas clearly" },
-    { icon: "📂", text: "Create portfolio-ready projects" },
-    { icon: "💬", text: "Communicate with global fluency" },
+    { icon: <IconMic    />, text: t.outcome1 },
+    { icon: <IconCpu    />, text: t.outcome2 },
+    { icon: <IconSearch />, text: t.outcome3 },
+    { icon: <IconFile   />, text: t.outcome4 },
+    { icon: <IconMsg    />, text: t.outcome5 },
   ];
 
   const coaches = [
-    {
-      id: "founder-lead",
-      role: "Founder / Program Lead",
-      title: "Curriculum design, coaching philosophy, and program vision.",
-      initials: "FL",
-    },
-    {
-      id: "communication-coach",
-      role: "Communication Coach",
-      title: "Public speaking, English fluency, and presentation delivery.",
-      initials: "CC",
-    },
-    {
-      id: "ai-research-coach",
-      role: "AI & Research Coach",
-      title: "AI literacy, research methods, and structured critical thinking.",
-      initials: "AR",
-    },
+    { id: "founder-lead",       role: t.coach1_role, title: t.coach1_desc, initials: "FL" },
+    { id: "communication-coach", role: t.coach2_role, title: t.coach2_desc, initials: "CC" },
+    { id: "ai-research-coach",  role: t.coach3_role, title: t.coach3_desc, initials: "AR" },
   ];
 
   const parentReasons = [
-    { icon: "👥", title: "Small Group Learning", desc: "Every student gets real attention, feedback, and coaching — not a seat in a crowd." },
-    { icon: "🗣️", title: "English-Based Environment", desc: "Immersive English learning builds fluency naturally through real tasks, not drills." },
-    { icon: "🚀", title: "Practical Future Skills", desc: "Communication, AI, research, and presentation — skills schools don't prioritise." },
-    { icon: "✅", title: "Clear Project Outcomes", desc: "Parents see tangible results: portfolios, presentations, and measurable progress." },
+    { icon: <IconUsers  />, title: t.parent1_title, desc: t.parent1_desc },
+    { icon: <IconMsg    />, title: t.parent2_title, desc: t.parent2_desc },
+    { icon: <IconTarget />, title: t.parent3_title, desc: t.parent3_desc },
+    { icon: <IconCheck  />, title: t.parent4_title, desc: t.parent4_desc },
   ];
 
   return (
@@ -269,19 +237,19 @@ export default function Home() {
       {/* ── 1. Why FSA ────────────────────────────────────────────────────── */}
       <section id="why-fsa" className="bg-[#F4F7FA] px-6 py-28 text-[#071226]">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">01 — Why FSA</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.why_eyebrow}</div>
           <div className="mb-16 grid gap-10 lg:grid-cols-2">
             <h2 className="font-serif text-5xl leading-tight md:text-6xl">
-              Built for the skills that matter most.
+              {t.why_h2}
             </h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">
-              Future Skill Academy helps students build real-world communication, AI literacy, presentation, research, and project skills — through English-based, portfolio-driven learning.
+              {t.why_desc}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {whyCards.map((card) => (
               <div key={card.title} className="group rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-lg hover:-translate-y-1 duration-300">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#071226] text-2xl">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#071226] text-[#C9A84C]">
                   {card.icon}
                 </div>
                 <h3 className="font-serif text-2xl text-[#071226]">{card.title}</h3>
@@ -295,13 +263,13 @@ export default function Home() {
       {/* ── 2. Programs Preview ───────────────────────────────────────────── */}
       <section id="programs" className="bg-[#071226] px-6 py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">02 — Programs</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.prog_eyebrow}</div>
           <div className="mb-16 grid gap-10 lg:grid-cols-2">
             <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
-              Three pathways. One clear direction.
+              {t.prog_h2}
             </h2>
             <p className="self-end text-xl leading-relaxed text-white/60">
-              Each program is designed for a specific age group and skill set — progressing from communication foundations to advanced AI research and portfolio production.
+              {t.prog_desc}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -322,7 +290,7 @@ export default function Home() {
                   id={`program-learn-more-${prog.id}`}
                   className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-2.5 text-sm text-white/80 transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
                 >
-                  Learn More →
+                  {t.prog_learn_more}
                 </a>
               </div>
             ))}
@@ -333,19 +301,19 @@ export default function Home() {
       {/* ── 3. Student Outcomes ───────────────────────────────────────────── */}
       <section id="outcomes" className="bg-[#F4F7FA] px-6 py-28 text-[#071226]">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">03 — Student Outcomes</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.outcomes_eyebrow}</div>
           <div className="mb-16 max-w-3xl">
             <h2 className="font-serif text-5xl leading-tight md:text-6xl">
-              What students leave with.
+              {t.outcomes_h2}
             </h2>
             <p className="mt-6 text-xl leading-relaxed text-slate-600">
-              After completing an FSA program, students don&apos;t just gain knowledge — they gain capabilities they can demonstrate.
+              {t.outcomes_desc}
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {outcomes.map((item, i) => (
               <div key={i} className="flex flex-col items-start gap-4 rounded-[24px] border border-slate-200 bg-white p-7 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 duration-300">
-                <span className="text-3xl">{item.icon}</span>
+                <span className="text-[#C9A84C]">{item.icon}</span>
                 <p className="font-serif text-lg leading-snug text-[#071226]">{item.text}</p>
               </div>
             ))}
@@ -356,13 +324,13 @@ export default function Home() {
       {/* ── 4. Coaches Preview ────────────────────────────────────────────── */}
       <section id="coaches" className="bg-[#071226] px-6 py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">04 — Our Coaches</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.coaches_eyebrow}</div>
           <div className="mb-16 grid gap-10 lg:grid-cols-2">
             <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
-              Learn from international coaches and mentors.
+              {t.coaches_h2}
             </h2>
             <p className="self-end text-xl leading-relaxed text-white/60">
-              Every FSA coach brings real-world expertise and a passion for developing the next generation of communicators, researchers, and creators.
+              {t.coaches_desc}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -382,7 +350,7 @@ export default function Home() {
               id="coaches-meet-team-btn"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
             >
-              Meet the Full Team →
+              {t.coaches_cta}
             </a>
           </div>
         </div>
@@ -391,19 +359,19 @@ export default function Home() {
       {/* ── 5. Parent Trust ───────────────────────────────────────────────── */}
       <section id="parents" className="bg-white px-6 py-28 text-[#071226]">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">05 — For Parents</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.parents_eyebrow}</div>
           <div className="mb-16 max-w-3xl">
             <h2 className="font-serif text-5xl leading-tight md:text-6xl">
-              Why parents choose FSA.
+              {t.parents_h2}
             </h2>
             <p className="mt-6 text-xl leading-relaxed text-slate-600">
-              Families who choose FSA are investing in skills that compound — skills their children will use for decades, not just for the next exam.
+              {t.parents_desc}
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {parentReasons.map((reason, i) => (
               <div key={i} className="rounded-[28px] border border-slate-200 bg-[#F4F7FA] p-8 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#071226] text-xl">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#071226] text-[#C9A84C]">
                   {reason.icon}
                 </div>
                 <h3 className="font-serif text-xl text-[#071226]">{reason.title}</h3>
@@ -417,12 +385,12 @@ export default function Home() {
       {/* ── 6. Final CTA ──────────────────────────────────────────────────── */}
       <section id="contact" className="bg-[#071226] px-6 py-28">
         <div className="mx-auto max-w-5xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">Start Here</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.cta_eyebrow}</div>
           <h2 className="font-serif text-5xl leading-tight text-white md:text-7xl">
-            Book a Free Trial Class.
+            {t.cta_h2}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/65">
-            See what FSA is about — in one free class. No commitment, no pressure. Just real learning, real feedback, and a clear sense of whether FSA is the right fit for your child.
+            {t.cta_desc}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a
@@ -430,14 +398,14 @@ export default function Home() {
               id="final-cta-trial-btn"
               className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]"
             >
-              Book Free Trial →
+              {t.cta_btn1}
             </a>
             <a
               href="/programs"
               id="final-cta-programs-btn"
               className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
             >
-              Explore Programs
+              {t.cta_btn2}
             </a>
           </div>
         </div>
