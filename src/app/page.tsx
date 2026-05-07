@@ -74,8 +74,10 @@ function LanguageSwitcher({
 }
 
 // ─── Page ───────────────────────────────────────────────────────────────────
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function Home() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLanguage();
   const t = translations[locale];
 
   useEffect(() => {
@@ -128,7 +130,7 @@ export default function Home() {
   ];
 
   const coaches = [
-    { id: "founder-lead",       role: t.coach1_role, title: t.coach1_desc, initials: "FL" },
+    { id: "program-lead",       role: t.coach1_role, title: t.coach1_desc, initials: "PL" },
     { id: "communication-coach", role: t.coach2_role, title: t.coach2_desc, initials: "CC" },
     { id: "ai-research-coach",  role: t.coach3_role, title: t.coach3_desc, initials: "AR" },
   ];

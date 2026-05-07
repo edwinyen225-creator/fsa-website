@@ -60,8 +60,10 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function ParentsPage() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLanguage();
   const t = usePar(locale);
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 

@@ -53,8 +53,10 @@ const IconTarget = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCo
 const IconMap = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><path d="M9 3v15M15 6v15"/></svg>);
 const IconTracks = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>);
 
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function ProgramsPage() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLanguage();
   const p = usePT(locale);
   const t = translations[locale];
 

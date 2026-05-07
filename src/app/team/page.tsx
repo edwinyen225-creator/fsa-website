@@ -48,8 +48,10 @@ const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IconUsers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>);
 const IconHeart = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>);
 
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function TeamPage() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLanguage();
   const m = useTT(locale);
 
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
@@ -120,10 +122,10 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Founder */}
+      {/* Program Lead */}
       <section className="px-6 py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.founder_label}</div>
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.lead_label}</div>
           <div className="overflow-hidden rounded-[42px] border border-white/10 bg-white/5 backdrop-blur-sm">
             <div className="grid gap-0 lg:grid-cols-[360px_1fr]">
               {/* Avatar panel */}
@@ -132,11 +134,11 @@ export default function TeamPage() {
                   <span className="font-serif text-4xl text-[#C9A84C]">EY</span>
                 </div>
                 <div className="text-center">
-                  <div className="font-serif text-2xl text-white">{m.founder_name}</div>
-                  <div className="mt-1 text-sm text-[#C9A84C] uppercase tracking-[0.2em]">{m.founder_role}</div>
+                  <div className="font-serif text-2xl text-white">{m.lead_name}</div>
+                  <div className="mt-1 text-sm text-[#C9A84C] uppercase tracking-[0.2em]">{m.lead_role}</div>
                 </div>
                 <div className="flex flex-wrap justify-center gap-2 mt-2">
-                  {[m.founder_tag1, m.founder_tag2, m.founder_tag3].map(tag => (
+                  {[m.lead_tag1, m.lead_tag2, m.lead_tag3].map(tag => (
                     <span key={tag} className="rounded-full border border-white/15 px-4 py-1.5 text-xs text-white/60">{tag}</span>
                   ))}
                 </div>
@@ -144,7 +146,7 @@ export default function TeamPage() {
               {/* Bio panel */}
               <div className="flex flex-col justify-center p-10 md:p-14">
                 <div className="mb-3 text-xs uppercase tracking-[0.3em] text-white/35">About</div>
-                <p className="text-xl leading-relaxed text-white/75">{m.founder_bio}</p>
+                <p className="text-xl leading-relaxed text-white/75">{m.lead_bio}</p>
               </div>
             </div>
           </div>

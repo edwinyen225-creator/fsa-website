@@ -93,8 +93,10 @@ const IconEmail = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IconLine  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
 const IconMap   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>);
 
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function ContactPage() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLanguage();
   const c = ct[locale];
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 

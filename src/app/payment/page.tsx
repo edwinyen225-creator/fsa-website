@@ -112,8 +112,10 @@ const IconLink   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCo
 const IconDots   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>);
 const IconShield = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>);
 
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function PaymentPage() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const { locale, setLocale } = useLanguage();
   const t = py[locale];
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
