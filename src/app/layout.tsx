@@ -27,7 +27,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Future Skill Academy — Tokyo",
-  description: "FSA helps students develop communication, AI literacy, presentation, research, and real-world project skills — through English-based, portfolio-driven learning.",
+  description:
+    "Future Skill Academy is a premium Tokyo-based learning academy helping students build communication, AI literacy, presentation, research, and real-world project skills.",
+
+  openGraph: {
+    title: "Future Skill Academy — Tokyo",
+    description:
+      "Future Skill Academy is a premium Tokyo-based learning academy helping students build communication, AI literacy, presentation, research, and real-world project skills.",
+    siteName: "Future Skill Academy",
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Future Skill Academy — Tokyo",
+    description:
+      "Future Skill Academy is a premium Tokyo-based learning academy helping students build communication, AI literacy, presentation, research, and real-world project skills.",
+  },
 };
 
 export default function RootLayout({
