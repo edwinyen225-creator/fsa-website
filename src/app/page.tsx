@@ -2,28 +2,18 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import {
-  type Locale,
-  localeLabels,
-  localeNames,
-  translations,
-} from "@/lib/i18n";
+import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
+import { homepageTranslations } from "@/lib/homepage-i18n";
+import { useLanguage } from "@/hooks/useLanguage";
 
 // ─── Language switcher component ────────────────────────────────────────────
-function LanguageSwitcher({
-  locale,
-  onChange,
-}: {
-  locale: Locale;
-  onChange: (l: Locale) => void;
-}) {
+function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: Locale) => void }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node))
-        setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -73,163 +63,153 @@ function LanguageSwitcher({
   );
 }
 
-// ─── Page ───────────────────────────────────────────────────────────────────
-import { useLanguage } from "@/hooks/useLanguage";
+// ─── FAQ Item Component ─────────────────────────────────────────────────────
+function FaqItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-white/10 last:border-0">
+      <button onClick={() => setIsOpen(!isOpen)} className="flex w-full items-center justify-between py-6 text-left transition hover:text-[#C9A84C]">
+        <span className="font-serif text-xl">{question}</span>
+        <svg className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180 text-[#C9A84C]" : "text-white/40"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {isOpen && (
+        <div className="pb-6 pr-8 text-white/60 leading-relaxed text-lg">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
 
+// ─── Page ───────────────────────────────────────────────────────────────────
 export default function Home() {
   const { locale, setLocale } = useLanguage();
-  const t = translations[locale];
+  const t = homepageTranslations[locale];
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
 
-  const features: [string, string][] = [
-    [t.feature1_title, t.feature1_desc],
-    [t.feature2_title, t.feature2_desc],
-    [t.feature3_title, t.feature3_desc],
-    [t.feature4_title, t.feature4_desc],
-    [t.feature5_title, t.feature5_desc],
-    [t.feature6_title, t.feature6_desc],
+  // Icons
+  const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>);
+  const IconFile = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>);
+  const IconMessageCircle = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>);
+  const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.96-3.08 3 3 0 01-.34-5.58 2.5 2.5 0 011.32-4.24 2.5 2.5 0 011.98-3A2.5 2.5 0 019.5 2z"/><path d="M14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44 2.5 2.5 0 002.96-3.08 3 3 0 00.34-5.58 2.5 2.5 0 00-1.32-4.24 2.5 2.5 0 00-1.98-3A2.5 2.5 0 0014.5 2z"/></svg>);
+  const IconLayers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>);
+  const IconPresentation = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 01-2 2H5a2 2 0 01-2-2V3"/><path d="M12 16v4"/><path d="M8 20h8"/></svg>);
+
+  const classSteps = [
+    { num: "01", title: t.class_step1_title, desc: t.class_step1_desc },
+    { num: "02", title: t.class_step2_title, desc: t.class_step2_desc },
+    { num: "03", title: t.class_step3_title, desc: t.class_step3_desc },
+    { num: "04", title: t.class_step4_title, desc: t.class_step4_desc },
+    { num: "05", title: t.class_step5_title, desc: t.class_step5_desc },
+    { num: "06", title: t.class_step6_title, desc: t.class_step6_desc },
   ];
 
-  const pillars = [t.pillar1, t.pillar2, t.pillar3, t.pillar4];
-
-  // ── SVG icon helpers ──────────────────────────────────────────────────────
-  const IconGlobe = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>);
-  const IconCpu  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>);
-  const IconLayers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>);
-  const IconMic  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0M12 21v-4M8 21h8"/></svg>);
-  const IconSearch = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>);
-  const IconFile = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>);
-  const IconMsg  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
-  const IconUsers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>);
-  const IconBook = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>);
-  const IconTarget = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
-  const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>);
-
-  // ── Section data (fully translated) ──────────────────────────────────────
-  const whyCards = [
-    { icon: <IconGlobe />, title: t.why_card1_title, desc: t.why_card1_desc },
-    { icon: <IconCpu  />, title: t.why_card2_title, desc: t.why_card2_desc },
-    { icon: <IconLayers />, title: t.why_card3_title, desc: t.why_card3_desc },
+  const creations = [
+    { icon: <IconPresentation />, text: t.create_item1 },
+    { icon: <IconFile />, text: t.create_item2 },
+    { icon: <IconBrain />, text: t.create_item3 },
+    { icon: <IconLayers />, text: t.create_item4 },
+    { icon: <IconCheck />, text: t.create_item5 },
   ];
 
   const programs = [
-    { id: "future-communicator",    name: t.prog1_name, ages: t.prog1_ages, skills: [t.prog1_skill1, t.prog1_skill2, t.prog1_skill3], accent: "from-[#0B2352] to-[#0C1B36]" },
-    { id: "ai-research-builder",    name: t.prog2_name, ages: t.prog2_ages, skills: [t.prog2_skill1, t.prog2_skill2, t.prog2_skill3], accent: "from-[#0C1B36] to-[#071226]" },
-    { id: "portfolio-project-studio", name: t.prog3_name, ages: t.prog3_ages, skills: [t.prog3_skill1, t.prog3_skill2, t.prog3_skill3], accent: "from-[#071226] to-[#0B2352]" },
-  ];
-
-  const outcomes = [
-    { icon: <IconMic    />, text: t.outcome1 },
-    { icon: <IconCpu    />, text: t.outcome2 },
-    { icon: <IconSearch />, text: t.outcome3 },
-    { icon: <IconFile   />, text: t.outcome4 },
-    { icon: <IconMsg    />, text: t.outcome5 },
-  ];
-
-  const coaches = [
-    { id: "program-lead",       role: t.coach1_role, title: t.coach1_desc, initials: "PL" },
-    { id: "communication-coach", role: t.coach2_role, title: t.coach2_desc, initials: "CC" },
-    { id: "ai-research-coach",  role: t.coach3_role, title: t.coach3_desc, initials: "AR" },
-  ];
-
-  const parentReasons = [
-    { icon: <IconUsers  />, title: t.parent1_title, desc: t.parent1_desc },
-    { icon: <IconMsg    />, title: t.parent2_title, desc: t.parent2_desc },
-    { icon: <IconTarget />, title: t.parent3_title, desc: t.parent3_desc },
-    { icon: <IconCheck  />, title: t.parent4_title, desc: t.parent4_desc },
+    { id: "future-communicator", name: t.prog1_name, ages: t.prog1_ages, skills: [t.prog1_skill1, t.prog1_skill2, t.prog1_skill3], accent: "border-[#C9A84C]/20 hover:border-[#C9A84C]" },
+    { id: "ai-research-builder", name: t.prog2_name, ages: t.prog2_ages, skills: [t.prog2_skill1, t.prog2_skill2, t.prog2_skill3], accent: "border-blue-500/20 hover:border-blue-500" },
+    { id: "portfolio-project-studio", name: t.prog3_name, ages: t.prog3_ages, skills: [t.prog3_skill1, t.prog3_skill2, t.prog3_skill3], accent: "border-purple-500/20 hover:border-purple-500" },
   ];
 
   return (
     <main className="min-h-screen bg-[#071226] text-white overflow-hidden">
-
+      
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#050B16]">
+      <section className="relative min-h-[90vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#050B16] flex items-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(201,168,76,0.18),transparent_35%),radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.16),transparent_35%)]" />
 
         {/* Navbar */}
         <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5">
-          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-white/8 px-7 py-4 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center gap-4">
+          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#0B1833]/80 px-7 py-4 backdrop-blur-xl shadow-2xl">
+            <Link href="/" className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
                 <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
               </div>
-              <div>
+              <div className="hidden sm:block">
                 <div className="font-serif text-xl tracking-wide">Future Skill Academy</div>
-                <div className="text-xs uppercase tracking-[0.35em] text-white/45">{t.nav_tagline}</div>
               </div>
-            </div>
+            </Link>
 
-            <nav className="hidden items-center gap-9 text-sm text-white/70 md:flex">
-              <Link className="hover:text-[#C9A84C] transition-colors" href="/programs">{t.nav_programs}</Link>
-              <Link className="hover:text-[#C9A84C] transition-colors" href="/#why-fsa">{t.nav_philosophy}</Link>
-              <Link className="hover:text-[#C9A84C] transition-colors" href="/parents">{t.nav_parents}</Link>
-              <Link className="hover:text-[#C9A84C] transition-colors" href="/contact">{t.nav_contact}</Link>
+            <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/programs">Programs</Link>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/parents">For Parents</Link>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/team">Team</Link>
+              <Link className="hover:text-[#C9A84C] transition-colors" href="/contact">Contact</Link>
             </nav>
 
             <div className="flex items-center gap-3">
               <LanguageSwitcher locale={locale} onChange={setLocale} />
-              <a href="/signup" id="nav-cta-btn" className="rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">
-                {t.nav_cta}
-              </a>
+              <Link href="/signup" id="nav-cta-btn" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">
+                Book Trial
+              </Link>
             </div>
           </div>
         </header>
 
         {/* Hero body */}
-        <div className="relative z-10 mx-auto grid min-h-screen max-w-7xl items-center gap-14 px-6 pt-36 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-6 pt-32 lg:grid-cols-[1fr_0.8fr]">
           <div>
             <div className="mb-8 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">
               {t.hero_badge}
             </div>
-            <h1 className="max-w-5xl font-serif text-6xl leading-[0.92] tracking-tight md:text-8xl lg:text-9xl">
-              {t.hero_h1_line1}{" "}
-              <span className="text-[#C9A84C]">{t.hero_h1_highlight}</span>{" "}
+            <h1 className="max-w-4xl font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
+              {t.hero_h1_line1} <br/>
+              <span className="text-[#C9A84C] italic pr-2">{t.hero_h1_highlight}</span> <br/>
               {t.hero_h1_line2}
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl">{t.hero_desc}</p>
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl">
+              {t.hero_desc}
+            </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <a href="/signup" id="hero-cta-primary" className="rounded-full bg-white px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02]">
+              <Link href="/signup" className="rounded-full bg-white px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                 {t.hero_cta_primary}
-              </a>
-              <a href="/programs" id="hero-cta-secondary" className="rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
+              </Link>
+              <Link href="/programs" className="rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
                 {t.hero_cta_secondary}
-              </a>
-            </div>
-            <div className="mt-16 grid max-w-2xl grid-cols-3 gap-8 border-t border-white/10 pt-8">
-              <div>
-                <div className="font-serif text-4xl text-white">{t.hero_stat1_val}</div>
-                <div className="mt-2 text-xs uppercase tracking-[0.24em] text-white/45">{t.hero_stat1_label}</div>
-              </div>
-              <div>
-                <div className="font-serif text-4xl text-white">{t.hero_stat2_val}</div>
-                <div className="mt-2 text-xs uppercase tracking-[0.24em] text-white/45">{t.hero_stat2_label}</div>
-              </div>
-              <div>
-                <div className="font-serif text-4xl text-white">{t.hero_stat3_val}</div>
-                <div className="mt-2 text-xs uppercase tracking-[0.24em] text-white/45">{t.hero_stat3_label}</div>
-              </div>
+              </Link>
             </div>
           </div>
 
-          <div className="hidden lg:block">
-            <div className="relative overflow-hidden rounded-[42px] border border-white/10 bg-white/6 p-8 shadow-2xl backdrop-blur-xl">
-              <div className="aspect-[4/5] rounded-[32px] bg-gradient-to-br from-[#133263] via-[#0C1B36] to-[#050B16] p-10">
-                <div className="flex h-full flex-col justify-between">
-                  <div className="flex justify-end">
-                    <div className="rounded-full border border-[#C9A84C]/30 px-4 py-2 text-xs uppercase tracking-[0.25em] text-[#C9A84C]">
-                      {t.hero_card_badge}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-full border border-[#C9A84C]/40 bg-[#071226]/80">
-                      <span className="font-serif text-3xl text-[#C9A84C]">FSA</span>
-                    </div>
-                    <h2 className="font-serif text-4xl leading-tight">{t.hero_card_h2}</h2>
-                    <p className="mt-5 text-white/60">{t.hero_card_desc}</p>
-                  </div>
+          <div className="hidden lg:flex justify-end">
+            <div className="relative w-full max-w-md overflow-hidden rounded-[32px] border border-[#C9A84C]/20 bg-[#0B1833]/80 p-10 shadow-2xl backdrop-blur-xl">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#071226] border border-white/10">
+                  <span className="font-serif text-2xl text-[#C9A84C]">FSA</span>
+                </div>
+                <div className="rounded-full bg-[#C9A84C]/10 px-4 py-2 text-xs uppercase tracking-widest text-[#C9A84C]">
+                  {t.hero_card_badge}
+                </div>
+              </div>
+              <h2 className="font-serif text-3xl leading-tight text-white mb-4">
+                {t.hero_card_h2}
+              </h2>
+              <p className="text-white/60 leading-relaxed mb-8">
+                {t.hero_card_desc}
+              </p>
+              <div className="space-y-4 border-t border-white/10 pt-6">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white/40 uppercase tracking-widest">{t.hero_stat1_label}</span>
+                  <span className="text-white font-medium">{t.hero_stat1_val}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white/40 uppercase tracking-widest">{t.hero_stat2_label}</span>
+                  <span className="text-white font-medium">{t.hero_stat2_val}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white/40 uppercase tracking-widest">{t.hero_stat3_label}</span>
+                  <span className="text-white font-medium">{t.hero_stat3_val}</span>
                 </div>
               </div>
             </div>
@@ -237,182 +217,181 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 1. Why FSA ────────────────────────────────────────────────────── */}
-      <section id="why-fsa" className="bg-[#F4F7FA] px-6 py-28 text-[#071226]">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.why_eyebrow}</div>
-          <div className="mb-16 grid gap-10 lg:grid-cols-2">
+      {/* ── 1. Who this is for (Editorial) ────────────────────────────────── */}
+      <section className="bg-white px-6 py-24 text-[#071226] md:py-32">
+        <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center">
+          <div>
+            <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.who_eyebrow}</div>
             <h2 className="font-serif text-5xl leading-tight md:text-6xl">
-              {t.why_h2}
+              {t.who_h2}
             </h2>
-            <p className="self-end text-xl leading-relaxed text-slate-600">
-              {t.why_desc}
-            </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {whyCards.map((card) => (
-              <div key={card.title} className="group rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-lg hover:-translate-y-1 duration-300">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#071226] text-[#C9A84C]">
-                  {card.icon}
-                </div>
-                <h3 className="font-serif text-2xl text-[#071226]">{card.title}</h3>
-                <p className="mt-4 leading-relaxed text-slate-600">{card.desc}</p>
-              </div>
-            ))}
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <IconCheck />
+              <p className="text-xl leading-relaxed text-slate-700">{t.who_p1}</p>
+            </div>
+            <div className="flex items-start gap-4">
+              <IconCheck />
+              <p className="text-xl leading-relaxed text-slate-700">{t.who_p2}</p>
+            </div>
+            <div className="flex items-start gap-4">
+              <IconCheck />
+              <p className="text-xl leading-relaxed text-slate-700">{t.who_p3}</p>
+            </div>
+            <div className="flex items-start gap-4">
+              <IconCheck />
+              <p className="text-xl leading-relaxed text-slate-700">{t.who_p4}</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── 2. Programs Preview ───────────────────────────────────────────── */}
-      <section id="programs" className="bg-[#071226] px-6 py-28">
+      {/* ── 2. What actually happens in class (Process) ───────────────────── */}
+      <section className="bg-[#F4F7FA] px-6 py-24 text-[#071226] md:py-32">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.prog_eyebrow}</div>
-          <div className="mb-16 grid gap-10 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
-              {t.prog_h2}
-            </h2>
-            <p className="self-end text-xl leading-relaxed text-white/60">
-              {t.prog_desc}
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {programs.map((prog) => (
-              <div key={prog.id} className={`group relative overflow-hidden rounded-[32px] bg-gradient-to-br ${prog.accent} border border-white/10 p-8 transition hover:border-[#C9A84C]/40 duration-300`}>
-                <div className="mb-3 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{prog.ages}</div>
-                <h3 className="font-serif text-2xl text-white">{prog.name}</h3>
-                <ul className="mt-6 space-y-2">
-                  {prog.skills.map((skill) => (
-                    <li key={skill} className="flex items-center gap-3 text-sm text-white/70">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#C9A84C] flex-shrink-0" />
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="/programs"
-                  id={`program-learn-more-${prog.id}`}
-                  className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-2.5 text-sm text-white/80 transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
-                >
-                  {t.prog_learn_more}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. Student Outcomes ───────────────────────────────────────────── */}
-      <section id="outcomes" className="bg-[#F4F7FA] px-6 py-28 text-[#071226]">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.outcomes_eyebrow}</div>
-          <div className="mb-16 max-w-3xl">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">
-              {t.outcomes_h2}
-            </h2>
-            <p className="mt-6 text-xl leading-relaxed text-slate-600">
-              {t.outcomes_desc}
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {outcomes.map((item, i) => (
-              <div key={i} className="flex flex-col items-start gap-4 rounded-[24px] border border-slate-200 bg-white p-7 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 duration-300">
-                <span className="text-[#C9A84C]">{item.icon}</span>
-                <p className="font-serif text-lg leading-snug text-[#071226]">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. Coaches Preview ────────────────────────────────────────────── */}
-      <section id="coaches" className="bg-[#071226] px-6 py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.coaches_eyebrow}</div>
-          <div className="mb-16 grid gap-10 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
-              {t.coaches_h2}
-            </h2>
-            <p className="self-end text-xl leading-relaxed text-white/60">
-              {t.coaches_desc}
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {coaches.map((coach) => (
-              <div key={coach.id} className="rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition hover:border-[#C9A84C]/30 duration-300">
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-[#C9A84C]/30 bg-[#0B2352]">
-                  <span className="font-serif text-xl text-[#C9A84C]">{coach.initials}</span>
-                </div>
-                <div className="mb-1 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{coach.role}</div>
-                <p className="mt-3 text-white/65 leading-relaxed text-sm">{coach.title}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <a
-              href="/team"
-              id="coaches-meet-team-btn"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
-            >
-              {t.coaches_cta}
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Parent Trust ───────────────────────────────────────────────── */}
-      <section id="parents" className="bg-white px-6 py-28 text-[#071226]">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.parents_eyebrow}</div>
-          <div className="mb-16 max-w-3xl">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">
-              {t.parents_h2}
-            </h2>
-            <p className="mt-6 text-xl leading-relaxed text-slate-600">
-              {t.parents_desc}
-            </p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {parentReasons.map((reason, i) => (
-              <div key={i} className="rounded-[28px] border border-slate-200 bg-[#F4F7FA] p-8 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#071226] text-[#C9A84C]">
-                  {reason.icon}
-                </div>
-                <h3 className="font-serif text-xl text-[#071226]">{reason.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{reason.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. Final CTA ──────────────────────────────────────────────────── */}
-      <section id="contact" className="bg-[#071226] px-6 py-28">
-        <div className="mx-auto max-w-5xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.cta_eyebrow}</div>
-          <h2 className="font-serif text-5xl leading-tight text-white md:text-7xl">
-            {t.cta_h2}
+          <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.class_eyebrow}</div>
+          <h2 className="mb-20 text-center font-serif text-5xl leading-tight md:text-6xl">
+            {t.class_h2}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/65">
-            {t.cta_desc}
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <a
-              href="/signup"
-              id="final-cta-trial-btn"
-              className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]"
-            >
-              {t.cta_btn1}
-            </a>
-            <a
-              href="/programs"
-              id="final-cta-programs-btn"
-              className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
-            >
-              {t.cta_btn2}
-            </a>
+          
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {classSteps.map((step, idx) => (
+              <div key={idx} className="relative rounded-[24px] border border-slate-200 bg-white p-10 shadow-sm transition-shadow hover:shadow-md">
+                <div className="absolute -top-5 left-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#071226] text-sm font-bold text-[#C9A84C] shadow-lg">
+                  {step.num}
+                </div>
+                <h3 className="mt-4 mb-3 font-serif text-2xl text-[#071226]">{step.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* ── 3. What students create (Variation) ───────────────────────────── */}
+      <section className="bg-[#071226] px-6 py-24 md:py-32 relative">
+        <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center">
+          <div className="order-2 lg:order-1 grid gap-4 sm:grid-cols-2">
+            {creations.map((item, idx) => (
+              <div key={idx} className={`flex flex-col justify-center rounded-[24px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-colors hover:border-[#C9A84C]/30 ${idx === creations.length - 1 ? 'sm:col-span-2' : ''}`}>
+                <div className="mb-4 text-[#C9A84C]">{item.icon}</div>
+                <div className="font-serif text-xl text-white">{item.text}</div>
+              </div>
+            ))}
+          </div>
+          <div className="order-1 lg:order-2 lg:pl-12">
+            <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.create_eyebrow}</div>
+            <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
+              {t.create_h2}
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Programs ───────────────────────────────────────────────────── */}
+      <section className="bg-[#0B1833] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.prog_eyebrow}</div>
+          <h2 className="mb-6 text-center font-serif text-5xl leading-tight text-white md:text-6xl">
+            {t.prog_h2}
+          </h2>
+          <p className="mx-auto mb-20 max-w-2xl text-center text-xl text-white/60 leading-relaxed">
+            {t.prog_desc}
+          </p>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {programs.map((prog) => (
+              <div key={prog.id} className={`group flex flex-col justify-between rounded-[32px] border ${prog.accent} bg-[#071226] p-10 transition-all duration-300`}>
+                <div>
+                  <div className="mb-4 inline-flex rounded-full bg-white/5 px-4 py-1.5 text-xs tracking-widest text-[#C9A84C] uppercase">
+                    {prog.ages}
+                  </div>
+                  <h3 className="mb-8 font-serif text-3xl text-white">{prog.name}</h3>
+                  <ul className="space-y-4">
+                    {prog.skills.map((skill, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-white/80">
+                        <IconCheck />
+                        <span>{skill}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link href="/programs" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-[#C9A84C] hover:text-white transition-colors">
+                  {t.prog_learn_more}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. How enrollment works ───────────────────────────────────────── */}
+      <section className="bg-[#F4F7FA] px-6 py-24 text-[#071226] md:py-32">
+        <div className="mx-auto max-w-7xl text-center">
+          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.enroll_eyebrow}</div>
+          <h2 className="mb-20 font-serif text-5xl leading-tight md:text-6xl">
+            {t.enroll_h2}
+          </h2>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-left">
+            {[t.enroll_step1, t.enroll_step2, t.enroll_step3, t.enroll_step4, t.enroll_step5, t.enroll_step6].map((step, idx) => (
+              <div key={idx} className="flex items-center gap-6 rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#071226] font-serif text-xl text-[#C9A84C]">
+                  {idx + 1}
+                </div>
+                <div className="font-medium text-slate-800">{step}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. Parent FAQ ─────────────────────────────────────────────────── */}
+      <section className="bg-[#071226] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.faq_eyebrow}</div>
+          <h2 className="mb-16 text-center font-serif text-5xl leading-tight text-white md:text-6xl">
+            {t.faq_h2}
+          </h2>
+          <div className="space-y-2">
+            <FaqItem question={t.faq_q1} answer={t.faq_a1} />
+            <FaqItem question={t.faq_q2} answer={t.faq_a2} />
+            <FaqItem question={t.faq_q3} answer={t.faq_a3} />
+            <FaqItem question={t.faq_q4} answer={t.faq_a4} />
+            <FaqItem question={t.faq_q5} answer={t.faq_a5} />
+            <FaqItem question={t.faq_q6} answer={t.faq_a6} />
+            <FaqItem question={t.faq_q7} answer={t.faq_a7} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ─────────────────────────────────────────────────────── */}
+      <section className="bg-[#0B1833] px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-4xl rounded-[40px] border border-[#C9A84C]/20 bg-[#071226] p-12 text-center shadow-2xl md:p-20 relative overflow-hidden">
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#C9A84C] opacity-5 blur-3xl" />
+          <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#3b82f6] opacity-5 blur-3xl" />
+          
+          <div className="relative z-10">
+            <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.cta_eyebrow}</div>
+            <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
+              {t.cta_h2}
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/60">
+              {t.cta_desc}
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Link href="/signup" className="rounded-full bg-[#C9A84C] px-8 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">
+                {t.cta_btn1}
+              </Link>
+              <Link href="/programs" className="rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
+                {t.cta_btn2}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }
