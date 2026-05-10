@@ -297,9 +297,6 @@ export default function Home() {
               <div key={idx} className="flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-sm transition-colors hover:border-[#C9A84C]/30 group">
                 <div className="relative h-40 w-full bg-[#0B1833] overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${item.img})` }} />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                     <span className="bg-[#071226]/80 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest text-[#C9A84C] border border-white/10 shadow-xl">Photo Placeholder</span>
-                  </div>
                 </div>
                 <div className="p-6 flex flex-col justify-center">
                   <div className="font-sans text-lg font-semibold tracking-tight text-white">{item.text}</div>
@@ -351,7 +348,7 @@ export default function Home() {
                   <ul className="space-y-4">
                     {prog.skills.map((skill, idx) => (
                       <li key={idx} className="flex items-center gap-3 text-white/80">
-                        <IconCheck />
+                        <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A84C]" />
                         <span>{skill}</span>
                       </li>
                     ))}
