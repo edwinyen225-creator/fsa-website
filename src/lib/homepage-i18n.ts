@@ -152,6 +152,7 @@ export const homepageTranslations = {
     create_item3: "AIを活用したアイデアマップ",
     create_item4: "プロジェクトスライド",
     create_item5: "パーソナルポートフォリオ作品",
+    create_item6: "ビフォー・アフターの実例",
 
     prog_eyebrow: "04 — プログラム",
     prog_h2: "3つのコアプログラム。",
@@ -250,6 +251,7 @@ export const homepageTranslations = {
     create_item3: "AI輔助的點子圖",
     create_item4: "專案簡報",
     create_item5: "個人作品集項目",
+    create_item6: "進步前後對比範例",
 
     prog_eyebrow: "04 — 課程",
     prog_h2: "三大核心課程。",
@@ -348,6 +350,7 @@ export const homepageTranslations = {
     create_item3: "AI辅助的点子图",
     create_item4: "项目演示",
     create_item5: "个人作品集项目",
+    create_item6: "进步前后对比范例",
 
     prog_eyebrow: "04 — 课程",
     prog_h2: "三大核心课程。",
