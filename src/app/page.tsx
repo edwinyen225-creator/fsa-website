@@ -39,7 +39,7 @@ function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: 
       </button>
 
       {open && (
-        <ul role="listbox" aria-label="Language options" className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1833] shadow-2xl backdrop-blur-xl">
+        <ul role="listbox" aria-label="Language options" className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1833] shadow-2xl backdrop-blur-xl z-[60]">
           {(Object.keys(localeLabels) as Locale[]).map((l) => (
             <li key={l} role="option" aria-selected={l === locale}>
               <button
@@ -160,7 +160,7 @@ export default function Home() {
         </header>
 
         {/* Hero body */}
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-6 pt-32 lg:grid-cols-[1fr_0.8fr]">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-6 pt-32 pb-20 md:pt-40 md:pb-32 lg:grid-cols-[1fr_0.8fr]">
           <div>
             <div className="mb-8 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">
               {t.hero_badge}

@@ -87,7 +87,7 @@ function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: 
         <svg className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}><path d="M2 4l4 4 4-4"/></svg>
       </button>
       {open && (
-        <ul role="listbox" className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1833] shadow-2xl backdrop-blur-xl">
+        <ul role="listbox" className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1833] shadow-2xl backdrop-blur-xl z-[60]">
           {(Object.keys(localeLabels) as Locale[]).map(l => (
             <li key={l} role="option" aria-selected={l === locale}>
               <button id={`pay-lang-${l}`} onClick={() => { onChange(l); setOpen(false); }}

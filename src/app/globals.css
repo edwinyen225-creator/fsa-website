@@ -14,72 +14,123 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6;
 }
 
 /* FSA Premium Metallic Gold System */
 :root {
-  --fsa-gold-dark: #8a6a1f;
-  --fsa-gold-base: #c9a84c;
-  --fsa-gold-light: #f3d77a;
-  --fsa-gold-warm: #b88a2a;
-  --fsa-gold-bright: #e6c766;
+  --fsa-gold-shadow: #6b531a;
+  --fsa-gold-dark: #a38228;
+  --fsa-gold-base: #d6b85a;
+  --fsa-gold-light: #fceea1;
+  --fsa-gold-highlight: #fffef2;
 }
 
 /* Metallic gold text */
 .gold-metallic,
 [class*="text-[#C9A84C]"] {
-  background: linear-gradient(135deg,
-      var(--fsa-gold-dark) 0%,
-      var(--fsa-gold-base) 24%,
-      var(--fsa-gold-light) 45%,
-      var(--fsa-gold-warm) 68%,
-      var(--fsa-gold-bright) 100%);
+  background: linear-gradient(170deg,
+      var(--fsa-gold-light) 0%,
+      var(--fsa-gold-base) 40%,
+      var(--fsa-gold-dark) 60%,
+      var(--fsa-gold-base) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.18),
-    0 8px 24px rgba(201, 168, 76, 0.18);
+  color: var(--fsa-gold-base); /* Safe fallback */
+  -webkit-text-fill-color: transparent;
+  /* Removed drop-shadow to guarantee text visibility on all browsers */
 }
 
-/* Metallic gold backgrounds */
+/* Metallic gold backgrounds - Premium Realistic */
 [class*="bg-[#C9A84C]"] {
-  background: linear-gradient(135deg,
-      #9a7622 0%,
-      #c9a84c 28%,
-      #f3d77a 50%,
-      #b88a2a 75%,
-      #e6c766 100%) !important;
+  background: linear-gradient(145deg,
+      var(--fsa-gold-light) 0%,
+      var(--fsa-gold-base) 20%,
+      var(--fsa-gold-dark) 50%,
+      var(--fsa-gold-highlight) 55%,
+      var(--fsa-gold-dark) 80%,
+      var(--fsa-gold-shadow) 100%) !important;
+  border-top: 1px solid var(--fsa-gold-highlight) !important;
+  border-bottom: 1px solid var(--fsa-gold-shadow) !important;
+  color: var(--background) !important; /* Deep navy matching the page background */
+  /* CNC cut-through text effect */
+  text-shadow: 
+    0px -1px 1px rgba(0, 0, 0, 0.7), /* Dark shadow on the top inner edge */
+    0px 1px 1px rgba(255, 255, 255, 0.7) !important; /* Light hitting the bottom inner edge */
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 12px 30px rgba(201, 168, 76, 0.22);
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 1px rgba(107, 83, 26, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    0 2px 0 #8c6a1d,
+    0 4px 10px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(214, 184, 90, 0.2) !important;
+  transition: all 250ms ease !important;
 }
 
-/* Gold borders and outlines */
-[class*="border-[#C9A84C]"] {
-  border-color: rgba(217, 181, 73, 0.65) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(243, 215, 122, 0.12),
-    0 0 24px rgba(201, 168, 76, 0.08);
-}
-
-/* Premium hover polish */
-button,
-a,
-[class*="rounded"] {
-  transition:
-    transform 220ms ease,
-    box-shadow 220ms ease,
-    border-color 220ms ease,
-    background 220ms ease,
-    opacity 220ms ease;
-}
-
-button:hover,
-a:hover {
+/* Hover state for engraved gold text and surface */
+[class*="bg-[#C9A84C]"]:hover {
+  filter: brightness(1.08) contrast(1.05);
+  /* The carved interior illuminates with warm light */
+  color: rgba(252, 238, 161, 0.9) !important; 
+  text-shadow: 
+    0 0 12px rgba(252, 238, 161, 0.7), /* Soft inner glow illuminating the cut */
+    0px -1px 1px rgba(0, 0, 0, 0.6), /* Top edge shadow maintained */
+    0px 1px 1px rgba(255, 255, 255, 0.8) !important; /* Bottom edge highlight maintained */
   transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1px rgba(107, 83, 26, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    0 3px 0 #8c6a1d,
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(214, 184, 90, 0.4) !important;
+}
+
+/* Active pressed state for gold buttons */
+button[class*="bg-[#C9A84C]"]:active,
+a[class*="bg-[#C9A84C]"]:active {
+  transform: translateY(2px);
+  filter: brightness(0.95);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 1px rgba(107, 83, 26, 0.8),
+    0 0px 0 #8c6a1d,
+    0 2px 5px rgba(0, 0, 0, 0.4),
+    0 0 10px rgba(214, 184, 90, 0.2) !important;
+}
+
+/* Gold borders and outlines - Realistic */
+[class*="border-[#C9A84C]"] {
+  border-color: var(--fsa-gold-base) !important;
+  border-bottom-width: 2px !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 254, 242, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(214, 184, 90, 0.1) !important;
+}
+
+/* Premium hover polish for other buttons */
+button:not([class*="bg-[#C9A84C]"]):hover,
+a:not([class*="bg-[#C9A84C]"]):hover {
+  transform: translateY(-1px);
+}
+
+/* Glass-like texture for white backgrounds */
+.bg-white,
+.bg-\[\#F4F7FA\] {
+  background-color: rgba(255, 255, 255, 0.90) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
 }
