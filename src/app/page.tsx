@@ -110,17 +110,18 @@ export default function Home() {
   ];
 
   const creations = [
-    { icon: <IconPresentation />, text: t.create_item1 },
-    { icon: <IconFile />, text: t.create_item2 },
-    { icon: <IconBrain />, text: t.create_item3 },
+    { icon: <IconFile />, text: t.create_item1 },
+    { icon: <IconPresentation />, text: t.create_item2 },
+    { icon: <IconMessageCircle />, text: t.create_item3 },
     { icon: <IconLayers />, text: t.create_item4 },
-    { icon: <IconCheck />, text: t.create_item5 },
+    { icon: <IconBrain />, text: t.create_item5 },
+    { icon: <IconCheck />, text: t.create_item6 },
   ];
 
   const programs = [
-    { id: "future-communicator", name: t.prog1_name, ages: t.prog1_ages, skills: [t.prog1_skill1, t.prog1_skill2, t.prog1_skill3], accent: "border-[#C9A84C]/20 hover:border-[#C9A84C]" },
-    { id: "ai-research-builder", name: t.prog2_name, ages: t.prog2_ages, skills: [t.prog2_skill1, t.prog2_skill2, t.prog2_skill3], accent: "border-blue-500/20 hover:border-blue-500" },
-    { id: "portfolio-project-studio", name: t.prog3_name, ages: t.prog3_ages, skills: [t.prog3_skill1, t.prog3_skill2, t.prog3_skill3], accent: "border-purple-500/20 hover:border-purple-500" },
+    { id: "future-communicator", name: t.prog1_name, ages: t.prog1_ages, skills: [t.prog1_skill1, t.prog1_skill2, t.prog1_skill3], accent: "border-[#C9A84C]/20 hover:border-[#C9A84C]", isActive: true },
+    { id: "portfolio-project-studio", name: t.prog2_name, ages: t.prog2_ages, skills: [t.prog2_skill1, t.prog2_skill2, t.prog2_skill3], accent: "border-blue-500/20 hover:border-blue-500", isActive: true },
+    { id: "future-cohort", name: t.prog3_name, ages: t.prog3_ages, skills: [t.prog3_skill1, t.prog3_skill2, t.prog3_skill3], accent: "border-white/5 opacity-70", isActive: false },
   ];
 
   return (
@@ -274,7 +275,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center">
           <div className="order-2 lg:order-1 grid gap-4 sm:grid-cols-2">
             {creations.map((item, idx) => (
-              <div key={idx} className={`flex flex-col justify-center rounded-[24px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-colors hover:border-[#C9A84C]/30 ${idx === creations.length - 1 ? 'sm:col-span-2' : ''}`}>
+              <div key={idx} className={`flex flex-col justify-center rounded-[24px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-colors hover:border-[#C9A84C]/30`}>
                 <div className="mb-4 text-[#C9A84C]">{item.icon}</div>
                 <div className="font-serif text-xl text-white">{item.text}</div>
               </div>
@@ -302,9 +303,12 @@ export default function Home() {
 
           <div className="grid gap-6 lg:grid-cols-3">
             {programs.map((prog) => (
-              <div key={prog.id} className={`group flex flex-col justify-between rounded-[32px] border ${prog.accent} bg-[#071226] p-10 transition-all duration-300`}>
-                <div>
-                  <div className="mb-4 inline-flex rounded-full bg-white/5 px-4 py-1.5 text-xs tracking-widest text-[#C9A84C] uppercase">
+              <div key={prog.id} className={`group flex flex-col justify-between rounded-[32px] border ${prog.accent} bg-[#071226] p-10 transition-all duration-300 relative`}>
+                {!prog.isActive && (
+                  <div className="absolute inset-0 bg-[#071226]/40 rounded-[32px] pointer-events-none" />
+                )}
+                <div className={!prog.isActive ? "opacity-80" : ""}>
+                  <div className={`mb-4 inline-flex rounded-full px-4 py-1.5 text-xs tracking-widest uppercase ${prog.isActive ? 'bg-white/5 text-[#C9A84C]' : 'bg-white/5 text-white/50'}`}>
                     {prog.ages}
                   </div>
                   <h3 className="mb-8 font-serif text-3xl text-white">{prog.name}</h3>
@@ -317,9 +321,15 @@ export default function Home() {
                     ))}
                   </ul>
                 </div>
-                <Link href="/programs" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-[#C9A84C] hover:text-white transition-colors">
-                  {t.prog_learn_more}
-                </Link>
+                {prog.isActive ? (
+                  <Link href="/programs" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-[#C9A84C] hover:text-white transition-colors">
+                    {t.prog_learn_more}
+                  </Link>
+                ) : (
+                  <div className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-white/40">
+                    Join Waitlist →
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -335,7 +345,7 @@ export default function Home() {
           </h2>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-left">
-            {[t.enroll_step1, t.enroll_step2, t.enroll_step3, t.enroll_step4, t.enroll_step5, t.enroll_step6].map((step, idx) => (
+            {[t.enroll_step1, t.enroll_step2, t.enroll_step3, t.enroll_step4, t.enroll_step5, t.enroll_step6, t.enroll_step7].map((step, idx) => (
               <div key={idx} className="flex items-center gap-6 rounded-2xl bg-white p-6 shadow-sm border border-slate-100">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#071226] font-serif text-xl text-[#C9A84C]">
                   {idx + 1}
