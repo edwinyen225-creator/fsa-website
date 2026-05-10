@@ -19,3 +19,67 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
 }
+
+/* FSA Premium Metallic Gold System */
+:root {
+  --fsa-gold-dark: #8a6a1f;
+  --fsa-gold-base: #c9a84c;
+  --fsa-gold-light: #f3d77a;
+  --fsa-gold-warm: #b88a2a;
+  --fsa-gold-bright: #e6c766;
+}
+
+/* Metallic gold text */
+.gold-metallic,
+[class*="text-[#C9A84C]"] {
+  background: linear-gradient(135deg,
+      var(--fsa-gold-dark) 0%,
+      var(--fsa-gold-base) 24%,
+      var(--fsa-gold-light) 45%,
+      var(--fsa-gold-warm) 68%,
+      var(--fsa-gold-bright) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18),
+    0 8px 24px rgba(201, 168, 76, 0.18);
+}
+
+/* Metallic gold backgrounds */
+[class*="bg-[#C9A84C]"] {
+  background: linear-gradient(135deg,
+      #9a7622 0%,
+      #c9a84c 28%,
+      #f3d77a 50%,
+      #b88a2a 75%,
+      #e6c766 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 12px 30px rgba(201, 168, 76, 0.22);
+}
+
+/* Gold borders and outlines */
+[class*="border-[#C9A84C]"] {
+  border-color: rgba(217, 181, 73, 0.65) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(243, 215, 122, 0.12),
+    0 0 24px rgba(201, 168, 76, 0.08);
+}
+
+/* Premium hover polish */
+button,
+a,
+[class*="rounded"] {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    opacity 220ms ease;
+}
+
+button:hover,
+a:hover {
+  transform: translateY(-1px);
+}
