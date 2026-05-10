@@ -168,7 +168,7 @@ export default function Home() {
             </div>
             <h1 className="max-w-4xl font-sans text-5xl font-semibold leading-[1.08] tracking-tighter text-white md:text-7xl lg:text-8xl">
               {t.hero_h1_line1} <br className="hidden md:block" />
-              <span className="text-[#C9A84C] font-sans pr-2">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
+              <span className="text-[#C9A84C] font-serif italic pr-2">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
               {t.hero_h1_line2}
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl">
