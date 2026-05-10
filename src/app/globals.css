@@ -37,7 +37,7 @@ body {
   --fsa-gold-highlight: #fffef2;
 }
 
-/* Metallic gold text */
+/* Metallic gold text (small labels) */
 .gold-metallic,
 [class*="text-[#C9A84C]"] {
   background: linear-gradient(170deg,
@@ -49,7 +49,33 @@ body {
   background-clip: text;
   color: var(--fsa-gold-base); /* Safe fallback */
   -webkit-text-fill-color: transparent;
-  /* Removed drop-shadow to guarantee text visibility on all browsers */
+}
+
+/* Large editorial gold headline text - Soft Champagne Metallic */
+h1 [class*="text-[#C9A84C]"],
+h2 [class*="text-[#C9A84C]"] {
+  background: linear-gradient(
+      135deg,
+      #FFFAEA 0%,
+      #EBD699 25%,
+      #D1B25C 50%,
+      #A6802C 75%,
+      #D1B25C 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #D1B25C;
+  -webkit-text-fill-color: transparent;
+  
+  /* Anti-clipping properties for large italic swashes and descenders */
+  padding: 0.1em 0.2em;
+  display: inline-block;
+  overflow: visible;
+  line-height: 1.15;
+  
+  /* Subtle soft glow and realistic shadow behind the transparent text */
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.4)) drop-shadow(0px 0px 15px rgba(209, 178, 92, 0.25));
 }
 
 /* Metallic gold backgrounds - Premium Realistic */

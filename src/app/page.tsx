@@ -92,14 +92,6 @@ export default function Home() {
     document.documentElement.lang = locale;
   }, [locale]);
 
-  // Icons
-  const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>);
-  const IconFile = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>);
-  const IconMessageCircle = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>);
-  const IconBrain = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44 2.5 2.5 0 01-2.96-3.08 3 3 0 01-.34-5.58 2.5 2.5 0 011.32-4.24 2.5 2.5 0 011.98-3A2.5 2.5 0 019.5 2z"/><path d="M14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44 2.5 2.5 0 002.96-3.08 3 3 0 00.34-5.58 2.5 2.5 0 00-1.32-4.24 2.5 2.5 0 00-1.98-3A2.5 2.5 0 0014.5 2z"/></svg>);
-  const IconLayers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>);
-  const IconPresentation = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 01-2 2H5a2 2 0 01-2-2V3"/><path d="M12 16v4"/><path d="M8 20h8"/></svg>);
-
   const classSteps = [
     { num: "01", title: t.class_step1_title, desc: t.class_step1_desc },
     { num: "02", title: t.class_step2_title, desc: t.class_step2_desc },
@@ -110,12 +102,12 @@ export default function Home() {
   ];
 
   const creations = [
-    { icon: <IconFile />, text: t.create_item1 },
-    { icon: <IconPresentation />, text: t.create_item2 },
-    { icon: <IconMessageCircle />, text: t.create_item3 },
-    { icon: <IconLayers />, text: t.create_item4 },
-    { icon: <IconBrain />, text: t.create_item5 },
-    { icon: <IconCheck />, text: t.create_item6 },
+    { img: "/images/placeholder-create-1.jpg", text: t.create_item1 },
+    { img: "/images/placeholder-create-2.jpg", text: t.create_item2 },
+    { img: "/images/placeholder-create-3.jpg", text: t.create_item3 },
+    { img: "/images/placeholder-create-4.jpg", text: t.create_item4 },
+    { img: "/images/placeholder-create-5.jpg", text: t.create_item5 },
+    { img: "/images/placeholder-create-6.jpg", text: t.create_item6 },
   ];
 
   const programs = [
@@ -128,8 +120,17 @@ export default function Home() {
     <main className="min-h-screen bg-[#071226] text-white overflow-hidden">
       
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#050B16] flex items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(201,168,76,0.18),transparent_35%),radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.16),transparent_35%)]" />
+      <section className="relative min-h-[90vh] bg-[#071226] flex items-center overflow-hidden">
+        {/* Cinematic Background Image Layer */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
+          style={{ backgroundImage: 'url("/images/hero-background.jpg")' }}
+        />
+        {/* Navy gradient overlay fallback / blending layer */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0B1833]/75 via-[#081327]/85 to-[#050B16]" />
+        
+        {/* Glow effects */}
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_35%,rgba(201,168,76,0.18),transparent_35%),radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.16),transparent_35%)]" />
 
         {/* Navbar */}
         <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5">
@@ -165,9 +166,9 @@ export default function Home() {
             <div className="mb-8 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">
               {t.hero_badge}
             </div>
-            <h1 className="max-w-4xl font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
-              {t.hero_h1_line1} <br/>
-              <span className="text-[#C9A84C] italic pr-2">{t.hero_h1_highlight}</span> <br/>
+            <h1 className="max-w-4xl font-sans text-5xl font-semibold leading-[1.08] tracking-tighter text-white md:text-7xl lg:text-8xl">
+              {t.hero_h1_line1} <br className="hidden md:block" />
+              <span className="text-[#C9A84C] font-sans pr-2">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
               {t.hero_h1_line2}
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl">
@@ -223,26 +224,36 @@ export default function Home() {
         <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center">
           <div>
             <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.who_eyebrow}</div>
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">
+            <h2 className="font-sans text-5xl font-semibold tracking-tighter text-[#071226] leading-tight md:text-6xl">
               {t.who_h2}
             </h2>
           </div>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <IconCheck />
+              <div className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A84C]" />
               <p className="text-xl leading-relaxed text-slate-700">{t.who_p1}</p>
             </div>
             <div className="flex items-start gap-4">
-              <IconCheck />
+              <div className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A84C]" />
               <p className="text-xl leading-relaxed text-slate-700">{t.who_p2}</p>
             </div>
             <div className="flex items-start gap-4">
-              <IconCheck />
+              <div className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A84C]" />
               <p className="text-xl leading-relaxed text-slate-700">{t.who_p3}</p>
             </div>
             <div className="flex items-start gap-4">
-              <IconCheck />
+              <div className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A84C]" />
               <p className="text-xl leading-relaxed text-slate-700">{t.who_p4}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Image Placeholder */}
+        <div className="mx-auto max-w-7xl mt-16">
+          <div className="w-full h-80 md:h-[500px] rounded-[32px] overflow-hidden bg-[#F4F7FA] border border-slate-200 relative group">
+            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: 'url("/images/placeholder-who.jpg")' }} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-widest text-[#071226] border border-slate-200 shadow-sm">Tokyo Learning Environment</span>
             </div>
           </div>
         </div>
@@ -252,7 +263,7 @@ export default function Home() {
       <section className="bg-[#F4F7FA] px-6 py-24 text-[#071226] md:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.class_eyebrow}</div>
-          <h2 className="mb-20 text-center font-serif text-5xl leading-tight md:text-6xl">
+          <h2 className="mb-20 text-center font-sans text-5xl font-semibold tracking-tighter text-[#071226] leading-tight md:text-6xl">
             {t.class_h2}
           </h2>
           
@@ -267,25 +278,50 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* Image Placeholder */}
+          <div className="mt-16 w-full h-80 md:h-[500px] rounded-[32px] overflow-hidden bg-white border border-slate-200 relative group">
+            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: 'url("/images/placeholder-class.jpg")' }} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-[#071226]/80 backdrop-blur-md px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-widest text-[#C9A84C] border border-[#C9A84C]/20 shadow-xl">Coaching Session</span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ── 3. What students create (Variation) ───────────────────────────── */}
       <section className="bg-[#071226] px-6 py-24 md:py-32 relative">
         <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center">
-          <div className="order-2 lg:order-1 grid gap-4 sm:grid-cols-2">
+          <div className="order-2 lg:order-1 grid gap-6 sm:grid-cols-2">
             {creations.map((item, idx) => (
-              <div key={idx} className={`flex flex-col justify-center rounded-[24px] border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-colors hover:border-[#C9A84C]/30`}>
-                <div className="mb-4 text-[#C9A84C]">{item.icon}</div>
-                <div className="font-serif text-xl text-white">{item.text}</div>
+              <div key={idx} className="flex flex-col overflow-hidden rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-sm transition-colors hover:border-[#C9A84C]/30 group">
+                <div className="relative h-40 w-full bg-[#0B1833] overflow-hidden">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${item.img})` }} />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                     <span className="bg-[#071226]/80 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest text-[#C9A84C] border border-white/10 shadow-xl">Photo Placeholder</span>
+                  </div>
+                </div>
+                <div className="p-6 flex flex-col justify-center">
+                  <div className="font-sans text-lg font-semibold tracking-tight text-white">{item.text}</div>
+                </div>
               </div>
             ))}
           </div>
           <div className="order-1 lg:order-2 lg:pl-12">
             <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.create_eyebrow}</div>
-            <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">
+            <h2 className="font-sans text-5xl font-semibold tracking-tighter text-white leading-tight md:text-6xl">
               {t.create_h2}
             </h2>
+          </div>
+        </div>
+
+        {/* Image Placeholder */}
+        <div className="mx-auto max-w-7xl mt-16">
+          <div className="w-full h-80 md:h-[500px] rounded-[32px] overflow-hidden bg-[#0B1833] border border-white/10 relative group">
+            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: 'url("/images/placeholder-create.jpg")' }} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-[#071226]/80 backdrop-blur-md px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-widest text-[#C9A84C] border border-white/10 shadow-xl">Portfolio Projects</span>
+            </div>
           </div>
         </div>
       </section>
@@ -294,7 +330,7 @@ export default function Home() {
       <section className="bg-[#0B1833] px-6 py-24 md:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.prog_eyebrow}</div>
-          <h2 className="mb-6 text-center font-serif text-5xl leading-tight text-white md:text-6xl">
+          <h2 className="mb-6 text-center font-sans text-5xl font-semibold tracking-tighter text-white leading-tight md:text-6xl">
             {t.prog_h2}
           </h2>
           <p className="mx-auto mb-20 max-w-2xl text-center text-xl text-white/60 leading-relaxed">
