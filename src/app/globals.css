@@ -12,6 +12,35 @@
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
   --font-mono: var(--font-geist-mono);
+
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-slow: float 12s ease-in-out infinite;
+  --animate-glow-pulse: glow 6s ease-in-out infinite;
+  --animate-navbar-float: navbar-float 12s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.6; filter: brightness(1); }
+  50% { opacity: 0.9; filter: brightness(1.15); }
+}
+
+@keyframes navbar-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+  }
+}
+
+.animate-navbar-float {
+  animation: navbar-float 12s ease-in-out infinite !important;
+  will-change: transform;
 }
 
 html {
@@ -30,11 +59,12 @@ body {
 
 /* FSA Premium Metallic Gold System */
 :root {
-  --fsa-gold-shadow: #6b531a;
-  --fsa-gold-dark: #a38228;
-  --fsa-gold-base: #d6b85a;
-  --fsa-gold-light: #fceea1;
-  --fsa-gold-highlight: #fffef2;
+  /* Brushed luxury gold: softer, calmer, elegant */
+  --fsa-gold-shadow: #4A3E26;
+  --fsa-gold-dark: #8E7A4E;
+  --fsa-gold-base: #BCA474;
+  --fsa-gold-light: #E3D1A9;
+  --fsa-gold-highlight: #F5EEDB;
 }
 
 /* Metallic gold text (small labels) */
@@ -56,16 +86,16 @@ h1 [class*="text-[#C9A84C]"],
 h2 [class*="text-[#C9A84C]"] {
   background: linear-gradient(
       135deg,
-      #FFFAEA 0%,
-      #EBD699 25%,
-      #D1B25C 50%,
-      #A6802C 75%,
-      #D1B25C 100%
+      #EBE5D9 0%,
+      #D4C4A3 25%,
+      #BCA474 50%,
+      #8E7A4E 75%,
+      #D4C4A3 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  color: #D1B25C;
+  color: #BCA474;
   -webkit-text-fill-color: transparent;
   
   /* Anti-clipping properties for large italic swashes and descenders */
@@ -75,10 +105,10 @@ h2 [class*="text-[#C9A84C]"] {
   line-height: 1.15;
   
   /* Subtle soft glow and realistic shadow behind the transparent text */
-  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.4)) drop-shadow(0px 0px 15px rgba(209, 178, 92, 0.25));
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.4)) drop-shadow(0px 0px 15px rgba(188, 164, 116, 0.15));
 }
 
-/* Metallic gold backgrounds - Premium Realistic */
+/* Metallic gold backgrounds - Premium Realistic Brushed Metal */
 [class*="bg-[#C9A84C]"] {
   background: linear-gradient(145deg,
       var(--fsa-gold-light) 0%,
@@ -87,69 +117,58 @@ h2 [class*="text-[#C9A84C]"] {
       var(--fsa-gold-highlight) 55%,
       var(--fsa-gold-dark) 80%,
       var(--fsa-gold-shadow) 100%) !important;
-  border-top: 1px solid var(--fsa-gold-highlight) !important;
-  border-bottom: 1px solid var(--fsa-gold-shadow) !important;
-  color: var(--background) !important; /* Deep navy matching the page background */
-  /* CNC cut-through text effect */
-  text-shadow: 
-    0px -1px 1px rgba(0, 0, 0, 0.7), /* Dark shadow on the top inner edge */
-    0px 1px 1px rgba(255, 255, 255, 0.7) !important; /* Light hitting the bottom inner edge */
+  border-top: 1px solid rgba(245, 238, 219, 0.4) !important;
+  border-bottom: 1px solid rgba(74, 62, 38, 0.6) !important;
+  color: #040A14 !important; /* Deep navy matching the page background */
+  /* Subtle text indentation for luxury watch feel */
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 1px rgba(107, 83, 26, 0.8),
-    inset 0 2px 4px rgba(255, 255, 255, 0.2),
-    0 2px 0 #8c6a1d,
-    0 4px 10px rgba(0, 0, 0, 0.4),
-    0 0 15px rgba(214, 184, 90, 0.2) !important;
-  transition: all 250ms ease !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 1px rgba(74, 62, 38, 0.5),
+    0 2px 5px rgba(0, 0, 0, 0.2) !important;
+  transition: transform 250ms ease, box-shadow 250ms ease, filter 250ms ease !important;
 }
 
 /* Hover state for engraved gold text and surface */
 [class*="bg-[#C9A84C]"]:hover {
-  filter: brightness(1.08) contrast(1.05);
-  /* The carved interior illuminates with warm light */
-  color: rgba(252, 238, 161, 0.9) !important; 
-  text-shadow: 
-    0 0 12px rgba(252, 238, 161, 0.7), /* Soft inner glow illuminating the cut */
-    0px -1px 1px rgba(0, 0, 0, 0.6), /* Top edge shadow maintained */
-    0px 1px 1px rgba(255, 255, 255, 0.8) !important; /* Bottom edge highlight maintained */
-  transform: translateY(-1px);
+  filter: brightness(1.05);
+  /* The carved interior illuminates slightly */
+  color: #040A14 !important; 
+  transform: translateY(-1px) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 1px rgba(107, 83, 26, 0.8),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    0 3px 0 #8c6a1d,
-    0 6px 12px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(214, 184, 90, 0.4) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 1px rgba(74, 62, 38, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 24px rgba(201, 168, 76, 0.35) !important;
+  cursor: pointer;
 }
 
 /* Active pressed state for gold buttons */
 button[class*="bg-[#C9A84C]"]:active,
 a[class*="bg-[#C9A84C]"]:active {
-  transform: translateY(2px);
-  filter: brightness(0.95);
+  transform: translateY(1px);
+  filter: brightness(0.96);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -1px 1px rgba(107, 83, 26, 0.8),
-    0 0px 0 #8c6a1d,
-    0 2px 5px rgba(0, 0, 0, 0.4),
-    0 0 10px rgba(214, 184, 90, 0.2) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 1px rgba(74, 62, 38, 0.7),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0 8px rgba(188, 164, 116, 0.05) !important;
 }
 
 /* Gold borders and outlines - Realistic */
 [class*="border-[#C9A84C]"] {
-  border-color: var(--fsa-gold-base) !important;
-  border-bottom-width: 2px !important;
+  border-color: var(--fsa-gold-dark) !important;
+  border-bottom-width: 1px !important;
   box-shadow:
-    inset 0 1px 1px rgba(255, 254, 242, 0.5),
-    0 1px 2px rgba(0, 0, 0, 0.3),
-    0 0 10px rgba(214, 184, 90, 0.1) !important;
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(188, 164, 116, 0.05) !important;
 }
 
 /* Premium hover polish for other buttons */
 button:not([class*="bg-[#C9A84C]"]):hover,
 a:not([class*="bg-[#C9A84C]"]):hover {
   transform: translateY(-1px);
+  transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* Glass-like texture for white backgrounds */

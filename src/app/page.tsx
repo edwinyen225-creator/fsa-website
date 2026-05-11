@@ -120,21 +120,10 @@ export default function Home() {
     <main className="min-h-screen bg-[#071226] text-white overflow-hidden">
       
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[90vh] bg-[#071226] flex items-center overflow-hidden">
-        {/* Cinematic Background Image Layer */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
-          style={{ backgroundImage: 'url("/images/hero-background.jpg")' }}
-        />
-        {/* Navy gradient overlay fallback / blending layer */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0B1833]/75 via-[#081327]/85 to-[#050B16]" />
-        
-        {/* Glow effects */}
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_70%_35%,rgba(201,168,76,0.18),transparent_35%),radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.16),transparent_35%)]" />
-
+      <section className="relative bg-[#071226] px-4 pt-24 pb-8 md:px-6 md:pt-28 md:pb-12">
         {/* Navbar */}
-        <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5">
-          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#0B1833]/80 px-7 py-4 backdrop-blur-xl shadow-2xl">
+        <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
+          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
             <Link href="/" className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
                 <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
@@ -160,60 +149,50 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Hero body */}
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 px-6 pt-32 pb-20 md:pt-40 md:pb-32 lg:grid-cols-[1fr_0.8fr]">
-          <div>
-            <div className="mb-8 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">
-              {t.hero_badge}
+        {/* Hero Container (Rounded Image Area) */}
+        <div className="relative mx-auto flex min-h-[60vh] w-full max-w-[1400px] items-center justify-start overflow-hidden rounded-[32px] md:rounded-[48px] border border-white/10 shadow-2xl">
+          {/* Base dark background (fallback) */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0B1833] to-[#050B16]" />
+
+          {/* Cinematic Background Image */}
+          <div 
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-90"
+            style={{ backgroundImage: 'url("/images/hero-background.jpg")' }}
+          />
+          
+          {/* Dark overlay for readability (40-60%) */}
+          <div className="absolute inset-0 z-0 bg-[#040A14]/40" />
+          
+          {/* Gradient: darker on left and bottom for text readability */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#040A14]/80 via-[#040A14]/30 to-transparent" />
+          <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#040A14]/80 via-transparent to-transparent" />
+
+          {/* Hero Content */}
+          <div className="relative z-10 w-full max-w-4xl px-8 py-10 md:px-16 md:py-16 lg:px-24 flex flex-col items-start justify-center">
+            
+            {/* FSA Badge */}
+            <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/20 px-5 py-2 backdrop-blur-md">
+              <div className="h-2 w-2 rounded-full bg-[#C9A84C] animate-pulse" />
+              <span className="text-xs uppercase tracking-[0.28em] text-white/90">{t.hero_badge}</span>
             </div>
-            <h1 className="max-w-4xl font-sans text-5xl font-semibold leading-[1.08] tracking-tighter text-white md:text-7xl lg:text-8xl">
-              {t.hero_h1_line1} <br className="hidden md:block" />
-              <span className="text-[#C9A84C] font-serif italic pr-2">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
-              {t.hero_h1_line2}
+            
+            <h1 className="max-w-4xl font-sans text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-[3.25rem]">
+              <span className="text-white/95">{t.hero_h1_line1}</span> <br className="hidden md:block" />
+              <span className="text-[#C9A84C] block md:inline-block py-1">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
+              <span className="text-white/95">{t.hero_h1_line2}</span>
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl">
+            
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-lg font-light">
               {t.hero_desc}
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="/signup" className="rounded-full bg-white px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            
+            <div className="mt-6 flex flex-wrap gap-4">
+              <Link href="/signup" className="rounded-full bg-[#C9A84C] px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02] hover:bg-[#E4C261] shadow-[0_4px_20px_rgba(201,168,76,0.2)]">
                 {t.hero_cta_primary}
               </Link>
-              <Link href="/programs" className="rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
+              <Link href="/programs" className="rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:bg-white/10">
                 {t.hero_cta_secondary}
               </Link>
-            </div>
-          </div>
-
-          <div className="hidden lg:flex justify-end">
-            <div className="relative w-full max-w-md overflow-hidden rounded-[32px] border border-[#C9A84C]/20 bg-[#0B1833]/80 p-10 shadow-2xl backdrop-blur-xl">
-              <div className="mb-6 flex items-center justify-between">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#071226] border border-white/10">
-                  <span className="font-serif text-2xl text-[#C9A84C]">FSA</span>
-                </div>
-                <div className="rounded-full bg-[#C9A84C]/10 px-4 py-2 text-xs uppercase tracking-widest text-[#C9A84C]">
-                  {t.hero_card_badge}
-                </div>
-              </div>
-              <h2 className="font-serif text-3xl leading-tight text-white mb-4">
-                {t.hero_card_h2}
-              </h2>
-              <p className="text-white/60 leading-relaxed mb-8">
-                {t.hero_card_desc}
-              </p>
-              <div className="space-y-4 border-t border-white/10 pt-6">
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-white/40 uppercase tracking-widest">{t.hero_stat1_label}</span>
-                  <span className="text-white font-medium">{t.hero_stat1_val}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-white/40 uppercase tracking-widest">{t.hero_stat2_label}</span>
-                  <span className="text-white font-medium">{t.hero_stat2_val}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-white/40 uppercase tracking-widest">{t.hero_stat3_label}</span>
-                  <span className="text-white font-medium">{t.hero_stat3_val}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -263,7 +242,7 @@ export default function Home() {
       <section className="bg-[#F4F7FA] px-6 py-24 text-[#071226] md:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.class_eyebrow}</div>
-          <h2 className="mb-20 text-center font-sans text-5xl font-semibold tracking-tighter text-[#071226] leading-tight md:text-6xl">
+          <h2 className="mb-16 text-center font-sans text-4xl font-semibold tracking-tighter text-[#071226] leading-tight md:text-6xl">
             {t.class_h2}
           </h2>
           
@@ -290,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* ── 3. What students create (Variation) ───────────────────────────── */}
-      <section className="bg-[#071226] px-6 py-24 md:py-32 relative">
+      <section className="bg-[#071226] px-6 py-20 md:py-24 relative">
         <div className="mx-auto max-w-7xl grid gap-16 lg:grid-cols-2 items-center">
           <div className="order-2 lg:order-1 grid gap-6 sm:grid-cols-2">
             {creations.map((item, idx) => (
@@ -324,7 +303,7 @@ export default function Home() {
       </section>
 
       {/* ── 4. Programs ───────────────────────────────────────────────────── */}
-      <section className="bg-[#0B1833] px-6 py-24 md:py-32">
+      <section className="bg-[#0B1833] px-6 py-20 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.prog_eyebrow}</div>
           <h2 className="mb-6 text-center font-sans text-5xl font-semibold tracking-tighter text-white leading-tight md:text-6xl">
@@ -373,7 +352,7 @@ export default function Home() {
       <section className="bg-[#F4F7FA] px-6 py-24 text-[#071226] md:py-32">
         <div className="mx-auto max-w-7xl text-center">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.enroll_eyebrow}</div>
-          <h2 className="mb-20 font-serif text-5xl leading-tight md:text-6xl">
+          <h2 className="mb-16 font-serif text-4xl leading-tight md:text-6xl">
             {t.enroll_h2}
           </h2>
 
@@ -391,10 +370,10 @@ export default function Home() {
       </section>
 
       {/* ── 6. Parent FAQ ─────────────────────────────────────────────────── */}
-      <section className="bg-[#071226] px-6 py-24 md:py-32">
+      <section className="bg-[#071226] px-6 py-20 md:py-24">
         <div className="mx-auto max-w-3xl">
           <div className="mb-4 text-center text-sm uppercase tracking-[0.35em] text-[#C9A84C] font-semibold">{t.faq_eyebrow}</div>
-          <h2 className="mb-16 text-center font-serif text-5xl leading-tight text-white md:text-6xl">
+          <h2 className="mb-12 text-center font-serif text-4xl leading-tight text-white md:text-6xl">
             {t.faq_h2}
           </h2>
           <div className="space-y-2">
@@ -410,7 +389,7 @@ export default function Home() {
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#0B1833] px-6 py-24 md:py-32">
+      <section className="bg-[#0B1833] px-6 py-20 md:py-24">
         <div className="mx-auto max-w-4xl rounded-[40px] border border-[#C9A84C]/20 bg-[#071226] p-12 text-center shadow-2xl md:p-20 relative overflow-hidden">
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#C9A84C] opacity-5 blur-3xl" />
           <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-[#3b82f6] opacity-5 blur-3xl" />

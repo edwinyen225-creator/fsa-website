@@ -88,8 +88,8 @@ export default function TeamPage() {
     <main className="min-h-screen bg-[#071226] text-white">
 
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-white/8 px-7 py-4 backdrop-blur-xl shadow-2xl">
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
+        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
           <Link href="/" className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
               <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
@@ -117,13 +117,13 @@ export default function TeamPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(201,168,76,0.15),transparent_40%),radial-gradient(circle_at_20%_75%,rgba(37,99,235,0.12),transparent_40%)]" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{m.badge}</div>
-          <h1 className="font-serif text-5xl leading-tight tracking-tight md:text-7xl">{m.h1}</h1>
+          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{m.h1}</h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl">{m.sub}</p>
         </div>
       </section>
 
       {/* Program Lead */}
-      <section className="px-6 py-28">
+      <section className="px-6 py-20 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.lead_label}</div>
           <div className="overflow-hidden rounded-[42px] border border-white/10 bg-white/5 backdrop-blur-sm">
@@ -154,7 +154,7 @@ export default function TeamPage() {
       </section>
 
       {/* Coach cards */}
-      <section className="bg-[#F4F7FA] px-6 py-28 text-[#071226]">
+      <section className="bg-[#F4F7FA] px-6 py-20 md:py-24 text-[#071226]">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.coaches_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
@@ -195,7 +195,7 @@ export default function TeamPage() {
       </section>
 
       {/* Teaching standards */}
-      <section className="bg-white px-6 py-28 text-[#071226]">
+      <section className="bg-white px-6 py-20 md:py-24 text-[#071226]">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.std_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
@@ -215,7 +215,7 @@ export default function TeamPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#071226] px-6 py-28">
+      <section className="bg-[#071226] px-6 py-20 md:py-24">
         <div className="mx-auto max-w-4xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.cta_eyebrow}</div>
           <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{m.cta_h2}</h2>
