@@ -94,10 +94,12 @@ const IconLine  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IconMap   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>);
 
 import { useLanguage } from "@/hooks/useLanguage";
+import { homepageTranslations } from "@/lib/homepage-i18n";
 
 export default function ContactPage() {
   const { locale, setLocale } = useLanguage();
   const c = ct[locale];
+  const ht = homepageTranslations[locale];
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
   const contacts = [
@@ -120,15 +122,15 @@ export default function ContactPage() {
               <div className="text-xs uppercase tracking-[0.35em] text-white/45">{c.tagline}</div>
             </div>
           </Link>
-          <nav className="hidden items-center gap-9 text-sm text-white/70 md:flex">
-            <Link href="/#why-fsa"  className="hover:text-[#C9A84C] transition-colors">{c.nav_why}</Link>
-            <Link href="/programs"  className="hover:text-[#C9A84C] transition-colors">{c.nav_programs}</Link>
-            <Link href="/parents"   className="hover:text-[#C9A84C] transition-colors">{c.nav_parents}</Link>
-            <Link href="/contact"   className="text-[#C9A84C]">{c.nav_contact}</Link>
+          <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
+            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{ht.nav_programs}</Link>
+            <Link href="/parents" className="hover:text-[#C9A84C] transition-colors">{ht.nav_parents}</Link>
+            <Link href="/team" className="hover:text-[#C9A84C] transition-colors">{ht.nav_team}</Link>
+            <Link href="/contact" className="text-[#C9A84C]">{ht.nav_contact}</Link>
           </nav>
           <div className="flex items-center gap-3">
             <LanguageSwitcher locale={locale} onChange={setLocale} />
-            <Link href="/signup" id="contact-nav-cta" className="rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{c.nav_cta}</Link>
+            <Link href="/signup" id="contact-nav-cta" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{ht.nav_book_trial}</Link>
           </div>
         </div>
       </header>

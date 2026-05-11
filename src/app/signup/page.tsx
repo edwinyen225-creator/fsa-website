@@ -49,10 +49,12 @@ const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IconExternal = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>);
 
 import { useLanguage } from "@/hooks/useLanguage";
+import { homepageTranslations } from "@/lib/homepage-i18n";
 
 export default function SignupPage() {
   const { locale, setLocale } = useLanguage();
   const s = useST(locale);
+  const ht = homepageTranslations[locale];
 
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
@@ -77,16 +79,16 @@ export default function SignupPage() {
               <div className="text-xs uppercase tracking-[0.35em] text-white/45">{s.tagline}</div>
             </div>
           </Link>
-          <nav className="hidden items-center gap-9 text-sm text-white/70 md:flex">
-            <Link href="/#why-fsa" className="hover:text-[#C9A84C] transition-colors">{s.nav_why}</Link>
-            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{s.nav_programs}</Link>
-            <Link href="/#parents" className="hover:text-[#C9A84C] transition-colors">{s.nav_parents}</Link>
-            <Link href="/#coaches" className="hover:text-[#C9A84C] transition-colors">{s.nav_team}</Link>
+          <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
+            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{ht.nav_programs}</Link>
+            <Link href="/parents" className="hover:text-[#C9A84C] transition-colors">{ht.nav_parents}</Link>
+            <Link href="/team" className="hover:text-[#C9A84C] transition-colors">{ht.nav_team}</Link>
+            <Link href="/contact" className="hover:text-[#C9A84C] transition-colors">{ht.nav_contact}</Link>
           </nav>
           <div className="flex items-center gap-3">
             <LanguageSwitcher locale={locale} onChange={setLocale} />
             <a href={FORM_URL} target="_blank" rel="noopener noreferrer" id="signup-nav-cta"
-              className="rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{s.nav_cta}</a>
+              className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{ht.nav_book_trial}</a>
           </div>
         </div>
       </header>

@@ -49,10 +49,12 @@ const IconUsers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IconHeart = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>);
 
 import { useLanguage } from "@/hooks/useLanguage";
+import { homepageTranslations } from "@/lib/homepage-i18n";
 
 export default function TeamPage() {
   const { locale, setLocale } = useLanguage();
   const m = useTT(locale);
+  const ht = homepageTranslations[locale];
 
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
@@ -99,15 +101,15 @@ export default function TeamPage() {
               <div className="text-xs uppercase tracking-[0.35em] text-white/45">{m.tagline}</div>
             </div>
           </Link>
-          <nav className="hidden items-center gap-9 text-sm text-white/70 md:flex">
-            <Link href="/#why-fsa"  className="hover:text-[#C9A84C] transition-colors">{m.nav_why}</Link>
-            <Link href="/programs"  className="hover:text-[#C9A84C] transition-colors">{m.nav_programs}</Link>
-            <Link href="/#parents"  className="hover:text-[#C9A84C] transition-colors">{m.nav_parents}</Link>
-            <Link href="/team"      className="text-[#C9A84C]">{m.nav_team}</Link>
+          <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
+            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{ht.nav_programs}</Link>
+            <Link href="/parents" className="hover:text-[#C9A84C] transition-colors">{ht.nav_parents}</Link>
+            <Link href="/team" className="text-[#C9A84C]">{ht.nav_team}</Link>
+            <Link href="/contact" className="hover:text-[#C9A84C] transition-colors">{ht.nav_contact}</Link>
           </nav>
           <div className="flex items-center gap-3">
             <LanguageSwitcher locale={locale} onChange={setLocale} />
-            <Link href="/signup" id="team-nav-cta" className="rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{m.nav_cta}</Link>
+            <Link href="/signup" id="team-nav-cta" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{ht.nav_book_trial}</Link>
           </div>
         </div>
       </header>

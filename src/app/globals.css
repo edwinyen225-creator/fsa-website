@@ -81,21 +81,19 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Large editorial gold headline text - Soft Champagne Metallic */
-h1 [class*="text-[#C9A84C]"],
-h2 [class*="text-[#C9A84C]"] {
-  background: linear-gradient(
-      135deg,
-      #EBE5D9 0%,
-      #D4C4A3 25%,
-      #BCA474 50%,
-      #8E7A4E 75%,
-      #D4C4A3 100%
-  );
-  background-size: 200% auto;
+/* Large editorial gold headline text - Strong Metallic Texture */
+.gold-headline-text {
+  background: linear-gradient(145deg,
+      var(--fsa-gold-light) 0%,
+      var(--fsa-gold-base) 20%,
+      var(--fsa-gold-dark) 50%,
+      var(--fsa-gold-highlight) 55%,
+      var(--fsa-gold-dark) 80%,
+      var(--fsa-gold-shadow) 100%);
+  background-size: 100% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  color: #BCA474;
+  color: var(--fsa-gold-base);
   -webkit-text-fill-color: transparent;
   
   /* Anti-clipping properties for large italic swashes and descenders */
