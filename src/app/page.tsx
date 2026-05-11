@@ -120,7 +120,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#071226] text-white overflow-hidden">
       
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#071226] px-2 pt-24 pb-6 md:px-4 md:pt-28 md:pb-8">
+      <section className="relative bg-[#071226] px-1 pt-20 pb-2 md:px-1.5 md:pt-22 md:pb-3">
         {/* Navbar */}
         <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
           <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
@@ -150,7 +150,7 @@ export default function Home() {
         </header>
 
         {/* Hero Container (Rounded Image Area) */}
-        <div className="relative mx-auto flex min-h-[70vh] lg:min-h-[75vh] w-full max-w-[1400px] items-center justify-start overflow-hidden rounded-[32px] md:rounded-[48px] border border-white/10 shadow-2xl">
+        <div className="relative mx-auto flex min-h-[80vh] lg:min-h-[88vh] w-full max-w-[1920px] items-center justify-start overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/10 shadow-2xl">
           {/* Base dark background (fallback) */}
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0B1833] to-[#050B16]" />
 
