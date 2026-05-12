@@ -120,7 +120,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#071226] text-white overflow-hidden">
       
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#071226] px-1 pt-20 pb-2 md:px-1.5 md:pt-22 md:pb-3">
+      <section className="relative min-h-screen overflow-hidden flex items-center">
         {/* Navbar */}
         <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
           <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
@@ -149,51 +149,52 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Hero Container (Rounded Image Area) */}
-        <div className="relative mx-auto flex min-h-[80vh] lg:min-h-[88vh] w-full max-w-[1920px] items-center justify-start overflow-hidden rounded-[20px] md:rounded-[28px] border border-white/10 shadow-2xl">
-          {/* Base dark background (fallback) */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0B1833] to-[#050B16]" />
+        {/* Full-section background image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url("/images/hero-background.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
 
-          {/* Cinematic Background Image */}
-          <div 
-            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-90"
-            style={{ backgroundImage: 'url("/images/hero-background.jpg")' }}
-          />
-          
-          {/* Dark overlay for readability (40-60%) */}
-          <div className="absolute inset-0 z-0 bg-[#040A14]/40" />
-          
-          {/* Gradient: darker on left and bottom for text readability */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#040A14]/80 via-[#040A14]/30 to-transparent" />
-          <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#040A14]/80 via-transparent to-transparent" />
+        {/* Dark base overlay (~40%) */}
+        <div className="absolute inset-0 z-0 bg-[#040A14]/40" />
 
-          {/* Hero Content */}
-          <div className="relative z-10 w-full max-w-4xl px-8 py-12 md:px-14 md:py-20 lg:px-20 flex flex-col items-start justify-center">
-            
-            {/* FSA Badge */}
-            <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/20 px-5 py-2 backdrop-blur-md">
-              <div className="h-2 w-2 rounded-full bg-[#C9A84C] animate-pulse" />
-              <span className="text-xs uppercase tracking-[0.28em] text-white/90">{t.hero_badge}</span>
-            </div>
-            
-            <h1 className="max-w-4xl font-sans text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-[3.25rem]">
-              <span className="text-white/95">{t.hero_h1_line1}</span> <br className="hidden md:block" />
-              <span className="gold-headline-text block md:inline-block py-1">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
-              <span className="text-white/95">{t.hero_h1_line2}</span>
-            </h1>
-            
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-lg font-light">
-              {t.hero_desc}
-            </p>
-            
-            <div className="mt-6 flex flex-wrap gap-4">
-              <Link href="/signup" className="rounded-full bg-[#C9A84C] px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02] hover:bg-[#E4C261] shadow-[0_4px_20px_rgba(201,168,76,0.2)]">
-                {t.hero_cta_primary}
-              </Link>
-              <Link href="/programs" className="rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:bg-white/10">
-                {t.hero_cta_secondary}
-              </Link>
-            </div>
+        {/* Left-side gradient for text readability */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#040A14]/80 via-[#040A14]/30 to-transparent" />
+
+        {/* Bottom gradient */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#040A14]/70 via-transparent to-transparent" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 w-full max-w-4xl px-8 pt-32 pb-20 md:px-14 md:pt-36 md:pb-24 lg:px-20 flex flex-col items-start justify-center">
+
+          {/* FSA Badge */}
+          <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/20 px-5 py-2 backdrop-blur-md">
+            <div className="h-2 w-2 rounded-full bg-[#C9A84C] animate-pulse" />
+            <span className="text-xs uppercase tracking-[0.28em] text-white/90">{t.hero_badge}</span>
+          </div>
+
+          <h1 className="max-w-4xl font-sans text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-[3.25rem]">
+            <span className="text-white/95">{t.hero_h1_line1}</span> <br className="hidden md:block" />
+            <span className="gold-headline-text block md:inline-block py-1">{t.hero_h1_highlight}</span> <br className="hidden md:block" />
+            <span className="text-white/95">{t.hero_h1_line2}</span>
+          </h1>
+
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-lg font-light">
+            {t.hero_desc}
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Link href="/signup" className="rounded-full bg-[#C9A84C] px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02] hover:bg-[#E4C261] shadow-[0_4px_20px_rgba(201,168,76,0.2)]">
+              {t.hero_cta_primary}
+            </Link>
+            <Link href="/programs" className="rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:bg-white/10">
+              {t.hero_cta_secondary}
+            </Link>
           </div>
         </div>
       </section>
