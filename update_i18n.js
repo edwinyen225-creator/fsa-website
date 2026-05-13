@@ -1,4 +1,6 @@
-import type { Locale } from "./i18n";
+const fs = require('fs');
+
+const i18nContent = `import type { Locale } from "./i18n";
 
 export const homepageTranslations = {
   en: {
@@ -516,3 +518,7 @@ export const homepageTranslations = {
 } as const;
 
 export type HomepageTranslations = typeof homepageTranslations.en;
+`;
+
+fs.writeFileSync('src/lib/homepage-i18n.ts', i18nContent);
+console.log('Successfully updated src/lib/homepage-i18n.ts');

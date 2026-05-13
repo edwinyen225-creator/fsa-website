@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
+import { type Locale } from "@/lib/i18n";
 
 const ct = {
   en: {
@@ -55,49 +55,15 @@ const ct = {
   },
 } as const;
 
-function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: Locale) => void }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const h = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
-    document.addEventListener("mousedown", h);
-    return () => document.removeEventListener("mousedown", h);
-  }, []);
-  return (
-    <div ref={ref} className="relative">
-      <button id="contact-lang-btn" onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open} aria-label="Select language"
-        className="flex items-center gap-1.5 rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
-        <svg className="h-3.5 w-3.5 opacity-70" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.93 4.93a.75.75 0 011.06.01 6.5 6.5 0 008.98 0 .75.75 0 011.07 1.04A8 8 0 016 6a8 8 0 01-1.07-1.07zM3 10a7 7 0 0014 0c0 1.72-.62 3.3-1.64 4.53A7 7 0 013 10z" clipRule="evenodd" /></svg>
-        <span>{localeLabels[locale]}</span>
-        <svg className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}><path d="M2 4l4 4 4-4" /></svg>
-      </button>
-      {open && (
-        <ul role="listbox" className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1833] shadow-2xl backdrop-blur-xl z-[60]">
-          {(Object.keys(localeLabels) as Locale[]).map(l => (
-            <li key={l} role="option" aria-selected={l === locale}>
-              <button id={`contact-lang-${l}`} onClick={() => { onChange(l); setOpen(false); }}
-                className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition hover:bg-white/8 ${l === locale ? "text-[#C9A84C]" : "text-white/75 hover:text-white"}`}>
-                <span className="w-8 font-mono text-xs opacity-60">{localeLabels[l]}</span>
-                <span>{localeNames[l]}</span>
-                {l === locale && <svg className="ml-auto h-3.5 w-3.5 text-[#C9A84C]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M2 6l3 3 5-5" /></svg>}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
+import { useLanguage } from "@/hooks/useLanguage";
+import { homepageTranslations } from "@/lib/homepage-i18n";
 
 const IconEmail = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>);
 const IconLine  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
 const IconMap   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>);
 
-import { useLanguage } from "@/hooks/useLanguage";
-import { homepageTranslations } from "@/lib/homepage-i18n";
-
 export default function ContactPage() {
-  const { locale, setLocale } = useLanguage();
+  const { locale } = useLanguage();
   const c = ct[locale];
   const ht = homepageTranslations[locale];
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
@@ -110,31 +76,6 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-[#071226] text-white">
-      {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
-          <Link href="/" className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
-              <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
-            </div>
-            <div>
-              <div className="font-serif text-xl tracking-wide">Future Skill Academy</div>
-              <div className="text-xs uppercase tracking-[0.35em] text-white/45">{c.tagline}</div>
-            </div>
-          </Link>
-          <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
-            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{ht.nav_programs}</Link>
-            <Link href="/parents" className="hover:text-[#C9A84C] transition-colors">{ht.nav_parents}</Link>
-            <Link href="/team" className="hover:text-[#C9A84C] transition-colors">{ht.nav_team}</Link>
-            <Link href="/contact" className="text-[#C9A84C]">{ht.nav_contact}</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher locale={locale} onChange={setLocale} />
-            <Link href="/signup" id="contact-nav-cta" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{ht.nav_book_trial}</Link>
-          </div>
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="relative min-h-[50vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(201,168,76,0.15),transparent_40%)]" />

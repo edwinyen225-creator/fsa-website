@@ -1,41 +1,9 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
 import { usePar } from "@/lib/parents-i18n";
-
-function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: Locale) => void }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const h = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
-    document.addEventListener("mousedown", h); return () => document.removeEventListener("mousedown", h);
-  }, []);
-  return (
-    <div ref={ref} className="relative">
-      <button id="par-lang-btn" onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open} aria-label="Select language"
-        className="flex items-center gap-1.5 rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
-        <svg className="h-3.5 w-3.5 opacity-70" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.93 4.93a.75.75 0 011.06.01 6.5 6.5 0 008.98 0 .75.75 0 011.07 1.04A8 8 0 016 6a8 8 0 01-1.07-1.07zM3 10a7 7 0 0014 0c0 1.72-.62 3.3-1.64 4.53A7 7 0 013 10z" clipRule="evenodd" /></svg>
-        <span>{localeLabels[locale]}</span>
-        <svg className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}><path d="M2 4l4 4 4-4"/></svg>
-      </button>
-      {open && (
-        <ul role="listbox" className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1833] shadow-2xl backdrop-blur-xl z-[60]">
-          {(Object.keys(localeLabels) as Locale[]).map(l => (
-            <li key={l} role="option" aria-selected={l === locale}>
-              <button id={`par-lang-${l}`} onClick={() => { onChange(l); setOpen(false); }}
-                className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition hover:bg-white/8 ${l === locale ? "text-[#C9A84C]" : "text-white/75 hover:text-white"}`}>
-                <span className="w-8 font-mono text-xs opacity-60">{localeLabels[l]}</span>
-                <span>{localeNames[l]}</span>
-                {l === locale && <svg className="ml-auto h-3.5 w-3.5 text-[#C9A84C]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5}><path d="M2 6l3 3 5-5"/></svg>}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
+import { useLanguage } from "@/hooks/useLanguage";
+import { homepageTranslations } from "@/lib/homepage-i18n";
 
 const IC = (d: string) => () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d={d}/></svg>);
 const IconTarget  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
@@ -60,11 +28,8 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-import { useLanguage } from "@/hooks/useLanguage";
-import { homepageTranslations } from "@/lib/homepage-i18n";
-
 export default function ParentsPage() {
-  const { locale, setLocale } = useLanguage();
+  const { locale } = useLanguage();
   const t = usePar(locale);
   const ht = homepageTranslations[locale];
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
@@ -86,31 +51,6 @@ export default function ParentsPage() {
 
   return (
     <main className="min-h-screen bg-[#071226] text-white">
-      {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
-          <Link href="/" className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
-              <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
-            </div>
-            <div>
-              <div className="font-serif text-xl tracking-wide">Future Skill Academy</div>
-              <div className="text-xs uppercase tracking-[0.35em] text-white/45">{t.tagline}</div>
-            </div>
-          </Link>
-          <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
-            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{ht.nav_programs}</Link>
-            <Link href="/parents" className="text-[#C9A84C]">{ht.nav_parents}</Link>
-            <Link href="/team" className="hover:text-[#C9A84C] transition-colors">{ht.nav_team}</Link>
-            <Link href="/contact" className="hover:text-[#C9A84C] transition-colors">{ht.nav_contact}</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher locale={locale} onChange={setLocale} />
-            <Link href="/signup" id="par-nav-cta" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{ht.nav_book_trial}</Link>
-          </div>
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="relative min-h-[60vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(201,168,76,0.14),transparent_40%),radial-gradient(circle_at_15%_70%,rgba(37,99,235,0.1),transparent_40%)]" />
@@ -132,10 +72,10 @@ export default function ParentsPage() {
           <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{t.why_h2}</h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {whyCards.map((c, i) => (
-              <div key={i} className="rounded-[28px] border border-slate-200 bg-white p-8 transition hover:shadow-lg hover:-translate-y-1 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#071226] text-[#C9A84C]">{c.icon}</div>
-                <h3 className="font-serif text-lg text-[#071226]">{c.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{c.desc}</p>
+              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-lg hover:-translate-y-1 duration-300">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{c.icon}</div>
+                <h3 className="font-serif text-lg text-white">{c.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/60">{c.desc}</p>
               </div>
             ))}
           </div>
@@ -186,9 +126,9 @@ export default function ParentsPage() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {outputs.map((o, i) => (
-              <div key={i} className="rounded-[28px] border border-slate-200 bg-[#F4F7FA] p-7 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#071226] text-[#C9A84C]"><IconFile /></div>
-                <p className="font-serif text-base text-[#071226]">{o}</p>
+              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-7 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]"><IconFile /></div>
+                <p className="font-serif text-base text-white">{o}</p>
               </div>
             ))}
           </div>

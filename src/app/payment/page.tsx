@@ -134,31 +134,6 @@ export default function PaymentPage() {
 
   return (
     <main className="min-h-screen bg-[#071226] text-white">
-      {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 pointer-events-none">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[#061128]/70 px-6 py-3 backdrop-blur-xl animate-navbar-float ring-1 ring-white/5 pointer-events-auto">
-          <Link href="/" className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
-              <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
-            </div>
-            <div>
-              <div className="font-serif text-xl tracking-wide">Future Skill Academy</div>
-              <div className="text-xs uppercase tracking-[0.35em] text-white/45">{t.tagline}</div>
-            </div>
-          </Link>
-          <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
-            <Link href="/programs" className="hover:text-[#C9A84C] transition-colors">{ht.nav_programs}</Link>
-            <Link href="/parents" className="hover:text-[#C9A84C] transition-colors">{ht.nav_parents}</Link>
-            <Link href="/team" className="hover:text-[#C9A84C] transition-colors">{ht.nav_team}</Link>
-            <Link href="/contact" className="hover:text-[#C9A84C] transition-colors">{ht.nav_contact}</Link>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher locale={locale} onChange={setLocale} />
-            <Link href="/signup" id="pay-nav-cta" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">{ht.nav_book_trial}</Link>
-          </div>
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="relative min-h-[50vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(201,168,76,0.14),transparent_40%)]" />
@@ -200,10 +175,10 @@ export default function PaymentPage() {
           <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{t.payment_h2}</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {methods.map((m, i) => (
-              <div key={i} className="rounded-[28px] border border-slate-200 bg-white p-8 transition hover:shadow-md duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#071226] text-[#C9A84C]">{m.icon}</div>
-                <h3 className="font-serif text-xl text-[#071226]">{m.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{m.desc}</p>
+              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-md duration-300">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{m.icon}</div>
+                <h3 className="font-serif text-xl text-white">{m.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/60">{m.desc}</p>
               </div>
             ))}
           </div>

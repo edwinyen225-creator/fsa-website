@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const pageContent = `"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -12,7 +14,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-b border-white/10 last:border-0">
       <button onClick={() => setIsOpen(!isOpen)} className="flex w-full items-center justify-between py-6 text-left transition hover:text-[#C9A84C]">
         <span className="font-serif text-xl">{question}</span>
-        <svg className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180 text-[#C9A84C]" : "text-white/40"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+        <svg className={\`h-5 w-5 transition-transform \${isOpen ? "rotate-180 text-[#C9A84C]" : "text-white/40"}\`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
@@ -181,7 +183,7 @@ export default function Home() {
           <div className="order-2 lg:order-1 grid gap-6 sm:grid-cols-2">
             {creations.map((item, idx) => (
               <div key={idx} className="cinematic-image-card flex flex-col transition-colors hover:border-[#C9A84C]/30 group">
-                <div className="cinematic-image-card-media h-36" style={{ backgroundImage: `url(${item.img})` }} />
+                <div className="cinematic-image-card-media h-36" style={{ backgroundImage: \`url(\${item.img})\` }} />
                 <div className="p-6 flex flex-col justify-start">
                   <h3 className="font-sans text-lg font-semibold tracking-tight text-white mb-2">{item.title}</h3>
                   <p className="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">{item.desc}</p>
@@ -227,12 +229,12 @@ export default function Home() {
 
           <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2">
             {programs.map((prog) => (
-              <div key={prog.id} className={`premium-card premium-card-dark group flex flex-col justify-between border ${prog.accent} transition-all duration-300 relative`}>
+              <div key={prog.id} className={\`premium-card premium-card-dark group flex flex-col justify-between border \${prog.accent} transition-all duration-300 relative\`}>
                 {!prog.isActive && (
                   <div className="absolute inset-0 bg-[#071226]/40 rounded-[24px] pointer-events-none" />
                 )}
                 <div className={!prog.isActive ? "opacity-80" : ""}>
-                  <div className={`mb-4 inline-flex rounded-full px-4 py-1.5 text-xs tracking-widest uppercase ${prog.isActive ? 'bg-white/5 text-[#C9A84C]' : 'bg-white/5 text-white/50'}`}>
+                  <div className={\`mb-4 inline-flex rounded-full px-4 py-1.5 text-xs tracking-widest uppercase \${prog.isActive ? 'bg-white/5 text-[#C9A84C]' : 'bg-white/5 text-white/50'}\`}>
                     {prog.ages}
                   </div>
                   <h3 className="mb-7 font-serif text-[1.5rem] leading-tight text-white">{prog.name}</h3>
@@ -274,7 +276,7 @@ export default function Home() {
                 <div className="premium-step-number flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-serif text-sm text-[#C9A84C]">
                   {idx + 1}
                 </div>
-                <div className="text-[0.92rem] font-medium leading-tight text-slate-800">{step.replace(/^\d+\.\s*/, '')}</div>
+                <div className="text-[0.92rem] font-medium leading-tight text-slate-800">{step.replace(/^\\d+\\.\\s*/, '')}</div>
               </div>
             ))}
           </div>
@@ -329,3 +331,7 @@ export default function Home() {
     </main>
   );
 }
+`;
+
+fs.writeFileSync('src/app/page.tsx', pageContent);
+console.log('Successfully updated src/app/page.tsx');
