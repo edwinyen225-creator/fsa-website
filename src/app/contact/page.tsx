@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { type Locale } from "@/lib/i18n";
 
 const ct = {
   en: {

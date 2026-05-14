@@ -14,29 +14,26 @@ const pt = {
     p1_f3: "Culture & school life", p1_f4: "Work-life communication", p1_f5: "Useful phrases",
     p1_outcome: "Conversation confidence, phrase bank, pronunciation feedback, short speaking clip, monthly progress note.",
 
-
     p2_tagline: "Active 1-on-1 program with English or Chinese support for TOEIC preparation.",
     p2_f1: "TOEIC Listening & Reading", p2_f2: "Vocabulary & grammar",
     p2_f3: "Test strategy & timing", p2_f4: "Weak-point diagnosis", p2_f5: "Score improvement plan",
     p2_outcome: "TOEIC diagnostic profile, target score plan, part-by-part strategy, weak-point map, monthly progress check.",
-
 
     p3_tagline: "Active 1-on-1 program on how to use AI responsibly and practically.",
     p3_f1: "AI for research & writing", p3_f2: "Presentations & video creation",
     p3_f3: "Coding support", p3_f4: "Productivity workflows", p3_f5: "AI safety and ethics",
     p3_outcome: "AI prompt library, AI research workflow, presentation outline, video script, coding log, AI safety checklist.",
 
-
     p4_tagline: "Flagship premium 1-on-1 program combining language, AI, research, and portfolio-building.",
     p4_f1: "Language communication coaching", p4_f2: "AI & project coaching",
     p4_f3: "Research & writing", p4_f4: "Presentations & video", p4_f5: "CV/profile & portfolio building",
     p4_outcome: "Presentation deck, research brief, AI workflow sample, video script, CV material, speaking clip, final showcase artifact.",
 
-
     p5_tagline: "Future group class for matched learning, peer feedback, and public speaking.",
     p5_f1: "Matched group learning", p5_f2: "Collaboration & networking",
     p5_f3: "Peer feedback", p5_f4: "Public speaking", p5_f5: "Group projects & showcase",
     p5_outcome: "Team presentation, peer feedback report, showcase event participation.",
+
     out_eyebrow: "Student Outputs", out_h2: "What learners create.",
     out_desc: "FSA learners produce real, tangible outputs — things they can keep, share, and be proud of.",
     out1: "Presentation Deck", out2: "Research Brief", out3: "CV / Portfolio Material", out4: "AI Workflow Sample",
@@ -61,34 +58,30 @@ const pt = {
     sec_eyebrow: "プログラム一覧", sec_h2a: "4つのパーソナライズされたプログラム。", sec_h2b: "1つの未来のコホート。",
     focus_label: "授業で取り組むこと", outcome_label: "典型的な成果物", trial_btn: "無料相談を予約",
 
-    p1_tagline: "Active 1-on-1 English or Chinese communication coaching.",
-    p1_f1: "Natural conversation & listening", p1_f2: "Pronunciation & self-expression",
-    p1_f3: "Culture & school life", p1_f4: "Work-life communication", p1_f5: "Useful phrases",
-    p1_outcome: "Conversation confidence, phrase bank, pronunciation feedback, short speaking clip, monthly progress note.",
+    p1_tagline: "英語または中国語の1対1コミュニケーションコーチング（受付中）。",
+    p1_f1: "自然な会話とリスニング", p1_f2: "発音と自己表現",
+    p1_f3: "文化と学校生活", p1_f4: "仕事・日常のコミュニケーション", p1_f5: "使えるフレーズ",
+    p1_outcome: "会話への自信、フレーズバンク、発音フィードバック、短いスピーキングクリップ、月次進捗ノート。",
 
+    p2_tagline: "英語または中国語サポートによるTOEIC対策1対1プログラム（受付中）。",
+    p2_f1: "TOEICリスニングとリーディング", p2_f2: "語彙と文法",
+    p2_f3: "試験戦略とタイムマネジメント", p2_f4: "弱点診断", p2_f5: "スコアアップ計画",
+    p2_outcome: "TOEIC診断プロフィール、目標スコア計画、パート別戦略、弱点マップ、月次進捗確認。",
 
-    p2_tagline: "Active 1-on-1 program with English or Chinese support for TOEIC preparation.",
-    p2_f1: "TOEIC Listening & Reading", p2_f2: "Vocabulary & grammar",
-    p2_f3: "Test strategy & timing", p2_f4: "Weak-point diagnosis", p2_f5: "Score improvement plan",
-    p2_outcome: "TOEIC diagnostic profile, target score plan, part-by-part strategy, weak-point map, monthly progress check.",
+    p3_tagline: "AIを責任ある形で実践的に活用するための1対1プログラム（受付中）。",
+    p3_f1: "リサーチとライティングへのAI活用", p3_f2: "プレゼンと動画制作",
+    p3_f3: "コーディングサポート", p3_f4: "生産性ワークフロー", p3_f5: "AI安全性と倫理",
+    p3_outcome: "AIプロンプトライブラリ、AIリサーチワークフロー、プレゼンアウトライン、動画スクリプト、コーディングログ、AIセーフティチェックリスト。",
 
+    p4_tagline: "言語・AI・リサーチ・ポートフォリオを組み合わせたフラッグシップ1対1プログラム。",
+    p4_f1: "言語コミュニケーションコーチング", p4_f2: "AI・プロジェクトコーチング",
+    p4_f3: "リサーチとライティング", p4_f4: "プレゼンと動画", p4_f5: "CV・プロフィール・ポートフォリオ構築",
+    p4_outcome: "プレゼン資料、リサーチブリーフ、AIワークフローサンプル、動画スクリプト、CV素材、スピーキングクリップ、最終ショーケース成果物。",
 
-    p3_tagline: "Active 1-on-1 program on how to use AI responsibly and practically.",
-    p3_f1: "AI for research & writing", p3_f2: "Presentations & video creation",
-    p3_f3: "Coding support", p3_f4: "Productivity workflows", p3_f5: "AI safety and ethics",
-    p3_outcome: "AI prompt library, AI research workflow, presentation outline, video script, coding log, AI safety checklist.",
-
-
-    p4_tagline: "Flagship premium 1-on-1 program combining language, AI, research, and portfolio-building.",
-    p4_f1: "Language communication coaching", p4_f2: "AI & project coaching",
-    p4_f3: "Research & writing", p4_f4: "Presentations & video", p4_f5: "CV/profile & portfolio building",
-    p4_outcome: "Presentation deck, research brief, AI workflow sample, video script, CV material, speaking clip, final showcase artifact.",
-
-
-    p5_tagline: "Future group class for matched learning, peer feedback, and public speaking.",
-    p5_f1: "Matched group learning", p5_f2: "Collaboration & networking",
-    p5_f3: "Peer feedback", p5_f4: "Public speaking", p5_f5: "Group projects & showcase",
-    p5_outcome: "Team presentation, peer feedback report, showcase event participation.",
+    p5_tagline: "マッチングされたグループ学習・ピアフィードバック・パブリックスピーキングのための将来のグループクラス。",
+    p5_f1: "マッチングされたグループ学習", p5_f2: "コラボレーションとネットワーキング",
+    p5_f3: "ピアフィードバック", p5_f4: "パブリックスピーキング", p5_f5: "グループプロジェクトとショーケース",
+    p5_outcome: "チームプレゼン、ピアフィードバックレポート、ショーケースイベント参加。",
 
     out_eyebrow: "生徒の成果物", out_h2: "生徒が制作するもの。",
     out_desc: "FSAの生徒は実際の成果物を制作します — 手元に残せて、共有でき、誇れるものを。",
@@ -114,34 +107,30 @@ const pt = {
     sec_eyebrow: "我們的課程", sec_h2a: "四個個人化課程。", sec_h2b: "一個未來的群組課程。",
     focus_label: "學員的學習重點", outcome_label: "典型成果", trial_btn: "預約免費諮詢",
 
-    p1_tagline: "Active 1-on-1 English or Chinese communication coaching.",
-    p1_f1: "Natural conversation & listening", p1_f2: "Pronunciation & self-expression",
-    p1_f3: "Culture & school life", p1_f4: "Work-life communication", p1_f5: "Useful phrases",
-    p1_outcome: "Conversation confidence, phrase bank, pronunciation feedback, short speaking clip, monthly progress note.",
+    p1_tagline: "開放中。英文或中文的一對一溝通課程。",
+    p1_f1: "自然會話與聽力", p1_f2: "發音與自我表達",
+    p1_f3: "文化與學校生活", p1_f4: "職場與日常溝通", p1_f5: "實用句型",
+    p1_outcome: "對話自信、句型庫、發音回饋、短片口說練習、月次進度筆記。",
 
+    p2_tagline: "開放中。結合英文或中文支援的一對一 TOEIC 準備課程。",
+    p2_f1: "TOEIC 聽力與閱讀", p2_f2: "單字與文法",
+    p2_f3: "考試策略與時間管理", p2_f4: "弱點診斷", p2_f5: "分數提升計畫",
+    p2_outcome: "TOEIC 診斷分析、目標分數計畫、各題型策略、弱點地圖、月次進度確認。",
 
-    p2_tagline: "Active 1-on-1 program with English or Chinese support for TOEIC preparation.",
-    p2_f1: "TOEIC Listening & Reading", p2_f2: "Vocabulary & grammar",
-    p2_f3: "Test strategy & timing", p2_f4: "Weak-point diagnosis", p2_f5: "Score improvement plan",
-    p2_outcome: "TOEIC diagnostic profile, target score plan, part-by-part strategy, weak-point map, monthly progress check.",
+    p3_tagline: "開放中。學習如何負責任且實際地使用 AI 的一對一課程。",
+    p3_f1: "AI 用於研究與寫作", p3_f2: "簡報與影片製作",
+    p3_f3: "程式輔助", p3_f4: "生產力工作流程", p3_f5: "AI 安全與倫理",
+    p3_outcome: "AI 提示詞庫、AI 研究工作流程、簡報大綱、影片腳本、程式記錄、AI 安全清單。",
 
+    p4_tagline: "旗艦一對一課程，結合語言、AI、研究與作品集建立。",
+    p4_f1: "語言溝通課程", p4_f2: "AI 與專案課程",
+    p4_f3: "研究與寫作", p4_f4: "簡報與影片", p4_f5: "履歷、個人檔案與作品集建立",
+    p4_outcome: "簡報資料、研究摘要、AI 工作流程範本、影片腳本、履歷素材、口說片段、最終成果展示。",
 
-    p3_tagline: "Active 1-on-1 program on how to use AI responsibly and practically.",
-    p3_f1: "AI for research & writing", p3_f2: "Presentations & video creation",
-    p3_f3: "Coding support", p3_f4: "Productivity workflows", p3_f5: "AI safety and ethics",
-    p3_outcome: "AI prompt library, AI research workflow, presentation outline, video script, coding log, AI safety checklist.",
-
-
-    p4_tagline: "Flagship premium 1-on-1 program combining language, AI, research, and portfolio-building.",
-    p4_f1: "Language communication coaching", p4_f2: "AI & project coaching",
-    p4_f3: "Research & writing", p4_f4: "Presentations & video", p4_f5: "CV/profile & portfolio building",
-    p4_outcome: "Presentation deck, research brief, AI workflow sample, video script, CV material, speaking clip, final showcase artifact.",
-
-
-    p5_tagline: "Future group class for matched learning, peer feedback, and public speaking.",
-    p5_f1: "Matched group learning", p5_f2: "Collaboration & networking",
-    p5_f3: "Peer feedback", p5_f4: "Public speaking", p5_f5: "Group projects & showcase",
-    p5_outcome: "Team presentation, peer feedback report, showcase event participation.",
+    p5_tagline: "未來小組課程，針對配對學習、同儕回饋與公開演講設計。",
+    p5_f1: "配對小組學習", p5_f2: "協作與建立人脈",
+    p5_f3: "同儕回饋", p5_f4: "公開演講", p5_f5: "小組專案與成果展示",
+    p5_outcome: "團隊簡報、同儕回饋報告、成果展示活動參與。",
 
     out_eyebrow: "學員成果", out_h2: "學員所創作的作品。",
     out_desc: "FSA學員產出真實、具體的成果 — 可以保留、分享並引以為傲的作品。",
@@ -167,34 +156,30 @@ const pt = {
     sec_eyebrow: "我们的课程", sec_h2a: "四个个性化课程。", sec_h2b: "一个未来的群组课程。",
     focus_label: "学员的学习重点", outcome_label: "典型成果", trial_btn: "预约免费咨询",
 
-    p1_tagline: "Active 1-on-1 English or Chinese communication coaching.",
-    p1_f1: "Natural conversation & listening", p1_f2: "Pronunciation & self-expression",
-    p1_f3: "Culture & school life", p1_f4: "Work-life communication", p1_f5: "Useful phrases",
-    p1_outcome: "Conversation confidence, phrase bank, pronunciation feedback, short speaking clip, monthly progress note.",
+    p1_tagline: "开放中。英文或中文的一对一沟通课程。",
+    p1_f1: "自然会话与听力", p1_f2: "发音与自我表达",
+    p1_f3: "文化与学校生活", p1_f4: "职场与日常沟通", p1_f5: "实用句型",
+    p1_outcome: "对话自信、句型库、发音反馈、短片口说练习、月次进度笔记。",
 
+    p2_tagline: "开放中。结合英文或中文支援的一对一 TOEIC 准备课程。",
+    p2_f1: "TOEIC 听力与阅读", p2_f2: "单词与语法",
+    p2_f3: "考试策略与时间管理", p2_f4: "弱点诊断", p2_f5: "分数提升计划",
+    p2_outcome: "TOEIC 诊断分析、目标分数计划、各题型策略、弱点地图、月次进度确认。",
 
-    p2_tagline: "Active 1-on-1 program with English or Chinese support for TOEIC preparation.",
-    p2_f1: "TOEIC Listening & Reading", p2_f2: "Vocabulary & grammar",
-    p2_f3: "Test strategy & timing", p2_f4: "Weak-point diagnosis", p2_f5: "Score improvement plan",
-    p2_outcome: "TOEIC diagnostic profile, target score plan, part-by-part strategy, weak-point map, monthly progress check.",
+    p3_tagline: "开放中。学习如何负责任且实际地使用 AI 的一对一课程。",
+    p3_f1: "AI 用于研究与写作", p3_f2: "简报与影片制作",
+    p3_f3: "程序辅助", p3_f4: "生产力工作流程", p3_f5: "AI 安全与伦理",
+    p3_outcome: "AI 提示词库、AI 研究工作流程、简报大纲、影片脚本、程序记录、AI 安全清单。",
 
+    p4_tagline: "旗舰一对一课程，结合语言、AI、研究与作品集建立。",
+    p4_f1: "语言沟通课程", p4_f2: "AI 与项目课程",
+    p4_f3: "研究与写作", p4_f4: "简报与影片", p4_f5: "简历、个人档案与作品集建立",
+    p4_outcome: "简报资料、研究摘要、AI 工作流程样本、影片脚本、简历素材、口说片段、最终成果展示。",
 
-    p3_tagline: "Active 1-on-1 program on how to use AI responsibly and practically.",
-    p3_f1: "AI for research & writing", p3_f2: "Presentations & video creation",
-    p3_f3: "Coding support", p3_f4: "Productivity workflows", p3_f5: "AI safety and ethics",
-    p3_outcome: "AI prompt library, AI research workflow, presentation outline, video script, coding log, AI safety checklist.",
-
-
-    p4_tagline: "Flagship premium 1-on-1 program combining language, AI, research, and portfolio-building.",
-    p4_f1: "Language communication coaching", p4_f2: "AI & project coaching",
-    p4_f3: "Research & writing", p4_f4: "Presentations & video", p4_f5: "CV/profile & portfolio building",
-    p4_outcome: "Presentation deck, research brief, AI workflow sample, video script, CV material, speaking clip, final showcase artifact.",
-
-
-    p5_tagline: "Future group class for matched learning, peer feedback, and public speaking.",
-    p5_f1: "Matched group learning", p5_f2: "Collaboration & networking",
-    p5_f3: "Peer feedback", p5_f4: "Public speaking", p5_f5: "Group projects & showcase",
-    p5_outcome: "Team presentation, peer feedback report, showcase event participation.",
+    p5_tagline: "未来小组课程，针对配对学习、同伴反馈与公开演讲设计。",
+    p5_f1: "配对小组学习", p5_f2: "协作与建立人脉",
+    p5_f3: "同伴反馈", p5_f4: "公开演讲", p5_f5: "小组项目与成果展示",
+    p5_outcome: "团队简报、同伴反馈报告、成果展示活动参与。",
 
     out_eyebrow: "学员成果", out_h2: "学员所创作的作品。",
     out_desc: "FSA学员产出真实、具体的成果 — 可以保留、分享并引以为傲的作品。",
