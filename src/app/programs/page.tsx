@@ -30,9 +30,11 @@ export default function ProgramsPage() {
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
   const programs = [
-    { id: "future-communicator",     number: "01", icon: <IconMic />,    name: t.prog1_name, ages: t.prog1_ages, tagline: p.p1_tagline, focus: [p.p1_f1,p.p1_f2,p.p1_f3,p.p1_f4,p.p1_f5], outcome: p.p1_outcome, accent: "from-[#0B2352] via-[#0C1B36] to-[#071226]" },
-    { id: "ai-research-builder",     number: "02", icon: <IconCpu />,    name: t.prog2_name, ages: t.prog2_ages, tagline: p.p2_tagline, focus: [p.p2_f1,p.p2_f2,p.p2_f3,p.p2_f4,p.p2_f5], outcome: p.p2_outcome, accent: "from-[#071226] via-[#0C1F3A] to-[#0B2352]" },
-    { id: "portfolio-project-studio",number: "03", icon: <IconLayers />, name: t.prog3_name, ages: t.prog3_ages, tagline: p.p3_tagline, focus: [p.p3_f1,p.p3_f2,p.p3_f3,p.p3_f4,p.p3_f5], outcome: p.p3_outcome, accent: "from-[#0B2352] via-[#0A1A30] to-[#071226]" },
+    { id: "general-language",     number: "01", icon: <IconMic />,    name: ht.prog1_name, ages: ht.prog1_ages, tagline: p.p1_tagline, focus: [p.p1_f1,p.p1_f2,p.p1_f3,p.p1_f4,p.p1_f5], outcome: p.p1_outcome, accent: "from-[#0B2352] via-[#0C1B36] to-[#071226]" },
+    { id: "toeic-prep",           number: "02", icon: <IconTarget />, name: ht.prog2_name, ages: ht.prog2_ages, tagline: p.p2_tagline, focus: [p.p2_f1,p.p2_f2,p.p2_f3,p.p2_f4,p.p2_f5], outcome: p.p2_outcome, accent: "from-[#071226] via-[#0C1F3A] to-[#0B2352]" },
+    { id: "ai-practical",         number: "03", icon: <IconCpu />,    name: ht.prog3_name, ages: ht.prog3_ages, tagline: p.p3_tagline, focus: [p.p3_f1,p.p3_f2,p.p3_f3,p.p3_f4,p.p3_f5], outcome: p.p3_outcome, accent: "from-[#0B2352] via-[#0A1A30] to-[#071226]" },
+    { id: "future-portfolio",     number: "04", icon: <IconLayers />, name: ht.prog4_name, ages: ht.prog4_ages, tagline: p.p4_tagline, focus: [p.p4_f1,p.p4_f2,p.p4_f3,p.p4_f4,p.p4_f5], outcome: p.p4_outcome, accent: "from-[#071226] via-[#102A4A] to-[#0C1B36]" },
+    { id: "future-cohort",        number: "05", icon: <IconUsers />,  name: ht.prog5_name, ages: ht.prog5_ages, tagline: p.p5_tagline, focus: [p.p5_f1,p.p5_f2,p.p5_f3,p.p5_f4,p.p5_f5], outcome: p.p5_outcome, accent: "from-[#0B1833] via-[#071226] to-[#0B1833]" },
   ];
   const outputs = [
     { icon: <IconSlides />, label: p.out1 }, { icon: <IconDoc />, label: p.out2 },

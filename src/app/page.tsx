@@ -54,11 +54,11 @@ export default function Home() {
   ];
 
   const programs = [
-    { id: "prog1", name: t.prog1_name, ages: t.prog1_ages, skills: [t.prog1_skill1, t.prog1_skill2, t.prog1_skill3], accent: "border-slate-500/20 hover:border-slate-400", isActive: true },
-    { id: "prog2", name: t.prog2_name, ages: t.prog2_ages, skills: [t.prog2_skill1, t.prog2_skill2, t.prog2_skill3], accent: "border-blue-500/20 hover:border-blue-500", isActive: true },
-    { id: "prog3", name: t.prog3_name, ages: t.prog3_ages, skills: [t.prog3_skill1, t.prog3_skill2, t.prog3_skill3], accent: "border-emerald-500/20 hover:border-emerald-500", isActive: true },
-    { id: "prog4", name: t.prog4_name, ages: t.prog4_ages, skills: [t.prog4_skill1, t.prog4_skill2, t.prog4_skill3], accent: "border-[#C9A84C]/30 hover:border-[#C9A84C]", isActive: true },
-    { id: "prog5", name: t.prog5_name, ages: t.prog5_ages, skills: [t.prog5_skill1, t.prog5_skill2, t.prog5_skill3], accent: "border-white/5 opacity-70", isActive: false },
+    { id: "prog1", name: t.prog1_name, status: t.prog1_status, bestFor: t.prog1_best_for, desc: t.prog1_desc, workOn: t.prog1_work_on, outcomes: t.prog1_outcomes, accent: "border-slate-500/20 hover:border-slate-400", isFlagship: false, isActive: true, cta: t.prog1_cta },
+    { id: "prog2", name: t.prog2_name, status: t.prog2_status, bestFor: t.prog2_best_for, desc: t.prog2_desc, workOn: t.prog2_work_on, outcomes: t.prog2_outcomes, accent: "border-blue-500/20 hover:border-blue-500", isFlagship: false, isActive: true, cta: t.prog2_cta },
+    { id: "prog3", name: t.prog3_name, status: t.prog3_status, bestFor: t.prog3_best_for, desc: t.prog3_desc, workOn: t.prog3_work_on, outcomes: t.prog3_outcomes, accent: "border-emerald-500/20 hover:border-emerald-500", isFlagship: false, isActive: true, cta: t.prog3_cta },
+    { id: "prog4", name: t.prog4_name, status: t.prog4_status, bestFor: t.prog4_best_for, desc: t.prog4_desc, workOn: t.prog4_work_on, outcomes: t.prog4_outcomes, accent: "border-[#C9A84C]/40 hover:border-[#C9A84C]", isFlagship: true, isActive: true, cta: t.prog4_cta },
+    { id: "prog5", name: t.prog5_name, status: t.prog5_status, bestFor: t.prog5_best_for, desc: t.prog5_desc, workOn: t.prog5_work_on, outcomes: t.prog5_outcomes, accent: "border-white/5 opacity-70", isFlagship: false, isActive: false, cta: t.prog5_cta },
   ];
 
   return (
@@ -154,11 +154,11 @@ export default function Home() {
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {classSteps.map((step, idx) => (
-              <div key={idx} className="premium-card premium-card-light relative transition-shadow hover:shadow-md h-full flex flex-col">
-                <div className="premium-step-number absolute -top-5 left-8 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-[#C9A84C]">
+              <div key={idx} className="premium-card premium-card-light relative transition-shadow hover:shadow-md h-full flex flex-col items-start px-8 py-8">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C9A84C]/15 text-sm font-bold text-[#C9A84C] mb-5">
                   {step.num}
                 </div>
-                <h3 className="light-card-title mt-4 mb-3 font-serif text-[#071226]">{step.title}</h3>
+                <h3 className="light-card-title mb-3 font-serif text-[#071226]">{step.title}</h3>
                 <p className="light-card-body text-slate-600 flex-grow">{step.desc}</p>
               </div>
             ))}
@@ -225,33 +225,50 @@ export default function Home() {
             {t.prog_desc}
           </p>
 
-          <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2">
-            {programs.map((prog) => (
-              <div key={prog.id} className={`premium-card premium-card-dark group flex flex-col justify-between border ${prog.accent} transition-all duration-300 relative`}>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
+            {programs.map((prog, idx) => (
+              <div key={prog.id} className={`premium-card premium-card-dark group flex flex-col justify-between border ${prog.accent} transition-all duration-300 relative ${idx < 3 ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
                 {!prog.isActive && (
                   <div className="absolute inset-0 bg-[#071226]/40 rounded-[24px] pointer-events-none" />
                 )}
-                <div className={!prog.isActive ? "opacity-80" : ""}>
-                  <div className={`mb-4 inline-flex rounded-full px-4 py-1.5 text-xs tracking-widest uppercase ${prog.isActive ? 'bg-white/5 text-[#C9A84C]' : 'bg-white/5 text-white/50'}`}>
-                    {prog.ages}
+                <div className={!prog.isActive ? "opacity-80 flex flex-col flex-grow" : "flex flex-col flex-grow"}>
+                  <div className={`mb-4 inline-flex rounded-full px-4 py-1.5 text-xs tracking-widest uppercase ${prog.isFlagship ? 'bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30' : prog.isActive ? 'bg-white/5 text-white/70' : 'bg-white/5 text-white/40'} self-start`}>
+                    {prog.status}
                   </div>
-                  <h3 className="mb-7 font-serif text-[1.5rem] leading-tight text-white">{prog.name}</h3>
-                  <ul className="space-y-4">
-                    {prog.skills.map((skill, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-white/80">
-                        <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#C9A84C]" />
-                        <span className="text-[0.95rem] leading-relaxed">{skill}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className={`mb-4 font-serif text-[1.5rem] leading-tight ${prog.isFlagship ? 'text-[#C9A84C]' : 'text-white'}`}>{prog.name}</h3>
+                  <p className="text-[0.95rem] text-white/70 mb-6 leading-relaxed flex-grow">{prog.desc}</p>
+                  
+                  <div className="space-y-5 mt-auto">
+                    <div>
+                      <div className="text-[0.75rem] font-semibold text-[#C9A84C] uppercase tracking-wider mb-1.5">{t.best_for_label}</div>
+                      <p className="text-[0.85rem] leading-relaxed text-white/80">{prog.bestFor}</p>
+                    </div>
+                    
+                    <div>
+                      <div className="text-[0.75rem] font-semibold text-white/50 uppercase tracking-wider mb-2">{t.work_on_label}</div>
+                      <ul className="space-y-1.5">
+                        {(prog.workOn as string[]).map((item, i) => (
+                          <li key={i} className="flex items-start gap-2.5 text-[0.85rem] text-white/70">
+                            <div className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-white/30" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <div className="text-[0.75rem] font-semibold text-white/50 uppercase tracking-wider mb-1.5">{t.outcomes_label}</div>
+                      <p className="text-[0.85rem] leading-relaxed text-white/80">{prog.outcomes}</p>
+                    </div>
+                  </div>
                 </div>
                 {prog.isActive ? (
-                  <Link href="/signup" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-[#C9A84C] hover:text-white transition-colors">
-                    {t.prog_learn_more} →
+                  <Link href="/signup" className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-[#C9A84C] hover:text-white transition-colors">
+                    {prog.cta} →
                   </Link>
                 ) : (
-                  <div className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-white/40">
-                    {t.join_waitlist} →
+                  <div className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-white/40">
+                    {prog.cta} →
                   </div>
                 )}
               </div>
