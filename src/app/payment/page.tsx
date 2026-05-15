@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
 
 const py = {
@@ -17,8 +18,8 @@ const py = {
     note_eyebrow: "Important", note_title: "How enrollment is confirmed.",
     note_text: "Final enrollment in any FSA program is confirmed only after: (1) an initial consultation or free trial, (2) schedule confirmation, and (3) payment instructions have been shared and payment is received. We do not collect payment details on this website.",
     cta_eyebrow: "Start Here", cta_h2: "Begin with a free trial.", cta_desc: "The easiest next step is booking a free trial. From there we'll walk you through programs, scheduling, and pricing.",
-    cta_btn1: "Book a Free Trial →", cta_btn2: "Contact Us",
-    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_contact: "Contact", nav_cta: "Free Trial →", tagline: "Tokyo · Global",
+    cta_btn1: "Book a Free Trial", cta_btn2: "Contact Us",
+    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_contact: "Contact", nav_cta: "Free Trial", tagline: "Tokyo · Global",
   },
   ja: {
     badge: "料金・お支払い", h1: "プログラム料金と支払い。", sub: "FSAは現在パイロットプログラムを提供しています。最終的な料金は、プログラム形式・生徒のレベル・スケジュールによって異なります。",
@@ -33,8 +34,8 @@ const py = {
     note_eyebrow: "重要事項", note_title: "入学確認の流れ。",
     note_text: "FSAプログラムへの最終的な入学確認は、(1)初回相談または無料体験、(2)スケジュール確認、(3)支払い案内の共有と入金確認の後に行われます。このウェブサイトでは支払い情報を収集しません。",
     cta_eyebrow: "まずはここから", cta_h2: "無料体験から始める。", cta_desc: "次のステップは無料体験の予約です。その後、プログラム・スケジュール・料金についてご案内します。",
-    cta_btn1: "無料体験を予約する →", cta_btn2: "お問い合わせ",
-    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_contact: "お問い合わせ", nav_cta: "無料体験 →", tagline: "東京 · グローバル",
+    cta_btn1: "無料体験を予約する", cta_btn2: "お問い合わせ",
+    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_contact: "お問い合わせ", nav_cta: "無料体験", tagline: "東京 · グローバル",
   },
   "zh-TW": {
     badge: "費用與付款", h1: "課程費用與付款。", sub: "FSA目前提供試點課程選項。最終定價取決於課程形式、學生程度與時間安排。",
@@ -49,8 +50,8 @@ const py = {
     note_eyebrow: "重要說明", note_title: "如何確認報名。",
     note_text: "正式報名任何FSA課程須完成：(1)初次諮詢或免費體驗、(2)時間安排確認、(3)付款說明已分享並收到款項。我們不在此網站收集付款資訊。",
     cta_eyebrow: "從這裡開始", cta_h2: "從免費體驗開始。", cta_desc: "最簡單的下一步是預約免費體驗。之後我們將引導您了解課程、時間安排和費用。",
-    cta_btn1: "預約免費體驗 →", cta_btn2: "聯絡我們",
-    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_contact: "聯絡我們", nav_cta: "免費體驗 →", tagline: "東京 · 全球",
+    cta_btn1: "預約免費體驗", cta_btn2: "聯絡我們",
+    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_contact: "聯絡我們", nav_cta: "免費體驗", tagline: "東京 · 全球",
   },
   "zh-CN": {
     badge: "费用与付款", h1: "课程费用与付款。", sub: "FSA目前提供试点课程选项。最终定价取决于课程形式、学生程度与时间安排。",
@@ -65,8 +66,8 @@ const py = {
     note_eyebrow: "重要说明", note_title: "如何确认报名。",
     note_text: "正式报名任何FSA课程须完成：(1)初次咨询或免费体验、(2)时间安排确认、(3)付款说明已分享并收到款项。我们不在此网站收集付款信息。",
     cta_eyebrow: "从这里开始", cta_h2: "从免费体验开始。", cta_desc: "最简单的下一步是预约免费体验。之后我们将引导您了解课程、时间安排和费用。",
-    cta_btn1: "预约免费体验 →", cta_btn2: "联系我们",
-    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_contact: "联系我们", nav_cta: "免费体验 →", tagline: "东京 · 全球",
+    cta_btn1: "预约免费体验", cta_btn2: "联系我们",
+    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_contact: "联系我们", nav_cta: "免费体验", tagline: "东京 · 全球",
   },
 } as const;
 
@@ -158,10 +159,9 @@ export default function PaymentPage() {
                 <div className="font-serif text-4xl text-white mb-2">{plan.price}</div>
                 <div className="text-sm text-[#C9A84C] mb-5">{plan.status}</div>
                 <p className="text-sm leading-relaxed text-white/60 flex-1">{plan.desc}</p>
-                <Link href="/signup" id={`pay-plan-cta-${i}`}
-                  className="mt-8 inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
+                <MotionButton href="/signup" id={`pay-plan-cta-${i}`} className="mt-8 text-sm">
                   {t.cta_btn1}
-                </Link>
+                </MotionButton>
               </div>
             ))}
           </div>
@@ -208,8 +208,8 @@ export default function PaymentPage() {
           <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{t.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{t.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" id="pay-final-cta" className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{t.cta_btn1}</Link>
-            <Link href="/contact" className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{t.cta_btn2}</Link>
+            <MotionButton href="/signup" id="pay-final-cta">{t.cta_btn1}</MotionButton>
+            <MotionButton href="/contact">{t.cta_btn2}</MotionButton>
           </div>
         </div>
       </section>

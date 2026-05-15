@@ -22,7 +22,7 @@ export const translations = {
     nav_philosophy: "Philosophy",
     nav_parents: "For Parents",
     nav_contact: "Contact",
-    nav_cta: "Free Trial →",
+    nav_cta: "Free Trial",
     nav_tagline: "Tokyo · Global",
 
     // Hero
@@ -32,7 +32,7 @@ export const translations = {
     hero_h1_line2: "Skills.",
     hero_desc:
       "FSA helps students develop communication, AI literacy, presentation, research, and real-world project skills — through English-based, portfolio-driven learning.",
-    hero_cta_primary: "Book a Free Trial →",
+    hero_cta_primary: "Book a Free Trial",
     hero_cta_secondary: "Explore Programs",
     hero_stat1_val: "1-on-1",
     hero_stat1_label: "Format",
@@ -81,7 +81,7 @@ export const translations = {
     contact_h2: "Build skills students can actually use.",
     contact_desc:
       "Book a free trial or consultation to see whether FSA is the right fit for your child.",
-    contact_cta: "Book a Free Trial →",
+    contact_cta: "Book a Free Trial",
     // Why FSA
     why_eyebrow: "01 — Why FSA",
     why_h2: "Built for the skills that matter most.",
@@ -111,7 +111,7 @@ export const translations = {
     prog3_skill1: "Collaboration, networking & peer feedback",
     prog3_skill2: "Public speaking & group projects",
     prog3_skill3: "Opening soon when students are matched",
-    prog_learn_more: "Learn More →",
+    prog_learn_more: "Learn More",
     // Outcomes
     outcomes_eyebrow: "03 — Student Outcomes",
     outcomes_h2: "What students leave with.",
@@ -131,7 +131,7 @@ export const translations = {
     coach2_desc: "Public speaking, English fluency, and presentation delivery.",
     coach3_role: "AI & Research Coach",
     coach3_desc: "AI literacy, research methods, and structured critical thinking.",
-    coaches_cta: "Meet the Full Team →",
+    coaches_cta: "Meet the Full Team",
     // Parents
     parents_eyebrow: "05 — For Parents",
     parents_h2: "Why parents choose FSA.",
@@ -148,7 +148,7 @@ export const translations = {
     cta_eyebrow: "Start Here",
     cta_h2: "Book a Free Trial Class.",
     cta_desc: "See what FSA is about — in one free class. No commitment, no pressure. Just real learning, real feedback, and a clear sense of whether FSA is the right fit for your child.",
-    cta_btn1: "Book Free Trial →",
+    cta_btn1: "Book Free Trial",
     cta_btn2: "Explore Programs",
   },
 
@@ -158,7 +158,7 @@ export const translations = {
     nav_philosophy: "教育方針",
     nav_parents: "保護者の方へ",
     nav_contact: "お問い合わせ",
-    nav_cta: "無料体験 →",
+    nav_cta: "無料体験",
     nav_tagline: "東京 · グローバル",
 
     // Hero
@@ -168,7 +168,7 @@ export const translations = {
     hero_h1_line2: "スキルを。",
     hero_desc:
       "FSAは、コミュニケーション・AIリテラシー・プレゼンテーション・調査・実践的プロジェクト制作を英語ベースで学ぶ、ポートフォリオ重視のアカデミーです。",
-    hero_cta_primary: "無料体験を予約する →",
+    hero_cta_primary: "無料体験を予約する",
     hero_cta_secondary: "プログラムを見る",
     hero_stat1_val: "1-on-1",
     hero_stat1_label: "形式",
@@ -216,7 +216,7 @@ export const translations = {
     contact_h2: "実際に使えるスキルを身につけよう。",
     contact_desc:
       "無料体験や相談会を予約して、FSAがお子さまに合っているかを確かめてください。",
-    contact_cta: "無料体験を予約する →",
+    contact_cta: "無料体験を予約する",
     // Why FSA
     why_eyebrow: "01 — なぜFSAなのか",
     why_h2: "最も重要なスキルのために設計された。",
@@ -246,7 +246,7 @@ export const translations = {
     prog3_skill1: "グループワーク",
     prog3_skill2: "パブリックスピーキング",
     prog3_skill3: "グループマッチング後に開始",
-    prog_learn_more: "詳しく見る →",
+    prog_learn_more: "詳しく見る",
     // Outcomes
     outcomes_eyebrow: "03 — 生徒の成果",
     outcomes_h2: "卒業生が身につけるもの。",
@@ -266,7 +266,7 @@ export const translations = {
     coach2_desc: "パブリックスピーキング、英語力、プレゼンの伝え方を指導。",
     coach3_role: "AI・リサーチコーチ",
     coach3_desc: "AIリテラシー、リサーチ手法、批判的思考の構造化を担当。",
-    coaches_cta: "チームメンバーを見る →",
+    coaches_cta: "チームメンバーを見る",
     // Parents
     parents_eyebrow: "05 — 保護者の方へ",
     parents_h2: "なぜ保護者がFSAを選ぶのか。",
@@ -283,7 +283,7 @@ export const translations = {
     cta_eyebrow: "まずはここから",
     cta_h2: "無料体験クラスを予約する。",
     cta_desc: "1回の無料クラスでFSAを体験してください。コミットメントも圧力も不要。本物の学びと本物のフィードバックを実感できます。",
-    cta_btn1: "無料体験を予約する →",
+    cta_btn1: "無料体験を予約する",
     cta_btn2: "プログラムを見る",
   },
 
@@ -293,7 +293,7 @@ export const translations = {
     nav_philosophy: "教育理念",
     nav_parents: "給家長",
     nav_contact: "聯絡我們",
-    nav_cta: "免費體驗 →",
+    nav_cta: "免費體驗",
     nav_tagline: "東京 · 全球",
 
     // Hero
@@ -303,7 +303,7 @@ export const translations = {
     hero_h1_line2: "的技能。",
     hero_desc:
       "FSA 幫助學生以英語為媒介，透過作品集導向的學習，建立溝通、AI素養、簡報、研究及實際專案能力。",
-    hero_cta_primary: "預約免費體驗 →",
+    hero_cta_primary: "預約免費體驗",
     hero_cta_secondary: "探索課程",
     hero_stat1_val: "1-on-1",
     hero_stat1_label: "形式",
@@ -350,7 +350,7 @@ export const translations = {
     contact_h2: "培養學生真正能用的技能。",
     contact_desc:
       "預約免費體驗或諮詢，了解FSA是否適合您的孩子。",
-    contact_cta: "預約免費體驗 →",
+    contact_cta: "預約免費體驗",
     // Why FSA
     why_eyebrow: "01 — 為什麼選擇FSA",
     why_h2: "專為最重要的技能而設計。",
@@ -380,7 +380,7 @@ export const translations = {
     prog3_skill1: "小組協作與同儕回饋",
     prog3_skill2: "公開演講與小組專案",
     prog3_skill3: "人數湊齊後開班",
-    prog_learn_more: "了解更多 →",
+    prog_learn_more: "了解更多",
     // Outcomes
     outcomes_eyebrow: "03 — 學生成果",
     outcomes_h2: "學生帶走的能力。",
@@ -400,7 +400,7 @@ export const translations = {
     coach2_desc: "指導公開演講、英語流利度與簡報表達。",
     coach3_role: "AI與研究教練",
     coach3_desc: "負責AI素養、研究方法與結構化批判性思考。",
-    coaches_cta: "認識完整團隊 →",
+    coaches_cta: "認識完整團隊",
     // Parents
     parents_eyebrow: "05 — 給家長",
     parents_h2: "為什麼家長選擇FSA。",
@@ -417,7 +417,7 @@ export const translations = {
     cta_eyebrow: "從這裡開始",
     cta_h2: "預約免費體驗課。",
     cta_desc: "透過一堂免費課了解FSA。無需承諾，沒有壓力。只有真實的學習與清晰的反饋。",
-    cta_btn1: "預約免費體驗 →",
+    cta_btn1: "預約免費體驗",
     cta_btn2: "探索課程",
   },
 
@@ -427,7 +427,7 @@ export const translations = {
     nav_philosophy: "教育理念",
     nav_parents: "给家长",
     nav_contact: "联系我们",
-    nav_cta: "免费体验 →",
+    nav_cta: "免费体验",
     nav_tagline: "东京 · 全球",
 
     // Hero
@@ -437,7 +437,7 @@ export const translations = {
     hero_h1_line2: "的技能。",
     hero_desc:
       "FSA 帮助学生以英语为媒介，通过作品集导向的学习，建立沟通、AI素养、演示、研究及实际项目能力。",
-    hero_cta_primary: "预约免费体验 →",
+    hero_cta_primary: "预约免费体验",
     hero_cta_secondary: "探索课程",
     hero_stat1_val: "1-on-1",
     hero_stat1_label: "形式",
@@ -483,7 +483,7 @@ export const translations = {
     contact_eyebrow: "从这里开始",
     contact_h2: "培养学生真正能用的技能。",
     contact_desc: "预约免费体验或咨询，了解FSA是否适合您的孩子。",
-    contact_cta: "预约免费体验 →",
+    contact_cta: "预约免费体验",
     // Why FSA
     why_eyebrow: "01 — 为什么选择FSA",
     why_h2: "专为最重要的技能而设计。",
@@ -513,7 +513,7 @@ export const translations = {
     prog3_skill1: "小组协作、同届互评",
     prog3_skill2: "公开演讲、小组项目",
     prog3_skill3: "小组凑齐后开课",
-    prog_learn_more: "了解更多 →",
+    prog_learn_more: "了解更多",
     // Outcomes
     outcomes_eyebrow: "03 — 学生成果",
     outcomes_h2: "学生带走的能力。",
@@ -533,7 +533,7 @@ export const translations = {
     coach2_desc: "指导公开演讲、英语流利度与演示表达。",
     coach3_role: "AI与研究教练",
     coach3_desc: "负责AI素养、研究方法与结构化批判性思考。",
-    coaches_cta: "了解完整团队 →",
+    coaches_cta: "了解完整团队",
     // Parents
     parents_eyebrow: "05 — 给家长",
     parents_h2: "为什么家长选择FSA。",
@@ -550,7 +550,7 @@ export const translations = {
     cta_eyebrow: "从这里开始",
     cta_h2: "预约免费体验课。",
     cta_desc: "通过一堂免费课了解FSA。无需承诺，没有压力。只有真实的学习与清晰的反馈。",
-    cta_btn1: "预约免费体验 →",
+    cta_btn1: "预约免费体验",
     cta_btn2: "探索课程",
   },
 } as const;

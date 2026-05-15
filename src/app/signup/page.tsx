@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 import { useST } from "@/lib/signup-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
@@ -42,10 +43,9 @@ export default function SignupPage() {
           </h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl">{s.sub}</p>
           <div className="mt-10">
-            <a href={FORM_URL} target="_blank" rel="noopener noreferrer" id="hero-open-form-btn"
-              className="inline-flex items-center gap-3 rounded-full bg-[#C9A84C] px-10 py-4 text-lg font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">
+            <MotionButton href={FORM_URL} target="_blank" id="hero-open-form-btn">
               {s.open_form} <IconExternal />
-            </a>
+            </MotionButton>
           </div>
         </div>
       </section>
@@ -89,13 +89,12 @@ export default function SignupPage() {
               <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{s.card_eyebrow}</div>
               <h3 className="font-serif text-4xl leading-tight text-white md:text-5xl">{s.card_h3}</h3>
               <p className="mt-5 leading-relaxed text-white/60">{s.card_desc}</p>
-              <a href={FORM_URL} target="_blank" rel="noopener noreferrer" id="benefits-open-form-btn"
-                className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#C9A84C] px-8 py-4 text-base font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.01]">
+              <MotionButton href={FORM_URL} target="_blank" id="benefits-open-form-btn" className="mt-8 w-full">
                 {s.open_form} <IconExternal />
-              </a>
-              <Link href="/programs" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">
+              </MotionButton>
+              <MotionButton href="/programs" className="mt-4 w-full text-sm">
                 {s.explore}
-              </Link>
+              </MotionButton>
             </div>
           </div>
         </div>

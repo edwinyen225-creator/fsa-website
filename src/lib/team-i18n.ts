@@ -43,10 +43,10 @@ const tt = {
     cta_eyebrow: "Start Here",
     cta_h2: "Want to meet the team?",
     cta_desc: "Book a free trial class and experience FSA coaching firsthand. No commitment required.",
-    cta_btn: "Book a Free Trial →",
+    cta_btn: "Book a Free Trial",
     cta_btn2: "Explore Programs",
     // Nav
-    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_team: "Team", nav_cta: "Free Trial →",
+    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_team: "Team", nav_cta: "Free Trial",
     tagline: "Tokyo · Global",
   },
   ja: {
@@ -87,8 +87,8 @@ const tt = {
     cta_eyebrow: "まずはここから",
     cta_h2: "チームに会ってみませんか？",
     cta_desc: "無料体験クラスを予約して、FSAのコーチングを直接体験してください。コミットメント不要。",
-    cta_btn: "無料体験を予約する →", cta_btn2: "プログラムを見る",
-    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_team: "チーム", nav_cta: "無料体験 →",
+    cta_btn: "無料体験を予約する", cta_btn2: "プログラムを見る",
+    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_team: "チーム", nav_cta: "無料体験",
     tagline: "東京 · グローバル",
   },
   "zh-TW": {
@@ -129,8 +129,8 @@ const tt = {
     cta_eyebrow: "從這裡開始",
     cta_h2: "想認識我們的團隊嗎？",
     cta_desc: "預約免費體驗課，親身體驗FSA的教學。無需承諾。",
-    cta_btn: "預約免費體驗 →", cta_btn2: "探索課程",
-    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_team: "團隊", nav_cta: "免費體驗 →",
+    cta_btn: "預約免費體驗", cta_btn2: "探索課程",
+    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_team: "團隊", nav_cta: "免費體驗",
     tagline: "東京 · 全球",
   },
   "zh-CN": {
@@ -171,8 +171,8 @@ const tt = {
     cta_eyebrow: "从这里开始",
     cta_h2: "想认识我们的团队吗？",
     cta_desc: "预约免费体验课，亲身体验FSA的教学。无需承诺。",
-    cta_btn: "预约免费体验 →", cta_btn2: "探索课程",
-    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_team: "团队", nav_cta: "免费体验 →",
+    cta_btn: "预约免费体验", cta_btn2: "探索课程",
+    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_team: "团队", nav_cta: "免费体验",
     tagline: "东京 · 全球",
   },
 } as const;

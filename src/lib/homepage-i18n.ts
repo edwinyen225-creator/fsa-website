@@ -108,7 +108,7 @@ export const homepageTranslations = {
     cta_eyebrow: "Start Here",
     cta_h2: "Ready to start your journey?",
     cta_desc: "Book a consultation to discuss...",
-    cta_btn1: "Book Consultation →",
+    cta_btn1: "Book Consultation",
     cta_btn2: "Explore Programs",
     img_label_who: "Personalised Coaching",
     img_label_class: "Learning Process",
@@ -121,7 +121,7 @@ export const homepageTranslations = {
     // 1. Hero
     hero_eyebrow: "Build the future in your hands.",
     hero_heading: "World-class English and future skills. Unleash your potential with personalised learning.",
-    hero_cta_primary: "Book Free Consultation →",
+    hero_cta_primary: "Book Free Consultation",
     hero_cta_secondary: "View Programs",
     
     // 2. Feature Strip
@@ -145,13 +145,13 @@ export const homepageTranslations = {
     flagship_bullet2: "Practice research, analysis, and design",
     flagship_bullet3: "Learning that leverages AI and technology",
     flagship_bullet4: "Create an original portfolio",
-    flagship_cta: "View Program Details →",
+    flagship_cta: "View Program Details",
 
     // 4. Student Works
     works_eyebrow: "STUDENT WORKS",
     works_title: "Learning becomes visible outcomes.",
     works_subtext: "From research to planning, analysis, and expression. Students tackle projects assuming real-world society, producing deliverables that resonate globally.",
-    works_cta: "View Case Studies →",
+    works_cta: "View Case Studies",
     works_c1_title: "Sustainable Product Dev",
     works_c1_desc: "From market research to brand proposition",
     works_c2_title: "Data Analysis Report",
@@ -170,7 +170,7 @@ export const homepageTranslations = {
     coach_c2_desc: "Practical English · Expression guidance · Output support",
     coach_p1: "A Japanese coach and a Native coach accompany you from both the learning and practical sides.",
     coach_p2: "Through continuous dialogue, we support you until you achieve your goals.",
-    coach_btn: "View Coaches →",
+    coach_btn: "View Coaches",
 
     // 6. Programs
     prog_eyebrow: "OUR PROGRAMS",
@@ -218,7 +218,7 @@ export const homepageTranslations = {
     // 9. Final CTA
     final_h2: "Take the first step towards the future, today.",
     final_sub: "Through a free consultation, we will propose the optimal learning plan for your child.",
-    final_btn: "Book Free Consultation →"
+    final_btn: "Book Free Consultation"
   },
   ja: {
     // --- Legacy Keys (Kept to prevent breaking other pages) ---
@@ -327,7 +327,7 @@ export const homepageTranslations = {
     cta_eyebrow: "まずはここから",
     cta_h2: "学習をはじめませんか？",
     cta_desc: "ご相談・診断・パーソナル学習プラン...",
-    cta_btn1: "相談を予約する →",
+    cta_btn1: "相談を予約する",
     cta_btn2: "プログラムを見る",
     img_label_who: "パーソナライズドコーチング",
     img_label_class: "学習プロセス",
@@ -340,7 +340,7 @@ export const homepageTranslations = {
     // 1. Hero
     hero_eyebrow: "未来をつくる力を、あなたの手に。",
     hero_heading: "世界で通用する英語力と、未来に必要なスキルを。一人ひとりに合わせた学びで、可能性を解き放つ。",
-    hero_cta_primary: "無料相談を予約する →",
+    hero_cta_primary: "無料相談を予約する",
     hero_cta_secondary: "プログラムを見る",
     
     // 2. Feature Strip
@@ -364,13 +364,13 @@ export const homepageTranslations = {
     flagship_bullet2: "リサーチ・分析・デザインを実践",
     flagship_bullet3: "AI・テクノロジーを活用した学び",
     flagship_bullet4: "オリジナルのポートフォリオを作成",
-    flagship_cta: "プログラムの詳細を見る →",
+    flagship_cta: "プログラムの詳細を見る",
 
     // 4. Student Works
     works_eyebrow: "STUDENT WORKS",
     works_title: "学びが、成果になる。",
     works_subtext: "リサーチから企画、分析、表現まで。実社会を想定したプロジェクトに取り組み、世界に伝わる成果物を生み出します。",
-    works_cta: "成果事例を見る →",
+    works_cta: "成果事例を見る",
     works_c1_title: "サステナブル商品開発提案",
     works_c1_desc: "市場調査からブランド提案まで実施",
     works_c2_title: "データ分析レポート",
@@ -389,7 +389,7 @@ export const homepageTranslations = {
     coach_c2_desc: "実践英語・表現指導・発信サポート",
     coach_p1: "日本人コーチとネイティブコーチが、学習面・実践面の両面から伴走。",
     coach_p2: "対話を重ねながら、目標達成までサポートします。",
-    coach_btn: "コーチ紹介を見る →",
+    coach_btn: "コーチ紹介を見る",
 
     // 6. Programs
     prog_eyebrow: "OUR PROGRAMS",
@@ -437,7 +437,7 @@ export const homepageTranslations = {
     // 9. Final CTA
     final_h2: "未来への第一歩を、今日から。",
     final_sub: "無料相談にて、お子さまに最適な学習プランをご提案します。",
-    final_btn: "無料相談を予約する →"
+    final_btn: "無料相談を予約する"
   },
   "zh-TW": {
     // Legacy mapping omitted for brevity, mapping everything accurately based on JP/EN context
@@ -547,7 +547,7 @@ export const homepageTranslations = {
     cta_eyebrow: "從這裡開始",
     cta_h2: "準備好開始了嗎？",
     cta_desc: "預約諮詢，我們將為您進行...",
-    cta_btn1: "預約諮詢 →",
+    cta_btn1: "預約諮詢",
     cta_btn2: "探索課程",
     img_label_who: "個人化教練",
     img_label_class: "學習過程",
@@ -557,7 +557,7 @@ export const homepageTranslations = {
     // --- NEW EXACT HOMEPAGE KEYS ---
     hero_eyebrow: "把創造未來的力量交到您手中。",
     hero_heading: "掌握世界通用的英語與未來技能。透過量身打造的學習，釋放無限潛能。",
-    hero_cta_primary: "預約免費諮詢 →",
+    hero_cta_primary: "預約免費諮詢",
     hero_cta_secondary: "查看課程",
     strip_f1_title: "全球化英語",
     strip_f1_desc: "培養連結世界的實用溝通力",
@@ -577,11 +577,11 @@ export const homepageTranslations = {
     flagship_bullet2: "實踐研究、分析與設計",
     flagship_bullet3: "活用AI與科技的學習方式",
     flagship_bullet4: "製作獨一無二的專屬作品集",
-    flagship_cta: "查看課程詳情 →",
+    flagship_cta: "查看課程詳情",
     works_eyebrow: "STUDENT WORKS",
     works_title: "學習，化為具體成果。",
     works_subtext: "從研究、企劃、分析到表達。學員將參與真實的專案，產出能向世界傳遞價值的成果。",
-    works_cta: "查看學員成果 →",
+    works_cta: "查看學員成果",
     works_c1_title: "永續產品開發提案",
     works_c1_desc: "從市場調查到品牌企劃",
     works_c2_title: "數據分析報告",
@@ -598,7 +598,7 @@ export const homepageTranslations = {
     coach_c2_desc: "實用英語・表達指導・產出支持",
     coach_p1: "日籍教練與外籍教練從學習規劃到實際應用，為您提供全方位支持。",
     coach_p2: "透過持續對話，陪伴您直至達成目標。",
-    coach_btn: "查看教練介紹 →",
+    coach_btn: "查看教練介紹",
     prog_eyebrow: "OUR PROGRAMS",
     prog_h2: "根據目標選擇，三大核心課程",
     prog_c1_title: "Future Skills Portfolio",
@@ -638,7 +638,7 @@ export const homepageTranslations = {
     trust_i4_desc: "提供專注且安全的優質學習氛圍",
     final_h2: "邁向未來的第一步，從今天開始。",
     final_sub: "透過免費諮詢，我們將為您的孩子提供最適合的學習方案。",
-    final_btn: "預約免費諮詢 →"
+    final_btn: "預約免費諮詢"
   },
   "zh-CN": {
     // Legacy keys
@@ -748,7 +748,7 @@ export const homepageTranslations = {
     cta_eyebrow: "从这里开始",
     cta_h2: "准备好开始了吗？",
     cta_desc: "预约咨询，我们将为您进行...",
-    cta_btn1: "预约咨询 →",
+    cta_btn1: "预约咨询",
     cta_btn2: "探索课程",
     img_label_who: "个性化教练",
     img_label_class: "学习过程",
@@ -758,7 +758,7 @@ export const homepageTranslations = {
     // --- NEW EXACT HOMEPAGE KEYS ---
     hero_eyebrow: "把创造未来的力量交到您手中。",
     hero_heading: "掌握世界通用的英语与未来技能。通过量身定制的学习，释放无限潜能。",
-    hero_cta_primary: "预约免费咨询 →",
+    hero_cta_primary: "预约免费咨询",
     hero_cta_secondary: "查看课程",
     strip_f1_title: "全球化英语",
     strip_f1_desc: "培养连接世界的实用沟通力",
@@ -778,11 +778,11 @@ export const homepageTranslations = {
     flagship_bullet2: "实践研究、分析与设计",
     flagship_bullet3: "活用AI与科技的学习方式",
     flagship_bullet4: "制作独一无二的专属作品集",
-    flagship_cta: "查看课程详情 →",
+    flagship_cta: "查看课程详情",
     works_eyebrow: "STUDENT WORKS",
     works_title: "学习，化为具体成果。",
     works_subtext: "从研究、企划、分析到表达。学员将参与真实的双语项目，产出能向世界传递价值的成果。",
-    works_cta: "查看学员成果 →",
+    works_cta: "查看学员成果",
     works_c1_title: "可持续产品开发提案",
     works_c1_desc: "从市场调查到品牌企划",
     works_c2_title: "数据分析报告",
@@ -799,7 +799,7 @@ export const homepageTranslations = {
     coach_c2_desc: "实用英语・表达指导・产出支持",
     coach_p1: "日籍教练与外籍教练从学习规划到实际应用，为您提供全方位支持。",
     coach_p2: "通过持续对话，陪伴您直至达成目标。",
-    coach_btn: "查看教练介绍 →",
+    coach_btn: "查看教练介绍",
     prog_eyebrow: "OUR PROGRAMS",
     prog_h2: "根据目标选择，三大核心课程",
     prog_c1_title: "Future Skills Portfolio",
@@ -839,7 +839,7 @@ export const homepageTranslations = {
     trust_i4_desc: "提供专注且安全的优质学习氛围",
     final_h2: "迈向未来的第一步，从今天开始。",
     final_sub: "通过免费咨询，我们将为您的孩子提供最适合的学习方案。",
-    final_btn: "预约免费咨询 →"
+    final_btn: "预约免费咨询"
   }
 } as const;
 

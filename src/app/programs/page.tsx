@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 
 import { usePT } from "@/lib/programs-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -59,8 +60,8 @@ export default function ProgramsPage() {
           </h1>
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/65 md:text-xl">{p.sub}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <a href="#programs-list" className="rounded-full bg-white px-8 py-4 font-semibold text-[#071226] transition hover:scale-[1.02]">{p.btn1}</a>
-            <Link href="/signup" className="rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{p.btn2}</Link>
+            <MotionButton href="#programs-list">{p.btn1}</MotionButton>
+            <MotionButton href="/signup">{p.btn2}</MotionButton>
           </div>
         </div>
       </section>
@@ -100,7 +101,7 @@ export default function ProgramsPage() {
                       ))}
                     </ul>
                     <div className="mt-12">
-                      <Link href="/signup" id={`cta-${prog.id}`} className="inline-flex items-center gap-2 rounded-full bg-[#C9A84C] px-7 py-3.5 text-sm font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{p.trial_btn}</Link>
+                      <MotionButton href="/signup" id={`cta-${prog.id}`} className="text-sm">{p.trial_btn}</MotionButton>
                     </div>
                   </div>
                 </div>
@@ -156,8 +157,8 @@ export default function ProgramsPage() {
           <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{p.cta_h2a}<br />{p.cta_h2b}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{p.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" id="prog-final-cta" className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{p.cta_btn1}</Link>
-            <Link href="/" className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{p.cta_btn2}</Link>
+            <MotionButton href="/signup" id="prog-final-cta">{p.cta_btn1}</MotionButton>
+            <MotionButton href="/">{p.cta_btn2}</MotionButton>
           </div>
         </div>
       </section>

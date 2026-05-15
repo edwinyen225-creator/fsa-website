@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 import { usePathname } from "next/navigation";
 import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
 import { homepageTranslations } from "@/lib/homepage-i18n";
@@ -24,7 +25,7 @@ export function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChang
       <button
         id="lang-switcher-btn"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
+        className="flex items-center gap-1.5 rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition-[border-color,color] duration-200 ease-out hover:border-[#C9A84C] hover:text-[#C9A84C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128]"
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label="Select language"
@@ -45,7 +46,7 @@ export function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChang
               <button
                 id={`lang-option-${l}`}
                 onClick={() => { onChange(l); setOpen(false); }}
-                className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition hover:bg-white/8 ${l === locale ? "text-[#C9A84C]" : "text-white/75 hover:text-white"}`}
+                className={`flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-[background-color,color] duration-150 ease-out hover:bg-white/8 focus-visible:outline-none focus-visible:bg-white/10 ${l === locale ? "text-[#C9A84C]" : "text-white/75 hover:text-white"}`}
               >
                 <span className="w-8 font-mono text-xs opacity-60">{localeLabels[l]}</span>
                 <span>{localeNames[l]}</span>
@@ -81,17 +82,17 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
-          <Link className={`transition-colors ${pathname === '/programs' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/programs">{t.nav_programs}</Link>
-          <Link className={`transition-colors ${pathname === '/parents' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/parents">{t.nav_parents}</Link>
-          <Link className={`transition-colors ${pathname === '/team' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/team">{t.nav_team}</Link>
-          <Link className={`transition-colors ${pathname === '/contact' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/contact">{t.nav_contact}</Link>
+          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/programs' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/programs">{t.nav_programs}</Link>
+          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/parents' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/parents">{t.nav_parents}</Link>
+          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/team' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/team">{t.nav_team}</Link>
+          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/contact' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/contact">{t.nav_contact}</Link>
         </nav>
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher locale={locale} onChange={setLocale} />
-          <Link href="/signup" id="nav-cta-btn" className="hidden sm:block rounded-full bg-[#C9A84C] px-6 py-3 text-sm font-semibold text-[#06101F] transition hover:bg-[#E4C261]">
+          <MotionButton href="/signup" id="nav-cta-btn" className="hidden sm:flex text-sm">
             {t.nav_book_trial}
-          </Link>
+          </MotionButton>
         </div>
       </div>
     </header>

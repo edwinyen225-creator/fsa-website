@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 import { useTT } from "@/lib/team-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
@@ -160,8 +161,8 @@ export default function TeamPage() {
           <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{m.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{m.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" id="team-cta-btn" className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{m.cta_btn}</Link>
-            <Link href="/programs" className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{m.cta_btn2}</Link>
+            <MotionButton href="/signup" id="team-cta-btn">{m.cta_btn}</MotionButton>
+            <MotionButton href="/programs">{m.cta_btn2}</MotionButton>
           </div>
         </div>
       </section>

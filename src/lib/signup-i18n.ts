@@ -23,7 +23,7 @@ const st = {
     explore: "Explore Programs First",
     contact: "If you prefer, you can also contact us directly by email or LINE. We respond within 1 business day.",
     footer: "Future Skill Academy · Tokyo · Global",
-    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_team: "Team", nav_cta: "Free Trial →",
+    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_team: "Team", nav_cta: "Free Trial",
     tagline: "Tokyo · Global",
   },
   ja: {
@@ -48,7 +48,7 @@ const st = {
     explore: "先にプログラムを見る",
     contact: "ご希望の場合は、メールまたはLINEで直接ご連絡いただくこともできます。1営業日以内に返信いたします。",
     footer: "Future Skill Academy · 東京 · グローバル",
-    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_team: "チーム", nav_cta: "無料体験 →",
+    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_team: "チーム", nav_cta: "無料体験",
     tagline: "東京 · グローバル",
   },
   "zh-TW": {
@@ -73,7 +73,7 @@ const st = {
     explore: "先探索課程",
     contact: "如果您希望，也可以直接透過電子郵件或LINE聯繫我們。我們將在1個工作日內回覆。",
     footer: "Future Skill Academy · 東京 · 全球",
-    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_team: "團隊", nav_cta: "免費體驗 →",
+    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_team: "團隊", nav_cta: "免費體驗",
     tagline: "東京 · 全球",
   },
   "zh-CN": {
@@ -98,7 +98,7 @@ const st = {
     explore: "先探索课程",
     contact: "如果您希望，也可以直接通过电子邮件或LINE联系我们。我们将在1个工作日内回复。",
     footer: "Future Skill Academy · 东京 · 全球",
-    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_team: "团队", nav_cta: "免费体验 →",
+    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_team: "团队", nav_cta: "免费体验",
     tagline: "东京 · 全球",
   },
 } as const;

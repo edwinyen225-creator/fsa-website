@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 import { usePar } from "@/lib/parents-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
@@ -59,8 +60,8 @@ export default function ParentsPage() {
           <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{t.h1}</h1>
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/65 md:text-xl">{t.sub}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" id="par-hero-cta" className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{t.cta_btn1}</Link>
-            <Link href="/programs" className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{t.cta_btn2}</Link>
+            <MotionButton href="/signup" id="par-hero-cta">{t.cta_btn1}</MotionButton>
+            <MotionButton href="/programs">{t.cta_btn2}</MotionButton>
           </div>
         </div>
       </section>
@@ -153,8 +154,8 @@ export default function ParentsPage() {
           <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{t.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{t.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" id="par-final-cta" className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{t.cta_btn1}</Link>
-            <Link href="/programs" className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{t.cta_btn2}</Link>
+            <MotionButton href="/signup" id="par-final-cta">{t.cta_btn1}</MotionButton>
+            <MotionButton href="/programs">{t.cta_btn2}</MotionButton>
           </div>
         </div>
       </section>

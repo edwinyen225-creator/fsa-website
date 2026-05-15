@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import MotionButton from "@/components/ui/motion-button";
 
 const ct = {
   en: {
@@ -12,8 +13,8 @@ const ct = {
     location_label: "Location", location_val: "Tokyo, Japan", location_desc: "Remote-first. In-person pilot cohort forming in Tokyo.",
     response_note: "We respond to all enquiries within 1 business day.",
     cta_eyebrow: "Ready to start?", cta_h2: "Book a free trial class.", cta_desc: "The easiest way to experience FSA is to join a free trial. No forms, no commitment — just real coaching.",
-    cta_btn: "Book a Free Trial →", cta_btn2: "Explore Programs",
-    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_team: "Team", nav_contact: "Contact", nav_cta: "Free Trial →",
+    cta_btn: "Book a Free Trial", cta_btn2: "Explore Programs",
+    nav_why: "Why FSA", nav_programs: "Programs", nav_parents: "For Parents", nav_team: "Team", nav_contact: "Contact", nav_cta: "Free Trial",
     tagline: "Tokyo · Global",
   },
   ja: {
@@ -24,8 +25,8 @@ const ct = {
     location_label: "所在地", location_val: "東京、日本", location_desc: "リモートファースト。東京では対面コホートも準備中です。",
     response_note: "すべてのお問い合わせに1営業日以内に返信いたします。",
     cta_eyebrow: "まずはここから", cta_h2: "無料体験クラスを予約する。", cta_desc: "FSAを体験する一番の方法は、無料体験に参加することです。コミットメント不要。",
-    cta_btn: "無料体験を予約する →", cta_btn2: "プログラムを見る",
-    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_team: "チーム", nav_contact: "お問い合わせ", nav_cta: "無料体験 →",
+    cta_btn: "無料体験を予約する", cta_btn2: "プログラムを見る",
+    nav_why: "なぜFSA", nav_programs: "プログラム", nav_parents: "保護者の方へ", nav_team: "チーム", nav_contact: "お問い合わせ", nav_cta: "無料体験",
     tagline: "東京 · グローバル",
   },
   "zh-TW": {
@@ -36,8 +37,8 @@ const ct = {
     location_label: "所在地", location_val: "日本東京", location_desc: "以遠端為主。東京也正在組建試點小組進行面對面課程。",
     response_note: "我們將在1個工作日內回覆所有詢問。",
     cta_eyebrow: "從這裡開始", cta_h2: "預約免費體驗課。", cta_desc: "體驗FSA最好的方式就是參加免費體驗課。無需承諾——只有真實的指導。",
-    cta_btn: "預約免費體驗 →", cta_btn2: "探索課程",
-    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_team: "團隊", nav_contact: "聯絡我們", nav_cta: "免費體驗 →",
+    cta_btn: "預約免費體驗", cta_btn2: "探索課程",
+    nav_why: "為什麼FSA", nav_programs: "課程", nav_parents: "給家長", nav_team: "團隊", nav_contact: "聯絡我們", nav_cta: "免費體驗",
     tagline: "東京 · 全球",
   },
   "zh-CN": {
@@ -48,8 +49,8 @@ const ct = {
     location_label: "所在地", location_val: "日本东京", location_desc: "以远端为主。东京也正在组建试点小组进行面对面课程。",
     response_note: "我们将在1个工作日内回复所有询问。",
     cta_eyebrow: "从这里开始", cta_h2: "预约免费体验课。", cta_desc: "体验FSA最好的方式就是参加免费体验课。无需承诺——只有真实的指导。",
-    cta_btn: "预约免费体验 →", cta_btn2: "探索课程",
-    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_team: "团队", nav_contact: "联系我们", nav_cta: "免费体验 →",
+    cta_btn: "预约免费体验", cta_btn2: "探索课程",
+    nav_why: "为什么FSA", nav_programs: "课程", nav_parents: "给家长", nav_team: "团队", nav_contact: "联系我们", nav_cta: "免费体验",
     tagline: "东京 · 全球",
   },
 } as const;
@@ -113,8 +114,8 @@ export default function ContactPage() {
           <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{c.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{c.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/signup" id="contact-cta-btn" className="rounded-full bg-[#C9A84C] px-9 py-4 font-semibold text-[#071226] transition hover:bg-[#E4C261] hover:scale-[1.02]">{c.cta_btn}</Link>
-            <Link href="/programs" className="rounded-full border border-white/20 px-9 py-4 font-semibold text-white transition hover:border-[#C9A84C] hover:text-[#C9A84C]">{c.cta_btn2}</Link>
+            <MotionButton href="/signup" id="contact-cta-btn">{c.cta_btn}</MotionButton>
+            <MotionButton href="/programs">{c.cta_btn2}</MotionButton>
           </div>
         </div>
       </section>
