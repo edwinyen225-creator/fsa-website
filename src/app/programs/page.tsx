@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
 import MotionButton from "@/components/ui/motion-button";
+import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
+import { FloatingPaths } from "@/components/ui/background-paths";
+import { SparklesCore } from "@/components/ui/sparkles";
 
 import { usePT } from "@/lib/programs-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -30,12 +32,13 @@ export default function ProgramsPage() {
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
   const programs = [
-    { id: "general-language",     number: "01", icon: <IconMic />,    name: ht.prog1_name, ages: ht.prog1_status, tagline: p.p1_tagline, focus: [p.p1_f1,p.p1_f2,p.p1_f3,p.p1_f4,p.p1_f5], outcome: p.p1_outcome, accent: "from-[#0B2352] via-[#0C1B36] to-[#071226]" },
-    { id: "toeic-prep",           number: "02", icon: <IconTarget />, name: ht.prog2_name, ages: ht.prog2_status, tagline: p.p2_tagline, focus: [p.p2_f1,p.p2_f2,p.p2_f3,p.p2_f4,p.p2_f5], outcome: p.p2_outcome, accent: "from-[#071226] via-[#0C1F3A] to-[#0B2352]" },
-    { id: "ai-practical",         number: "03", icon: <IconCpu />,    name: ht.prog3_name, ages: ht.prog3_status, tagline: p.p3_tagline, focus: [p.p3_f1,p.p3_f2,p.p3_f3,p.p3_f4,p.p3_f5], outcome: p.p3_outcome, accent: "from-[#0B2352] via-[#0A1A30] to-[#071226]" },
-    { id: "future-portfolio",     number: "04", icon: <IconLayers />, name: ht.prog4_name, ages: ht.prog4_status, tagline: p.p4_tagline, focus: [p.p4_f1,p.p4_f2,p.p4_f3,p.p4_f4,p.p4_f5], outcome: p.p4_outcome, accent: "from-[#071226] via-[#102A4A] to-[#0C1B36]" },
-    { id: "future-cohort",        number: "05", icon: <IconUsers />,  name: ht.prog5_name, ages: ht.prog5_status, tagline: p.p5_tagline, focus: [p.p5_f1,p.p5_f2,p.p5_f3,p.p5_f4,p.p5_f5], outcome: p.p5_outcome, accent: "from-[#0B1833] via-[#071226] to-[#0B1833]" },
+    { id: "general-language",   number: "01", icon: <IconMic />,    name: ht.prog1_name, ages: ht.prog1_status, tagline: p.p1_tagline, focus: [p.p1_f1,p.p1_f2,p.p1_f3,p.p1_f4,p.p1_f5], outcome: p.p1_outcome },
+    { id: "toeic-prep",         number: "02", icon: <IconTarget />, name: ht.prog2_name, ages: ht.prog2_status, tagline: p.p2_tagline, focus: [p.p2_f1,p.p2_f2,p.p2_f3,p.p2_f4,p.p2_f5], outcome: p.p2_outcome },
+    { id: "ai-practical",       number: "03", icon: <IconCpu />,    name: ht.prog3_name, ages: ht.prog3_status, tagline: p.p3_tagline, focus: [p.p3_f1,p.p3_f2,p.p3_f3,p.p3_f4,p.p3_f5], outcome: p.p3_outcome },
+    { id: "future-portfolio",   number: "04", icon: <IconLayers />, name: ht.prog4_name, ages: ht.prog4_status, tagline: p.p4_tagline, focus: [p.p4_f1,p.p4_f2,p.p4_f3,p.p4_f4,p.p4_f5], outcome: p.p4_outcome },
+    { id: "future-cohort",      number: "05", icon: <IconUsers />,  name: ht.prog5_name, ages: ht.prog5_status, tagline: p.p5_tagline, focus: [p.p5_f1,p.p5_f2,p.p5_f3,p.p5_f4,p.p5_f5], outcome: p.p5_outcome },
   ];
+
   const outputs = [
     { icon: <IconSlides />, label: p.out1 }, { icon: <IconDoc />, label: p.out2 },
     { icon: <IconVideo />, label: p.out3 }, { icon: <IconFile />, label: p.out4 },
@@ -48,68 +51,273 @@ export default function ProgramsPage() {
     { icon: <IconTracks />, title: p.fmt5_t, desc: p.fmt5_d },
   ];
 
+  // Background gradient per program — subtle variation on dark navy
+  const bgGradients = [
+    "radial-gradient(ellipse at 30% 50%, #0D2057 0%, #071226 55%, #040A14 100%)",
+    "radial-gradient(ellipse at 70% 40%, #091E45 0%, #071226 55%, #040A14 100%)",
+    "radial-gradient(ellipse at 50% 60%, #0C1D48 0%, #071226 55%, #040A14 100%)",
+    "radial-gradient(ellipse at 25% 35%, #0A1B3F 0%, #071226 55%, #040A14 100%)",
+    "radial-gradient(ellipse at 60% 55%, #0B1C42 0%, #071226 55%, #040A14 100%)",
+  ];
+
+  const fxSections = programs.map((prog, idx) => ({
+    id: prog.id,
+    background: "",
+    renderBackground: (_active: boolean, _prev: boolean) => (
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: bgGradients[idx],
+          transition: "opacity 0.7s ease",
+        }}
+      />
+    ),
+    leftLabel: (
+      <span
+        style={{
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          fontSize: "clamp(1rem, 2vw, 1.5rem)",
+          letterSpacing: "0.05em",
+          fontWeight: 400,
+          color: "rgba(245,245,245,0.85)",
+        }}
+      >
+        {prog.number}
+      </span>
+    ),
+    rightLabel: (
+      <span
+        style={{
+          fontFamily: "'Helvetica Neue', Arial, sans-serif",
+          fontSize: "clamp(0.65rem, 1.1vw, 0.85rem)",
+          fontWeight: 400,
+          letterSpacing: "0.06em",
+          textTransform: "uppercase" as const,
+          textAlign: "right" as const,
+          display: "block",
+          lineHeight: 1.3,
+          color: "rgba(245,245,245,0.6)",
+          maxWidth: "14ch",
+        }}
+      >
+        {prog.name}
+      </span>
+    ),
+    title: (
+      <div
+        style={{
+          textTransform: "none",
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          textAlign: "center",
+          padding: "0 clamp(1rem, 5vw, 4rem)",
+          maxWidth: "min(600px, 88vw)",
+          letterSpacing: "normal",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {/* ── TOP: eyebrow + program name ── */}
+        <div style={{ paddingTop: "5rem" }}>
+          <p
+            style={{
+              fontFamily: "'Helvetica Neue', Arial, sans-serif",
+              fontSize: "0.62rem",
+              letterSpacing: "0.38em",
+              color: "#C9A84C",
+              fontWeight: 400,
+              textTransform: "uppercase",
+              margin: "0 0 0.9rem",
+            }}
+          >
+            {prog.ages} — {prog.number}
+          </p>
+          <p
+            style={{
+              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontSize: "clamp(1.6rem, 3.2vw, 2.8rem)",
+              fontWeight: 400,
+              lineHeight: 1.12,
+              letterSpacing: "-0.02em",
+              color: "rgba(245,245,245,0.96)",
+              margin: 0,
+            }}
+          >
+            {prog.name}
+          </p>
+        </div>
+
+        {/* ── SPARKLES — centered, wider than title column ── */}
+        <div
+          style={{
+            position: "relative",
+            width: "calc(100% + 320px)",
+            height: "220px",
+            marginTop: "1.5rem",
+            flexShrink: 0,
+          }}
+        >
+          {/* Sparkle particles with radial fade on all edges — no solid overlay */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              WebkitMaskImage:
+                "radial-gradient(ellipse 65% 80% at 50% 0%, black 0%, transparent 100%)",
+              maskImage:
+                "radial-gradient(ellipse 65% 80% at 50% 0%, black 0%, transparent 100%)",
+            }}
+          >
+            <SparklesCore
+              id={`sparkles-${prog.id}`}
+              background="transparent"
+              minSize={0.4}
+              maxSize={1}
+              particleDensity={1200}
+              className="w-full h-full"
+              particleColor="#FFFFFF"
+              speed={1}
+            />
+          </div>
+
+          {/* Glowing gold line */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "10%",
+              right: "10%",
+              height: "2px",
+              background:
+                "linear-gradient(to right, transparent, #C9A84C 30%, #E4C261 50%, #C9A84C 70%, transparent)",
+              filter: "blur(1.5px)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "10%",
+              right: "10%",
+              height: "1px",
+              background:
+                "linear-gradient(to right, transparent, #C9A84C 30%, #E4C261 50%, #C9A84C 70%, transparent)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "28%",
+              right: "28%",
+              height: "7px",
+              background:
+                "linear-gradient(to right, transparent, #E4C261 50%, transparent)",
+              filter: "blur(4px)",
+              pointerEvents: "none",
+            }}
+          />
+        </div>
+
+        {/* ── BOTTOM: tagline + focus — pushed further down ── */}
+        <div style={{ marginTop: "0rem" }}>
+          <p
+            style={{
+              fontFamily: "'Helvetica Neue', Arial, sans-serif",
+              fontSize: "0.82rem",
+              lineHeight: 1.75,
+              color: "rgba(245,245,245,0.5)",
+              fontWeight: 300,
+              margin: "0 auto 1.6rem",
+              maxWidth: "36ch",
+            }}
+          >
+            {prog.tagline}
+          </p>
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
+              display: "inline-block",
+              textAlign: "left",
+            }}
+          >
+            {prog.focus.map((f) => (
+              <li
+                key={f}
+                style={{
+                  fontFamily: "'Helvetica Neue', Arial, sans-serif",
+                  fontSize: "0.76rem",
+                  color: "rgba(245,245,245,0.62)",
+                  marginBottom: "0.38rem",
+                  paddingLeft: "1.1rem",
+                  position: "relative",
+                  fontWeight: 300,
+                  lineHeight: 1.55,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                <span
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    color: "#C9A84C",
+                    fontSize: "0.45rem",
+                    top: "0.42rem",
+                  }}
+                >
+                  ◆
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ),
+  }));
+
   return (
-    <main className="min-h-screen bg-[#071226] text-white">
-      {/* Hero */}
-      <section className="relative min-h-[60vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(201,168,76,0.15),transparent_40%),radial-gradient(circle_at_15%_70%,rgba(37,99,235,0.12),transparent_40%)]" />
-        <div className="relative z-10 mx-auto max-w-5xl text-center">
+    <main className="min-h-screen bg-[#040A14] text-white">
+
+      {/* Static Hero */}
+      <section className="relative min-h-[55vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(201,168,76,0.18),transparent_40%),radial-gradient(circle_at_20%_75%,rgba(37,99,235,0.13),transparent_40%)]" />
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{p.badge}</div>
           <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">
-            {p.h1a} <span className="text-[#C9A84C]">{p.gold}</span> {p.h1b}
+            {p.h1a} <span className="text-[#C9A84C]">{p.gold}</span>{p.h1b}
           </h1>
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/65 md:text-xl">{p.sub}</p>
+          <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl">{p.sub}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <MotionButton href="#programs-list">{p.btn1}</MotionButton>
+            <MotionButton href="/programs#scroll">{p.btn1}</MotionButton>
             <MotionButton href="/signup">{p.btn2}</MotionButton>
           </div>
         </div>
       </section>
 
-      {/* Programs */}
-      <section id="programs-list" className="px-6 py-20 md:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{p.sec_eyebrow}</div>
-          <h2 className="mb-16 font-serif text-4xl leading-tight md:text-6xl">{p.sec_h2a}<br />{p.sec_h2b}</h2>
-          <div className="space-y-10">
-            {programs.map((prog) => (
-              <div key={prog.id} id={prog.id} className={`overflow-hidden rounded-[36px] bg-gradient-to-br ${prog.accent} border border-white/10`}>
-                <div className="grid gap-0 lg:grid-cols-[1fr_1.2fr]">
-                  <div className="flex flex-col justify-between p-10 md:p-14 border-b border-white/10 lg:border-b-0 lg:border-r">
-                    <div>
-                      <div className="mb-6 flex items-center gap-4">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#C9A84C]/30 bg-[#071226]/60 text-[#C9A84C]">{prog.icon}</div>
-                        <span className="font-serif text-6xl text-white/10 leading-none">{prog.number}</span>
-                      </div>
-                      <div className="mb-2 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{prog.ages}</div>
-                      <h3 className="font-serif text-4xl text-white md:text-5xl">{prog.name}</h3>
-                      <p className="mt-4 text-lg leading-relaxed text-white/60">{prog.tagline}</p>
-                    </div>
-                    <div className="mt-10 rounded-[20px] border border-[#C9A84C]/20 bg-[#071226]/40 p-6">
-                      <div className="mb-2 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{p.outcome_label}</div>
-                      <p className="text-white/80 leading-relaxed">{prog.outcome}</p>
-                    </div>
-                  </div>
-                  <div className="p-10 md:p-14">
-                    <div className="mb-6 text-xs uppercase tracking-[0.3em] text-white/40">{p.focus_label}</div>
-                    <ul className="space-y-4">
-                      {prog.focus.map((item) => (
-                        <li key={item} className="flex items-start gap-4">
-                          <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-[#C9A84C]" />
-                          <span className="text-white/75 leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-12">
-                      <MotionButton href="/signup" id={`cta-${prog.id}`} className="text-sm">{p.trial_btn}</MotionButton>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Cinematic Programs Scroll */}
+      <FullScreenScrollFX
+        sections={fxSections}
+        colors={{
+          text: "rgba(245,245,245,0.9)",
+          overlay: "rgba(4,10,20,0.05)",
+          pageBg: "#040A14",
+          stageBg: "#040A14",
+        }}
+        fontFamily="'Helvetica Neue', Arial, sans-serif"
+        showProgress={true}
+        durations={{ change: 0.7, snap: 800 }}
+        bgTransition="fade"
+        gap={0}
+        gridPaddingX={3}
+      />
 
       {/* What students create */}
       <section className="bg-[#F4F7FA] px-6 py-20 md:py-24 text-[#071226]">
