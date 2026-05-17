@@ -9,6 +9,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import { usePT } from "@/lib/programs-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 // SVG icons
 const IconMic = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0M12 21v-4M8 21h8"/></svg>);
@@ -324,15 +325,15 @@ export default function ProgramsPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{p.out_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">{p.out_h2}</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{p.out_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{p.out_desc}</p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {outputs.map((item, i) => (
-              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-lg hover:-translate-y-1 duration-300">
+              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-8 transition hover:-translate-y-1 duration-300">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{item.icon}</div>
                 <p className="font-serif text-xl text-white">{item.label}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -343,16 +344,16 @@ export default function ProgramsPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{p.fmt_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">{p.fmt_h2}</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{p.fmt_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{p.fmt_desc}</p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {format.map((item, i) => (
-              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
+              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-8 transition hover:-translate-y-0.5 duration-300">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{item.icon}</div>
                 <h3 className="font-serif text-xl text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{item.desc}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -360,15 +361,15 @@ export default function ProgramsPage() {
 
       {/* CTA */}
       <section className="bg-[#071226] px-6 py-20 md:py-24">
-        <div className="mx-auto max-w-4xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
+        <GlowCard glowColor="gold" customSize className="mx-auto max-w-4xl bg-[#071226] p-7 sm:p-10 md:p-12 lg:p-20 text-center">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{p.cta_eyebrow}</div>
-          <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{p.cta_h2a}<br />{p.cta_h2b}</h2>
+          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-white md:text-6xl">{p.cta_h2a}<br />{p.cta_h2b}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{p.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <MotionButton href="/signup" id="prog-final-cta">{p.cta_btn1}</MotionButton>
             <MotionButton href="/">{p.cta_btn2}</MotionButton>
           </div>
-        </div>
+        </GlowCard>
       </section>
     </main>
   );

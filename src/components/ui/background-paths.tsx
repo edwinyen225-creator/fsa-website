@@ -3,7 +3,17 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-export function FloatingPaths({ position }: { position: number }) {
+export function FloatingPaths({
+    position,
+    stroke = "#C9A84C",
+    baseOpacity = 0.04,
+    opacityStep = 0.012,
+}: {
+    position: number;
+    stroke?: string;
+    baseOpacity?: number;
+    opacityStep?: number;
+}) {
     const paths = Array.from({ length: 36 }, (_, i) => ({
         id: i,
         d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
@@ -30,9 +40,9 @@ export function FloatingPaths({ position }: { position: number }) {
                     <motion.path
                         key={path.id}
                         d={path.d}
-                        stroke="#C9A84C"
+                        stroke={stroke}
                         strokeWidth={path.width}
-                        strokeOpacity={0.04 + path.id * 0.012}
+                        strokeOpacity={baseOpacity + path.id * opacityStep}
                         initial={{ pathLength: 0.3, opacity: 0.6 }}
                         animate={{
                             pathLength: 1,

@@ -7,6 +7,9 @@ import { usePathname } from "next/navigation";
 import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
 import { homepageTranslations } from "@/lib/homepage-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
+import { motion, AnimatePresence } from "framer-motion";
+import { MenuContainer, MenuItem } from "@/components/ui/fluid-menu";
+import { Menu as MenuIcon, X, BookOpen, Users, Globe, Phone } from "lucide-react";
 
 export function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: Locale) => void }) {
   const [open, setOpen] = useState(false);
@@ -64,6 +67,57 @@ export function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChang
   );
 }
 
+type NavT = { nav_programs: string; nav_parents: string; nav_team: string; nav_contact: string };
+
+function AnimatedNav({ pathname, t }: { pathname: string; t: NavT }) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const links = [
+    { href: "/programs", label: t.nav_programs },
+    { href: "/parents",  label: t.nav_parents  },
+    { href: "/team",     label: t.nav_team     },
+    { href: "/contact",  label: t.nav_contact  },
+  ];
+
+  return (
+    <nav className="hidden lg:flex items-center">
+      <div className="flex items-center gap-1 px-1.5 py-1.5">
+        {links.map((link, i) => {
+          const isActive = pathname === link.href;
+          const isHovered = hoveredIndex === i;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="relative px-4 py-1.5 text-sm rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128]"
+            >
+              {isHovered && (
+                <motion.span
+                  layoutId="nav-pill"
+                  className="absolute inset-0 rounded-full bg-white/[0.07]"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className={`relative z-10 transition-colors duration-150 ${isActive ? "text-[#C9A84C]" : isHovered ? "text-[#C9A84C]" : "text-white/65"}`}>
+                {link.label}
+              </span>
+              {isActive && (
+                <motion.span
+                  layoutId="nav-active-dot"
+                  className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-3 rounded-full bg-[#C9A84C]/70"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 export function Navbar() {
   const { locale, setLocale } = useLanguage();
   const t = homepageTranslations[locale];
@@ -72,21 +126,38 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#061128]/90 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Fluid nav menu */}
+          <MenuContainer>
+            <MenuItem
+              icon={
+                <div className="relative w-6 h-6">
+                  <div className="absolute inset-0 transition-all duration-300 ease-in-out origin-center opacity-100 scale-100 rotate-0 [div[data-expanded=true]_&]:opacity-0 [div[data-expanded=true]_&]:scale-0 [div[data-expanded=true]_&]:rotate-180">
+                    <MenuIcon size={24} strokeWidth={1.5} />
+                  </div>
+                  <div className="absolute inset-0 transition-all duration-300 ease-in-out origin-center opacity-0 scale-0 -rotate-180 [div[data-expanded=true]_&]:opacity-100 [div[data-expanded=true]_&]:scale-100 [div[data-expanded=true]_&]:rotate-0">
+                    <X size={24} strokeWidth={1.5} />
+                  </div>
+                </div>
+              }
+            />
+            <MenuItem href="/programs" label={t.nav_programs} icon={<BookOpen size={22} strokeWidth={1.5} />} />
+            <MenuItem href="/parents"  label={t.nav_parents}  icon={<Users    size={22} strokeWidth={1.5} />} />
+            <MenuItem href="/team"     label={t.nav_team}     icon={<Globe    size={22} strokeWidth={1.5} />} />
+            <MenuItem href="/contact"  label={t.nav_contact}  icon={<Phone    size={22} strokeWidth={1.5} />} />
+          </MenuContainer>
+
+          <Link href="/" className="flex items-center gap-4 ml-12 sm:ml-0">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
             <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
           </div>
           <div className="hidden sm:block">
             <div className="font-serif text-xl tracking-wide">Future Skill Academy</div>
           </div>
-        </Link>
+          </Link>
+        </div>
 
-        <nav className="hidden items-center gap-9 text-sm text-white/70 lg:flex">
-          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/programs' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/programs">{t.nav_programs}</Link>
-          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/parents' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/parents">{t.nav_parents}</Link>
-          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/team' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/team">{t.nav_team}</Link>
-          <Link className={`transition-colors duration-200 ease-out rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#061128] ${pathname === '/contact' ? 'text-[#C9A84C]' : 'hover:text-[#C9A84C]'}`} href="/contact">{t.nav_contact}</Link>
-        </nav>
+        <AnimatedNav pathname={pathname} t={t} />
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher locale={locale} onChange={setLocale} />

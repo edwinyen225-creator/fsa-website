@@ -149,7 +149,7 @@ export default function PaymentPage() {
       <section className="px-6 py-20 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.pricing_eyebrow}</div>
-          <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{t.pricing_h2}</h2>
+          <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.pricing_h2}</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {plans.map((plan, i) => (
               <div key={i} className={`relative overflow-hidden rounded-[32px] p-10 flex flex-col transition hover:-translate-y-1 duration-300 ${plan.highlight ? "bg-gradient-to-br from-[#0B2352] to-[#071226] border border-[#C9A84C]/30" : "border border-white/10 bg-white/5"}`}>
@@ -172,7 +172,7 @@ export default function PaymentPage() {
       <section className="bg-[#F4F7FA] px-6 py-20 md:py-24 text-[#071226]">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.payment_eyebrow}</div>
-          <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{t.payment_h2}</h2>
+          <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.payment_h2}</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {methods.map((m, i) => (
               <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-md duration-300">
@@ -203,9 +203,9 @@ export default function PaymentPage() {
 
       {/* CTA */}
       <section className="bg-[#071226] px-6 py-20">
-        <div className="mx-auto max-w-4xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
+        <div className="mx-auto max-w-4xl rounded-2xl sm:rounded-[42px] border border-white/10 bg-white/5 p-7 sm:p-10 md:p-12 lg:p-20 text-center backdrop-blur-xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.cta_eyebrow}</div>
-          <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{t.cta_h2}</h2>
+          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-white md:text-6xl">{t.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{t.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <MotionButton href="/signup" id="pay-final-cta">{t.cta_btn1}</MotionButton>

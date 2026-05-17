@@ -7,8 +7,10 @@ import { Globe, Cpu, Users, Layers, Map } from "lucide-react";
 import { homepageTranslations } from "@/lib/homepage-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { ShaderAnimation } from "@/components/ui/shader-lines";
+import { IcosahedronCanvas } from "@/components/ui/geometric-blur-mesh";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 import AnimatedScroll from "@/components/ui/animated-scroll";
+import TestimonialsSection from "@/components/ui/testimonials-section";
 
 export default function Home() {
   const { locale } = useLanguage();
@@ -21,9 +23,10 @@ export default function Home() {
 
       {/* ── 1. Hero Section ── */}
       <section className="relative min-h-[90vh] w-full flex items-center overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 z-0">
           <ShaderAnimation />
         </div>
+        <IcosahedronCanvas />
         <div className="absolute inset-0 bg-gradient-to-r from-[#040A14] via-[#040A14]/80 to-[#040A14]/20" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 w-full pt-20 flex items-center">
@@ -42,7 +45,7 @@ export default function Home() {
           </div>
 
           {/* Right: orbital timeline */}
-          <div className="hidden lg:block w-1/2 h-[90vh]">
+          <div className="hidden lg:block w-1/2 h-[90vh] translate-x-40">
             <RadialOrbitalTimeline
               timelineData={[
                 { id: 1, title: t.strip_f1_title, content: t.strip_f1_desc, icon: Globe, relatedIds: [2, 3] },
@@ -56,7 +59,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. Animated Features Scroll ── */}
+      {/* ── 2. Testimonials ── */}
+      <TestimonialsSection />
+
+      {/* ── 3. Animated Features Scroll ── */}
       <section className="h-screen">
         <AnimatedScroll />
       </section>

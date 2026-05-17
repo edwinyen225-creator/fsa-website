@@ -4,17 +4,39 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import MotionButton from '@/components/ui/motion-button';
 import { useLanguage } from '@/hooks/useLanguage';
 import { homepageTranslations } from '@/lib/homepage-i18n';
+import { FloatingPaths } from '@/components/ui/background-paths';
 
-const CheckIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-[#C9A84C] shrink-0">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
+// ─── Design tokens ────────────────────────────────────────────────────────────
+const CREAM  = '#F4EFE4';
+const CREAM2 = '#EDE8DC';
+const NAVY   = '#040A14';
+const GOLD   = '#C9A84C';
+
+// ─── Shared primitives ────────────────────────────────────────────────────────
+
+const Eyebrow = ({ text }: { text: string }) => (
+  <div className="flex items-center gap-3 mb-7">
+    <div className="h-px w-5 shrink-0" style={{ background: GOLD }} />
+    <span style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.35em', color: GOLD }}>
+      {text}
+    </span>
+  </div>
 );
 
-const IconTrustBadge = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4l3 3"/></svg>);
-const IconTrustUsers = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>);
-const IconTrustChart = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>);
-const IconTrustLock = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>);
+const BgNum = ({ n, dark }: { n: string; dark: boolean }) => (
+  <div
+    aria-hidden
+    className="absolute select-none pointer-events-none font-serif font-black leading-none"
+    style={{
+      fontSize: 'clamp(180px, 24vw, 360px)',
+      color: dark ? 'rgba(255,255,255,0.025)' : 'rgba(4,10,20,0.04)',
+      bottom: '-0.06em',
+      right: '-0.04em',
+    }}
+  >
+    {n}
+  </div>
+);
 
 interface SlidePanel {
   bgColor?: string;
@@ -34,92 +56,149 @@ export default function AnimatedScroll() {
   const t = homepageTranslations[locale];
 
   const slides = useMemo((): Slide[] => [
-    // ── 1. Flagship Program ──
+
+    // ── 1. Flagship Program ──────────────────────────────────────────────────
     {
       isDark: false,
       left: {
-        bgColor: '#fbfaf6',
+        bgColor: CREAM,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-16 xl:px-20 py-16 justify-center">
-            <div className="mb-4 text-[#8E7A4E] text-xs font-bold uppercase tracking-[0.2em]">Flagship Program</div>
-            <h2 className="font-serif text-4xl lg:text-[3rem] leading-[1.1] mb-2 text-[#040A14] tracking-tight">
-              Future Skills Portfolio
-            </h2>
-            <h3 className="font-sans text-base text-[#040A14]/55 mb-6 tracking-wide font-medium">
-              Future Skills · Portfolio
-            </h3>
-            <p className="text-[14px] text-[#071226]/70 leading-[1.8] mb-7 max-w-sm">
-              Focused on English communication, integrating AI, data analysis, design thinking, and presentations. We nurture the &apos;ability to convey&apos; and &apos;ability to create&apos; by tackling real-world challenges.
-            </p>
-            <div className="space-y-3 mb-8 border-l border-[#C9A84C]/30 pl-5">
-              {[
-                'Thorough strengthening of thinking and expression in English',
-                'Practice research, analysis, and design',
-                'Learning that leverages AI and technology',
-                'Create an original portfolio',
-              ].map((bullet, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <CheckIcon />
-                  <span className="text-[13.5px] font-medium text-[#040A14]/75">{bullet}</span>
-                </div>
-              ))}
-            </div>
-            <div>
-              <MotionButton href="/programs" className="text-sm">
-                View Program Details
-              </MotionButton>
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-16 xl:px-20 py-12 justify-center overflow-hidden">
+            <BgNum n="01" dark={false} />
+            <div className="relative z-10">
+              <Eyebrow text={t.flagship_eyebrow} />
+              <h2
+                className="font-serif"
+                style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3.4rem)', lineHeight: 1.05, letterSpacing: '-0.035em', color: NAVY, marginBottom: '0.75rem' }}
+              >
+                {t.flagship_title}
+              </h2>
+              <div style={{ height: 1, width: 40, background: `${GOLD}55`, marginBottom: '1rem' }} />
+              <p className="font-sans" style={{ fontSize: 13, color: `${NAVY}75`, letterSpacing: '0.03em', marginBottom: '1.5rem' }}>
+                {t.flagship_subtitle}
+              </p>
+              <p className="font-sans max-w-xs" style={{ fontSize: 13, lineHeight: 1.9, color: `${NAVY}65`, marginBottom: '1.75rem' }}>
+                {t.flagship_desc}
+              </p>
+              <div style={{ borderLeft: `1px solid ${GOLD}30`, paddingLeft: '1.25rem', marginBottom: '2rem' }}>
+                {[t.flagship_bullet1, t.flagship_bullet2, t.flagship_bullet3, t.flagship_bullet4].map((b, i) => (
+                  <div key={i} className="flex items-start gap-2.5" style={{ marginBottom: i < 3 ? '0.6rem' : 0 }}>
+                    <div style={{ width: 4, height: 4, borderRadius: '50%', background: GOLD, marginTop: 8, flexShrink: 0 }} />
+                    <span className="font-sans" style={{ fontSize: 12.5, lineHeight: 1.75, color: `${NAVY}68` }}>{b}</span>
+                  </div>
+                ))}
+              </div>
+              <MotionButton href="/programs" className="text-sm">{t.flagship_cta}</MotionButton>
             </div>
           </div>
         ),
       },
       right: {
-        bgColor: '#fbfaf6',
+        bgColor: CREAM,
         bgImage: '/images/placeholder-class.jpg',
-        leftFade: '#fbfaf6',
+        leftFade: CREAM,
         content: null,
       },
     },
 
-    // ── 2. Student Works ──
+    // ── 2. Student Works ─────────────────────────────────────────────────────
     {
       isDark: true,
       left: {
-        bgColor: '#040A14',
+        bgColor: NAVY,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-16 xl:px-20 py-16 justify-center">
-            <div className="mb-4 text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em]">Student Works</div>
-            <h2 className="font-serif text-3xl lg:text-[2.75rem] text-white mb-5 leading-[1.2]">
-              Learning becomes<br />visible outcomes.
-            </h2>
-            <p className="text-[14px] text-white/55 font-light leading-[1.8] mb-8 max-w-xs">
-              From research to planning, analysis, and expression. Students tackle projects assuming real-world society, producing deliverables that resonate globally.
-            </p>
-            <MotionButton href="/programs" className="text-sm">
-              View Case Studies
-            </MotionButton>
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-16 xl:px-20 py-12 justify-center overflow-hidden">
+            <BgNum n="02" dark={true} />
+            <div className="relative z-10">
+              <Eyebrow text={t.works_eyebrow} />
+              <h2
+                className="font-serif text-white"
+                style={{ fontSize: 'clamp(2rem, 3.4vw, 3rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '1.25rem' }}
+              >
+                {t.works_title}
+              </h2>
+              <p className="font-sans max-w-xs" style={{ fontSize: 13.5, lineHeight: 1.85, color: 'rgba(255,255,255,0.48)', marginBottom: '2.25rem' }}>
+                {t.works_subtext}
+              </p>
+              <MotionButton href="/programs" className="text-sm">{t.works_cta}</MotionButton>
+            </div>
           </div>
         ),
       },
       right: {
-        bgColor: '#040A14',
+        bgColor: NAVY,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-14 py-16 justify-center gap-4">
-            {[
-              { title: 'Sustainable Product Dev', desc: 'From market research to brand proposition', img: '/images/placeholder-create-1.jpg' },
-              { title: 'Data Analysis Report', desc: 'Visualizing challenges from data', img: '/images/placeholder-create-2.jpg' },
-              { title: 'English Presentation', desc: 'Structuring and presenting ideas in English', img: '/images/placeholder-create-3.jpg' },
-            ].map((card, i) => (
-              <div key={i} className="bg-[#0B1833] rounded-xl overflow-hidden border border-white/5 group shadow-xl flex flex-row h-[110px]">
-                <div className="w-[130px] shrink-0 relative overflow-hidden">
+          <div className="relative h-full overflow-hidden">
+            {/* Each image occupies its own vertical band; mask fades blend the seams */}
+            {([
+              {
+                num: '01', title: t.works_c1_title, desc: t.works_c1_desc,
+                img: '/images/placeholder-create-6.jpg', bgPos: 'center',
+                top: '0%', height: '38%',
+                mask: 'linear-gradient(to bottom, black 0%, black 65%, transparent 100%)',
+                textVAlign: 'top' as const,
+              },
+              {
+                num: '02', title: t.works_c2_title, desc: t.works_c2_desc,
+                img: '/images/placeholder-create-2.jpg', bgPos: 'center',
+                top: '28%', height: '44%',
+                mask: 'linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)',
+                textVAlign: 'middle' as const,
+              },
+              {
+                num: '03', title: t.works_c3_title, desc: t.works_c3_desc,
+                img: '/images/placeholder-create-1.jpg', bgPos: '50% 30%',
+                top: '62%', height: '38%',
+                mask: 'linear-gradient(to bottom, transparent 0%, black 28%, black 100%)',
+                textVAlign: 'bottom' as const,
+              },
+            ] as const).map((card, i) => (
+              <div
+                key={i}
+                style={{
+                  position: 'absolute',
+                  top: card.top,
+                  left: 0,
+                  right: 0,
+                  height: card.height,
+                  backgroundImage: `url("${card.img}")`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: card.bgPos,
+                  WebkitMaskImage: card.mask,
+                  maskImage: card.mask,
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 20,
+                    right: 20,
+                    ...(card.textVAlign === 'top'
+                      ? { top: '28%' }
+                      : card.textVAlign === 'middle'
+                      ? { top: '50%', transform: 'translateY(-50%)' }
+                      : { bottom: '22%' }),
+                  }}
+                >
                   <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url("${card.img}")` }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0B1833]/50" />
-                </div>
-                <div className="flex flex-col justify-center px-5">
-                  <h3 className="font-sans text-white font-bold text-[14px] mb-1.5">{card.title}</h3>
-                  <p className="text-[12px] text-white/55 leading-relaxed">{card.desc}</p>
+                    style={{
+                      display: 'inline-flex',
+                      flexDirection: 'column',
+                      background: 'rgba(4,10,20,0.62)',
+                      backdropFilter: 'blur(14px)',
+                      WebkitBackdropFilter: 'blur(14px)',
+                      borderRadius: 7,
+                      padding: '9px 14px',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      maxWidth: '82%',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: 9, color: GOLD, letterSpacing: '0.12em' }}>{card.num}</span>
+                      <span className="font-serif" style={{ fontSize: 13, color: '#fff', letterSpacing: '-0.02em' }}>{card.title}</span>
+                    </div>
+                    <span className="font-sans" style={{ fontSize: 11, color: 'rgba(255,255,255,0.48)', lineHeight: 1.5 }}>{card.desc}</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -128,26 +207,38 @@ export default function AnimatedScroll() {
       },
     },
 
-    // ── 3. Two-Coach Support ──
+    // ── 3. Two-Coach Support ─────────────────────────────────────────────────
     {
       isDark: false,
       left: {
-        bgColor: '#f6f8fa',
+        bgColor: CREAM,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-14 py-16 gap-5">
+          <div className="flex flex-col h-full px-6 sm:px-10 lg:px-12 pt-20 pb-10 sm:pb-14 gap-4 justify-center">
             {[
-              { title: 'Japanese Coach', desc: 'Learning design · Goal setting · Thinking support', img: '/images/placeholder-who.jpg' },
-              { title: 'Native Coach', desc: 'Practical English · Expression guidance · Output support', img: '/images/placeholder-who.jpg' },
+              { title: t.coach_c1_title, desc: t.coach_c1_desc, img: '/images/placeholder-who.jpg' },
+              { title: t.coach_c2_title, desc: t.coach_c2_desc, img: '/images/placeholder-who.jpg' },
             ].map((coach, i) => (
-              <div key={i} className="relative flex-1 min-h-0 rounded-2xl overflow-hidden border border-[#040A14]/10 shadow-md">
+              <div
+                key={i}
+                className="relative rounded-2xl overflow-hidden"
+                style={{ border: '1px solid rgba(4,10,20,0.09)', height: 'clamp(160px, 36vh, 300px)' }}
+              >
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-90"
+                  className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url("${coach.img}")` }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#040A14] via-[#040A14]/40 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5">
-                  <h3 className="text-white font-bold text-[15px] mb-1.5">{coach.title}</h3>
-                  <p className="text-white/70 text-[12px] leading-relaxed">{coach.desc}</p>
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(4,10,20,0.88) 0%, rgba(4,10,20,0.18) 55%, transparent 100%)' }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div style={{ height: 1, width: 20, background: GOLD, marginBottom: 10 }} />
+                  <h3 className="font-serif text-white" style={{ fontSize: 15, letterSpacing: '-0.02em', marginBottom: 5 }}>
+                    {coach.title}
+                  </h3>
+                  <p className="font-sans" style={{ fontSize: 11.5, color: 'rgba(255,255,255,0.58)', lineHeight: 1.6 }}>
+                    {coach.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -155,98 +246,96 @@ export default function AnimatedScroll() {
         ),
       },
       right: {
-        bgColor: '#f6f8fa',
+        bgColor: CREAM,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-16 py-16 justify-center max-w-md">
-            <div className="mb-4 text-[#8E7A4E] text-xs font-bold uppercase tracking-[0.2em]">Two-Coach Support</div>
-            <h2 className="font-serif text-3xl lg:text-4xl text-[#040A14] mb-8 leading-[1.2]">
-              Supporting your future, together.
-            </h2>
-            <p className="text-[#040A14]/80 text-[15px] leading-[1.8] font-medium mb-4">
-              A Japanese coach and a Native coach accompany you from both the learning and practical sides.
-            </p>
-            <p className="text-[#040A14]/55 text-[14px] leading-[1.8] mb-8">
-              Through continuous dialogue, we support you until you achieve your goals.
-            </p>
-            <MotionButton href="/team" className="text-sm">
-              View Coaches
-            </MotionButton>
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-14 py-12 justify-center overflow-hidden">
+            <BgNum n="03" dark={false} />
+            <div className="relative z-10 max-w-sm">
+              <Eyebrow text={t.coach_eyebrow} />
+              <h2
+                className="font-serif"
+                style={{ fontSize: 'clamp(1.9rem, 3.2vw, 2.7rem)', lineHeight: 1.15, letterSpacing: '-0.03em', color: NAVY, marginBottom: '2rem' }}
+              >
+                {t.coach_h2}
+              </h2>
+              <p className="font-sans font-medium" style={{ fontSize: 14, lineHeight: 1.8, color: `${NAVY}85`, marginBottom: '1rem' }}>
+                {t.coach_p1}
+              </p>
+              <p className="font-sans" style={{ fontSize: 13.5, lineHeight: 1.85, color: `${NAVY}50`, marginBottom: '2.25rem' }}>
+                {t.coach_p2}
+              </p>
+              <MotionButton href="/team" className="text-sm">{t.coach_btn}</MotionButton>
+            </div>
           </div>
         ),
       },
     },
 
-    // ── 4. Our Programs ──
+    // ── 4. Our Programs ──────────────────────────────────────────────────────
     {
       isDark: false,
       left: {
-        bgColor: '#fbfaf6',
+        bgColor: CREAM,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-14 py-16">
-            <div className="mb-3 text-[#8E7A4E] text-xs font-bold uppercase tracking-[0.2em]">Our Programs</div>
-            <h2 className="font-serif text-2xl lg:text-3xl text-[#040A14] mb-7 leading-[1.25]">
-              Three programs tailored to your goals
-            </h2>
-            <div className="flex-1 min-h-0 bg-[#040A14] text-white rounded-2xl p-8 flex flex-col border-t-4 border-[#C9A84C] shadow-xl overflow-hidden">
-              <div className="mb-5 text-[#C9A84C]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-              </div>
-              <h3 className="font-serif text-xl lg:text-2xl mb-1.5">Future Skills Portfolio</h3>
-              <h4 className="text-[12px] tracking-wide text-[#C9A84C] mb-4 font-bold">Future Skills · Portfolio</h4>
-              <p className="text-white/65 text-[13px] leading-[1.8] flex-1">
-                Build a portfolio applicable worldwide through exploratory projects × English practice.
-              </p>
-              <div className="text-right mt-4">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5 inline-block text-white">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-14 py-12 overflow-hidden">
+            <BgNum n="04" dark={false} />
+            <div className="relative z-10 flex flex-col h-full justify-center">
+              <Eyebrow text={t.prog_eyebrow} />
+              <h2
+                className="font-serif"
+                style={{ fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', lineHeight: 1.2, letterSpacing: '-0.03em', color: NAVY, marginBottom: '2rem' }}
+              >
+                {t.prog_h2}
+              </h2>
+              <div
+                className="rounded-2xl p-7 flex flex-col"
+                style={{ height: 'clamp(160px, 36vh, 300px)', background: NAVY, borderTop: `3px solid ${GOLD}` }}
+              >
+                <div style={{ marginBottom: 18, color: GOLD }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} style={{ width: 22, height: 22 }}>
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-white" style={{ fontSize: 17, letterSpacing: '-0.02em', marginBottom: 5 }}>{t.prog_c1_title}</h3>
+                <p style={{ fontSize: 10, color: GOLD, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>{t.prog_c1_sub}</p>
+                <p className="font-sans flex-1" style={{ fontSize: 12.5, lineHeight: 1.8, color: 'rgba(255,255,255,0.5)' }}>{t.prog_c1_desc}</p>
               </div>
             </div>
           </div>
         ),
       },
       right: {
-        bgColor: '#fbfaf6',
+        bgColor: CREAM2,
         content: (
-          <div className="flex flex-col h-full px-8 lg:px-12 py-16 gap-5">
+          <div className="flex flex-col h-full px-6 sm:px-9 lg:px-11 pt-20 pb-12 justify-center gap-4">
             {[
               {
                 icon: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} style={{ width: 18, height: 18 }}>
                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
                   </svg>
                 ),
-                title: 'General English Path',
-                sub: 'Comprehensive English Path',
-                desc: 'From basics to application of academic English, writing, and speaking.',
+                title: t.prog_c2_title, sub: t.prog_c2_sub, desc: t.prog_c2_desc,
               },
               {
                 icon: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} className="w-7 h-7">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2} style={{ width: 18, height: 18 }}>
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                 ),
-                title: 'Chinese Communication Path',
-                sub: 'Chinese Communication Path',
-                desc: 'Enhance Chinese communication skills and broaden your global perspective.',
+                title: t.prog_c3_title, sub: t.prog_c3_sub, desc: t.prog_c3_desc,
               },
             ].map((prog, i) => (
               <div
                 key={i}
-                className="bg-white text-[#040A14] rounded-2xl p-7 flex flex-col flex-1 min-h-0 border border-[#040A14]/5 shadow-[0_4px_16px_rgba(4,10,20,0.05),0_1px_4px_rgba(4,10,20,0.04)] hover:shadow-[0_16px_48px_rgba(4,10,20,0.10)] transition-shadow duration-300 ease-out"
+                className="bg-white rounded-2xl p-7 flex flex-col"
+                style={{ border: '1px solid rgba(4,10,20,0.06)', boxShadow: '0 2px 20px rgba(4,10,20,0.05)', height: 'clamp(160px, 36vh, 280px)' }}
               >
-                <div className="mb-4 text-[#040A14]/25">{prog.icon}</div>
-                <h3 className="font-serif text-lg lg:text-xl mb-1.5">{prog.title}</h3>
-                <h4 className="text-[12px] tracking-wide text-[#040A14]/40 mb-3 font-bold">{prog.sub}</h4>
-                <p className="text-[#040A14]/65 text-[13px] leading-[1.8] flex-1">{prog.desc}</p>
-                <div className="text-right text-[#C9A84C] mt-4">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5 inline-block">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
+                <div style={{ marginBottom: 14, color: `${NAVY}28` }}>{prog.icon}</div>
+                <h3 className="font-serif" style={{ fontSize: 15.5, letterSpacing: '-0.02em', color: NAVY, marginBottom: 5 }}>{prog.title}</h3>
+                <p style={{ fontSize: 10, color: GOLD, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>{prog.sub}</p>
+                <p className="font-sans flex-1" style={{ fontSize: 12.5, lineHeight: 1.8, color: `${NAVY}58` }}>{prog.desc}</p>
               </div>
             ))}
           </div>
@@ -254,29 +343,44 @@ export default function AnimatedScroll() {
       },
     },
 
-    // ── 5. Learning Journey ──
+    // ── 5. Learning Journey ──────────────────────────────────────────────────
     {
       isDark: true,
       left: {
-        bgColor: '#040A14',
+        bgColor: NAVY,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-16 xl:px-20 py-16 justify-center">
-            <div className="mb-3 text-[#C9A84C] text-xs font-bold uppercase tracking-[0.2em]">{t.journey_eyebrow}</div>
-            <h2 className="font-serif text-3xl lg:text-4xl text-white mb-10 leading-[1.15]">{t.journey_h2}</h2>
-            <div className="relative">
-              <div className="space-y-7 pl-14">
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-16 xl:px-20 py-12 justify-center overflow-hidden">
+            <BgNum n="05" dark={true} />
+            <div className="relative z-10">
+              <Eyebrow text={t.journey_eyebrow} />
+              <h2
+                className="font-serif text-white"
+                style={{ fontSize: 'clamp(1.8rem, 3vw, 2.7rem)', lineHeight: 1.15, letterSpacing: '-0.03em', marginBottom: '2.25rem' }}
+              >
+                {t.journey_h2}
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 {[
-                  { title: t.journey_s1_title, desc: t.journey_s1_desc },
-                  { title: t.journey_s2_title, desc: t.journey_s2_desc },
-                  { title: t.journey_s3_title, desc: t.journey_s3_desc },
-                  { title: t.journey_s4_title, desc: t.journey_s4_desc },
-                ].map((step, i) => (
-                  <div key={i} className="relative">
-                    <div className="absolute -left-14 top-0 w-10 h-10 rounded-full bg-[#040A14] border border-[#C9A84C]/50 text-[#C9A84C] text-[11px] font-mono flex items-center justify-center">
-                      0{i + 1}
+                  { title: t.journey_s1_title, desc: t.journey_s1_desc, n: '01' },
+                  { title: t.journey_s2_title, desc: t.journey_s2_desc, n: '02' },
+                  { title: t.journey_s3_title, desc: t.journey_s3_desc, n: '03' },
+                  { title: t.journey_s4_title, desc: t.journey_s4_desc, n: '04' },
+                ].map((step) => (
+                  <div key={step.n} className="flex items-start gap-4">
+                    <div
+                      className="shrink-0 font-mono flex items-center justify-center"
+                      style={{
+                        width: 32, height: 32, borderRadius: '50%',
+                        border: `1px solid ${GOLD}45`,
+                        color: GOLD, fontSize: 10, letterSpacing: '0.05em',
+                      }}
+                    >
+                      {step.n}
                     </div>
-                    <div className="text-white font-bold text-[14px] mb-1">{step.title}</div>
-                    <div className="text-white/45 text-[12px] leading-[1.7]">{step.desc}</div>
+                    <div style={{ paddingTop: 4 }}>
+                      <div className="font-sans font-semibold text-white" style={{ fontSize: 13, marginBottom: 2 }}>{step.title}</div>
+                      <div className="font-sans" style={{ fontSize: 11.5, color: 'rgba(255,255,255,0.38)', lineHeight: 1.6 }}>{step.desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -285,106 +389,134 @@ export default function AnimatedScroll() {
         ),
       },
       right: {
-        bgColor: '#040A14',
+        bgColor: NAVY,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-14 py-16 justify-center">
-            <div className="relative mb-10">
-              <div className="space-y-7 pl-14">
-                {[
-                  { title: t.journey_s5_title, desc: t.journey_s5_desc },
-                  { title: t.journey_s6_title, desc: t.journey_s6_desc },
-                  { title: t.journey_s7_title, desc: t.journey_s7_desc },
-                ].map((step, i) => (
-                  <div key={i} className="relative">
-                    <div className="absolute -left-14 top-0 w-10 h-10 rounded-full bg-[#040A14] border-2 border-[#C9A84C] text-[#C9A84C] text-[11px] font-mono flex items-center justify-center shadow-[0_0_12px_rgba(201,168,76,0.3)]">
-                      0{i + 5}
-                    </div>
-                    <div className="text-white font-bold text-[14px] mb-1">{step.title}</div>
-                    <div className="text-white/45 text-[12px] leading-[1.7]">{step.desc}</div>
+          <div className="flex flex-col h-full px-8 sm:px-10 lg:px-12 py-12 justify-center">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginBottom: '2.5rem' }}>
+              {[
+                { title: t.journey_s5_title, desc: t.journey_s5_desc, n: '05' },
+                { title: t.journey_s6_title, desc: t.journey_s6_desc, n: '06' },
+                { title: t.journey_s7_title, desc: t.journey_s7_desc, n: '07' },
+              ].map((step) => (
+                <div key={step.n} className="flex items-start gap-4">
+                  <div
+                    className="shrink-0 font-mono flex items-center justify-center"
+                    style={{
+                      width: 32, height: 32, borderRadius: '50%',
+                      border: `1px solid ${GOLD}45`,
+                      color: GOLD, fontSize: 10, letterSpacing: '0.05em',
+                    }}
+                  >
+                    {step.n}
                   </div>
-                ))}
-              </div>
+                  <div style={{ paddingTop: 4 }}>
+                    <div className="font-sans font-semibold text-white" style={{ fontSize: 13, marginBottom: 2 }}>{step.title}</div>
+                    <div className="font-sans" style={{ fontSize: 11.5, color: 'rgba(255,255,255,0.38)', lineHeight: 1.6 }}>{step.desc}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="pl-1">
-              <MotionButton href="/signup" className="text-sm">
-                {t.hero_cta_primary}
-              </MotionButton>
-            </div>
+            <MotionButton href="/signup" className="text-sm">{t.hero_cta_primary}</MotionButton>
           </div>
         ),
       },
     },
 
-    // ── 6. For Parents / Trust ──
+    // ── 6. For Parents / Trust ───────────────────────────────────────────────
     {
       isDark: false,
       left: {
-        bgColor: '#fbfaf6',
+        bgColor: CREAM,
         content: (
-          <div className="flex flex-col h-full px-10 lg:px-16 xl:px-20 py-16 justify-center">
-            <div className="mb-4 text-[#8E7A4E] text-xs font-bold uppercase tracking-[0.2em]">{t.trust_eyebrow}</div>
-            <h2 className="font-serif text-3xl lg:text-4xl text-[#040A14] mb-10 leading-[1.2]">{t.trust_h2}</h2>
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-8">
-              {[
-                { title: t.trust_i1_title, desc: t.trust_i1_desc, icon: <IconTrustBadge /> },
-                { title: t.trust_i2_title, desc: t.trust_i2_desc, icon: <IconTrustUsers /> },
-                { title: t.trust_i3_title, desc: t.trust_i3_desc, icon: <IconTrustChart /> },
-                { title: t.trust_i4_title, desc: t.trust_i4_desc, icon: <IconTrustLock /> },
-              ].map((item, i) => (
-                <div key={i} className="flex flex-col gap-2.5">
-                  <div className="text-[#C9A84C]">{item.icon}</div>
-                  <h3 className="text-[#040A14] font-bold text-[15px]">{item.title}</h3>
-                  <p className="text-[#040A14]/60 text-[13px] leading-[1.8]">{item.desc}</p>
-                </div>
-              ))}
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-16 xl:px-20 py-12 justify-center overflow-hidden">
+            <FloatingPaths position={1} stroke="#8E7A4E" baseOpacity={0.06} opacityStep={0.018} />
+            <FloatingPaths position={-1} stroke="#8E7A4E" baseOpacity={0.06} opacityStep={0.018} />
+            <div className="relative z-10">
+              <Eyebrow text={t.trust_eyebrow} />
+              <h2
+                className="font-serif"
+                style={{ fontSize: 'clamp(1.8rem, 3vw, 2.7rem)', lineHeight: 1.15, letterSpacing: '-0.03em', color: NAVY, marginBottom: '2.5rem' }}
+              >
+                {t.trust_h2}
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+                {[
+                  { title: t.trust_i1_title, desc: t.trust_i1_desc },
+                  { title: t.trust_i2_title, desc: t.trust_i2_desc },
+                  { title: t.trust_i3_title, desc: t.trust_i3_desc },
+                  { title: t.trust_i4_title, desc: t.trust_i4_desc },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="shrink-0" style={{ width: 1, background: `${GOLD}28`, alignSelf: 'stretch', minHeight: 36 }} />
+                    <div>
+                      <h3 className="font-sans font-bold" style={{ fontSize: 13.5, color: NAVY, marginBottom: 4 }}>{item.title}</h3>
+                      <p className="font-sans" style={{ fontSize: 12.5, lineHeight: 1.75, color: `${NAVY}52` }}>{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ),
       },
       right: {
-        bgColor: '#fbfaf6',
+        bgColor: CREAM,
         bgImage: '/images/placeholder-who.jpg',
-        leftFade: '#fbfaf6',
+        leftFade: CREAM,
         content: null,
       },
     },
 
-    // ── 7. Final CTA ──
+    // ── 7. Final CTA ─────────────────────────────────────────────────────────
     {
       isDark: true,
       left: {
-        bgColor: '#040A14',
+        bgColor: NAVY,
         content: (
-          <div className="relative flex flex-col h-full px-10 lg:px-16 xl:px-20 py-16 justify-center overflow-hidden">
-            <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[500px] h-[400px] rounded-full bg-[#C9A84C]/6 blur-[90px] pointer-events-none" />
-            <h2 className="font-serif text-4xl lg:text-[3.25rem] text-white leading-[1.15] tracking-tight relative z-10">
-              {t.final_h2}
-            </h2>
+          <div className="relative flex flex-col h-full px-8 sm:px-12 lg:px-16 xl:px-20 py-12 justify-center overflow-hidden">
+            <BgNum n="07" dark={true} />
+            <div className="relative z-10">
+              <div style={{ height: 1, width: 40, background: `${GOLD}55`, marginBottom: '2rem' }} />
+              <h2
+                className="font-serif text-white"
+                style={{ fontSize: 'clamp(2.2rem, 4.2vw, 3.8rem)', lineHeight: 1.08, letterSpacing: '-0.04em' }}
+              >
+                {t.final_h2}
+              </h2>
+            </div>
           </div>
         ),
       },
       right: {
-        bgColor: '#040A14',
+        bgColor: NAVY,
         content: (
-          <div className="relative flex flex-col h-full px-10 lg:px-14 py-16 justify-center gap-8 overflow-hidden">
-            <div className="absolute top-1/2 -translate-y-1/2 right-0 w-[400px] h-[400px] rounded-full bg-[#C9A84C]/5 blur-[100px] pointer-events-none" />
-            <p className="text-white/60 text-[15px] font-light leading-[1.9] max-w-xs relative z-10">{t.final_sub}</p>
-            <div className="relative z-10">
-              <MotionButton href="/signup">
-                {t.final_btn}
-              </MotionButton>
+          <div className="relative flex flex-col h-full px-8 sm:px-10 lg:px-12 py-12 justify-center overflow-hidden">
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                width: 420, height: 420, borderRadius: '50%',
+                top: '50%', right: -80, transform: 'translateY(-50%)',
+                background: `radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)`,
+              }}
+            />
+            <div className="relative z-10 max-w-xs">
+              <p className="font-sans" style={{ fontSize: 14.5, lineHeight: 1.9, color: 'rgba(255,255,255,0.52)', marginBottom: '2.5rem' }}>
+                {t.final_sub}
+              </p>
+              <MotionButton href="/signup">{t.final_btn}</MotionButton>
             </div>
           </div>
         ),
       },
     },
+
   ], [t]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrolling = useRef(false);
-  const exitingToTop = useRef(false);
+  const touchStart = useRef<number>(0);
   const numOfPages = slides.length;
   const animTime = 1000;
 
@@ -408,26 +540,10 @@ export default function AnimatedScroll() {
   useEffect(() => {
     if (!isInView) return;
 
-    const exitToTop = () => {
-      scrolling.current = true;
-      exitingToTop.current = true;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(() => {
-        scrolling.current = false;
-        exitingToTop.current = false;
-      }, animTime);
-    };
-
     const handleWheel = (e: WheelEvent) => {
-      // While exiting, block all wheel events so smooth scroll isn't cancelled
-      if (exitingToTop.current) { e.preventDefault(); return; }
       if (scrolling.current) { e.preventDefault(); return; }
       if (currentPage === numOfPages && e.deltaY > 0) return;
-      if (currentPage === 1 && e.deltaY < 0) {
-        e.preventDefault();
-        exitToTop();
-        return;
-      }
+      if (currentPage === 1 && e.deltaY < 0) return;
       e.preventDefault();
       scrolling.current = true;
       if (e.deltaY > 0) navigateDown(); else navigateUp();
@@ -443,38 +559,49 @@ export default function AnimatedScroll() {
         navigateDown();
         setTimeout(() => (scrolling.current = false), animTime);
       } else if (e.key === 'ArrowUp') {
+        if (currentPage === 1) return;
         e.preventDefault();
-        if (currentPage === 1) { exitToTop(); return; }
         scrolling.current = true;
         navigateUp();
         setTimeout(() => (scrolling.current = false), animTime);
       }
     };
 
+    const handleTouchStart = (e: TouchEvent) => { touchStart.current = e.touches[0].clientY; };
+    const handleTouchEnd = (e: TouchEvent) => {
+      const delta = touchStart.current - e.changedTouches[0].clientY;
+      if (Math.abs(delta) < 40) return;
+      if (delta > 0) navigateDown(); else navigateUp();
+    };
+
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
     return () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [isInView, currentPage, navigateUp, navigateDown, numOfPages]);
 
   const isDark = slides[currentPage - 1]?.isDark === true;
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden h-screen">
+    <div ref={containerRef} className="relative overflow-hidden" style={{ height: '100dvh' }}>
       {slides.map((slide, i) => {
         const idx = i + 1;
         const isActive = currentPage === idx;
-        const leftTrans = isActive ? 'translateY(0)' : 'translateY(100%)';
+        const leftTrans  = isActive ? 'translateY(0)' : 'translateY(100%)';
         const rightTrans = isActive ? 'translateY(0)' : 'translateY(-100%)';
 
         return (
           <div key={idx} className="absolute inset-0 pointer-events-none">
             {/* Left Half */}
             <div
-              className="absolute top-0 left-0 w-1/2 h-full transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] duration-[1000ms] pointer-events-auto overflow-hidden"
-              style={{ transform: leftTrans, backgroundColor: slide.left.bgColor || '#040A14' }}
+              className="absolute top-0 left-0 w-full sm:w-1/2 h-full transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] duration-[1000ms] pointer-events-auto overflow-hidden"
+              style={{ transform: leftTrans, backgroundColor: slide.left.bgColor || NAVY }}
             >
               {slide.left.bgImage && (
                 <>
@@ -482,15 +609,13 @@ export default function AnimatedScroll() {
                   <div className="absolute inset-0 bg-[#040A14]/40" />
                 </>
               )}
-              <div className="relative z-10 h-full">
-                {slide.left.content}
-              </div>
+              <div className="relative z-10 h-full">{slide.left.content}</div>
             </div>
 
             {/* Right Half */}
             <div
-              className="absolute top-0 left-1/2 w-1/2 h-full transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] duration-[1000ms] pointer-events-auto overflow-hidden"
-              style={{ transform: rightTrans, backgroundColor: slide.right.bgColor || '#040A14' }}
+              className="hidden sm:block absolute top-0 left-1/2 w-1/2 h-full transition-transform ease-[cubic-bezier(0.76,0,0.24,1)] duration-[1000ms] pointer-events-auto overflow-hidden"
+              style={{ transform: rightTrans, backgroundColor: slide.right.bgColor || NAVY }}
             >
               {slide.right.bgImage && (
                 <>
@@ -504,43 +629,76 @@ export default function AnimatedScroll() {
                   )}
                 </>
               )}
-              <div className="relative z-10 h-full">
-                {slide.right.content}
-              </div>
+              <div className="relative z-10 h-full">{slide.right.content}</div>
             </div>
           </div>
         );
       })}
 
-      {/* Vertical divider */}
-      <div className={`absolute top-0 left-1/2 w-px h-full z-20 pointer-events-none transition-colors duration-700 ${isDark ? 'bg-white/8' : 'bg-[#040A14]/8'}`} />
+      {/* Center divider — gold hairline */}
+      <div
+        className="hidden sm:block absolute top-0 left-1/2 w-px h-full z-20 pointer-events-none transition-opacity duration-700"
+        style={{ background: isDark ? `${GOLD}18` : `${GOLD}22` }}
+      />
 
-      {/* Page indicator dots */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-30">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`rounded-full transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] ${
-              currentPage === i + 1
-                ? 'w-1.5 h-6 bg-[#C9A84C]'
-                : isDark
-                  ? 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
-                  : 'w-1.5 h-1.5 bg-[#040A14]/25 hover:bg-[#040A14]/50'
-            }`}
+      {/* Editorial progress indicator */}
+      <div className="hidden sm:flex absolute right-6 top-1/2 -translate-y-1/2 flex-col items-center gap-2 z-30">
+        <span
+          className="font-mono transition-colors duration-500"
+          style={{ fontSize: 9, letterSpacing: '0.1em', color: GOLD }}
+        >
+          {String(currentPage).padStart(2, '0')}
+        </span>
+        <div
+          className="relative"
+          style={{ width: 1, height: 56, background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(4,10,20,0.1)' }}
+        >
+          <div
+            className="absolute top-0 left-0 w-full transition-all duration-700"
+            style={{ height: `${(currentPage / numOfPages) * 100}%`, background: GOLD }}
           />
-        ))}
+        </div>
+        <span
+          className="font-mono transition-colors duration-500"
+          style={{ fontSize: 9, letterSpacing: '0.1em', color: isDark ? 'rgba(255,255,255,0.22)' : 'rgba(4,10,20,0.22)' }}
+        >
+          {String(numOfPages).padStart(2, '0')}
+        </span>
       </div>
 
-      {/* Scroll hint on last page */}
-      {currentPage === numOfPages && (
+      {/* Scroll hint — all slides except last */}
+      {currentPage < numOfPages && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 animate-bounce">
-          <span className={`text-[11px] uppercase tracking-widest ${isDark ? 'text-white/30' : 'text-[#040A14]/30'}`}>Continue</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={`w-4 h-4 ${isDark ? 'text-white/30' : 'text-[#040A14]/30'}`}>
+          <span
+            className="font-sans uppercase"
+            style={{ fontSize: 9, letterSpacing: '0.25em', color: isDark ? 'rgba(255,255,255,0.28)' : 'rgba(4,10,20,0.28)' }}
+          >
+            Continue
+          </span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
+            style={{ width: 14, height: 14, color: isDark ? 'rgba(255,255,255,0.28)' : 'rgba(4,10,20,0.28)' }}
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       )}
+
+      {/* Mobile dot indicators */}
+      <div className="sm:hidden absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-row gap-2 z-30">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentPage(i + 1)}
+            className="transition-all duration-500 focus-visible:outline-none"
+            style={{
+              height: 4, borderRadius: 2,
+              width: currentPage === i + 1 ? 20 : 4,
+              background: currentPage === i + 1 ? GOLD : (isDark ? 'rgba(255,255,255,0.2)' : 'rgba(4,10,20,0.2)'),
+            }}
+          />
+        ))}
+      </div>
+
     </div>
   );
 }

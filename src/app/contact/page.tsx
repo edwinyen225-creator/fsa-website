@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import MotionButton from "@/components/ui/motion-button";
+import { FloatingPaths } from "@/components/ui/background-paths";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const ct = {
   en: {
@@ -79,6 +81,8 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative min-h-[50vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(201,168,76,0.15),transparent_40%)]" />
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{c.badge}</div>
           <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{c.h1}</h1>
@@ -90,17 +94,19 @@ export default function ContactPage() {
       <section className="px-6 py-20 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{c.methods_eyebrow}</div>
-          <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{c.methods_h2}</h2>
+          <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{c.methods_h2}</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {contacts.map((item, i) => (
-              <a key={i} href={item.href} target={item.href.startsWith("mailto") || item.href.startsWith("https") ? "_blank" : undefined}
-                rel={item.href.startsWith("https") ? "noopener noreferrer" : undefined}
-                className="group block overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-10 backdrop-blur-sm transition hover:border-[#C9A84C]/40 duration-300">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#C9A84C]/30 bg-[#0B2352] text-[#C9A84C]">{item.icon}</div>
-                <div className="mb-1 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{item.label}</div>
-                <div className="font-serif text-xl text-white">{item.val}</div>
-                <p className="mt-3 text-sm leading-relaxed text-white/55">{item.desc}</p>
-              </a>
+              <GlowCard key={i} glowColor="gold" className="overflow-hidden bg-white/5 backdrop-blur-sm">
+                <a href={item.href} target={item.href.startsWith("mailto") || item.href.startsWith("https") ? "_blank" : undefined}
+                  rel={item.href.startsWith("https") ? "noopener noreferrer" : undefined}
+                  className="group block p-10">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#C9A84C]/30 bg-[#0B2352] text-[#C9A84C]">{item.icon}</div>
+                  <div className="mb-1 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{item.label}</div>
+                  <div className="font-serif text-xl text-white">{item.val}</div>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">{item.desc}</p>
+                </a>
+              </GlowCard>
             ))}
           </div>
           <p className="mt-10 text-center text-sm text-white/35">{c.response_note}</p>
@@ -109,15 +115,15 @@ export default function ContactPage() {
 
       {/* CTA */}
       <section className="bg-[#071226] px-6 py-20">
-        <div className="mx-auto max-w-4xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
+        <GlowCard glowColor="gold" className="mx-auto max-w-4xl rounded-[42px] bg-white/5 p-7 sm:p-10 md:p-12 lg:p-20 text-center backdrop-blur-xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{c.cta_eyebrow}</div>
-          <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{c.cta_h2}</h2>
+          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-white md:text-6xl">{c.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{c.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <MotionButton href="/signup" id="contact-cta-btn">{c.cta_btn}</MotionButton>
             <MotionButton href="/programs">{c.cta_btn2}</MotionButton>
           </div>
-        </div>
+        </GlowCard>
       </section>
     </main>
   );

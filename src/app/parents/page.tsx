@@ -1,12 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import MotionButton from "@/components/ui/motion-button";
 import { usePar } from "@/lib/parents-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
-import { homepageTranslations } from "@/lib/homepage-i18n";
-
-const IC = (d: string) => () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d={d}/></svg>);
+import { GlowCard } from "@/components/ui/spotlight-card";
+import { FloatingPaths } from "@/components/ui/background-paths";
 const IconTarget  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
 const IconGlobe   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>);
 const IconMic     = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0M12 21v-4M8 21h8"/></svg>);
@@ -32,7 +30,6 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 export default function ParentsPage() {
   const { locale } = useLanguage();
   const t = usePar(locale);
-  const ht = homepageTranslations[locale];
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
   const whyCards = [
@@ -55,6 +52,8 @@ export default function ParentsPage() {
       {/* Hero */}
       <section className="relative min-h-[60vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(201,168,76,0.14),transparent_40%),radial-gradient(circle_at_15%_70%,rgba(37,99,235,0.1),transparent_40%)]" />
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{t.badge}</div>
           <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{t.h1}</h1>
@@ -70,14 +69,14 @@ export default function ParentsPage() {
       <section className="bg-[#F4F7FA] px-6 py-20 md:py-24 text-[#071226]">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.why_eyebrow}</div>
-          <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{t.why_h2}</h2>
+          <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.why_h2}</h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {whyCards.map((c, i) => (
-              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-lg hover:-translate-y-1 duration-300">
+              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-8 transition hover:-translate-y-1 duration-300">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{c.icon}</div>
                 <h3 className="font-serif text-lg text-white">{c.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{c.desc}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -87,7 +86,7 @@ export default function ParentsPage() {
       <section className="px-6 py-20 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.cmp_eyebrow}</div>
-          <h2 className="mb-16 font-serif text-5xl leading-tight md:text-6xl">{t.cmp_h2}</h2>
+          <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.cmp_h2}</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {/* Traditional */}
             <div className="rounded-[32px] border border-white/10 bg-white/5 p-10">
@@ -102,7 +101,7 @@ export default function ParentsPage() {
               </ul>
             </div>
             {/* FSA */}
-            <div className="rounded-[32px] border border-[#C9A84C]/30 bg-gradient-to-br from-[#0B2352] to-[#071226] p-10">
+            <GlowCard glowColor="gold" customSize className="bg-[#071226] p-10">
               <div className="mb-6 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{t.cmp_fsa_label}</div>
               <ul className="space-y-4">
                 {fsaItems.map((item, i) => (
@@ -112,7 +111,7 @@ export default function ParentsPage() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </GlowCard>
           </div>
         </div>
       </section>
@@ -122,15 +121,15 @@ export default function ParentsPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.out_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">{t.out_h2}</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.out_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{t.out_desc}</p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {outputs.map((o, i) => (
-              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-7 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
+              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-7 transition hover:-translate-y-0.5 duration-300">
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]"><IconFile /></div>
                 <p className="font-serif text-base text-white">{o}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -140,7 +139,7 @@ export default function ParentsPage() {
       <section className="px-6 py-20 md:py-24">
         <div className="mx-auto max-w-4xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.faq_eyebrow}</div>
-          <h2 className="mb-12 font-serif text-5xl leading-tight md:text-6xl">{t.faq_h2}</h2>
+          <h2 className="mb-12 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.faq_h2}</h2>
           <div>
             {faqs.map((f, i) => <FAQItem key={i} q={f.q} a={f.a} />)}
           </div>
@@ -149,15 +148,15 @@ export default function ParentsPage() {
 
       {/* CTA */}
       <section className="bg-[#071226] px-6 py-20 md:py-24">
-        <div className="mx-auto max-w-4xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
+        <GlowCard glowColor="gold" customSize className="mx-auto max-w-4xl bg-[#071226] p-7 sm:p-10 md:p-12 lg:p-20 text-center">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.cta_eyebrow}</div>
-          <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{t.cta_h2}</h2>
+          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-white md:text-6xl">{t.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{t.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <MotionButton href="/signup" id="par-final-cta">{t.cta_btn1}</MotionButton>
             <MotionButton href="/programs">{t.cta_btn2}</MotionButton>
           </div>
-        </div>
+        </GlowCard>
       </section>
     </main>
   );

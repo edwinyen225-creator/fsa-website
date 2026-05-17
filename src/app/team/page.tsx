@@ -6,6 +6,8 @@ import MotionButton from "@/components/ui/motion-button";
 import { useTT } from "@/lib/team-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
+import { FloatingPaths } from "@/components/ui/background-paths";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 // SVG icons
 const IconGlobe = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>);
@@ -57,6 +59,8 @@ export default function TeamPage() {
       {/* Hero */}
       <section className="relative min-h-[55vh] bg-gradient-to-b from-[#0B1833] via-[#081327] to-[#071226] px-6 pt-48 pb-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(201,168,76,0.15),transparent_40%),radial-gradient(circle_at_20%_75%,rgba(37,99,235,0.12),transparent_40%)]" />
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{m.badge}</div>
           <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{m.h1}</h1>
@@ -100,12 +104,12 @@ export default function TeamPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.coaches_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">{m.coaches_h2}</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{m.coaches_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{m.coaches_desc}</p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {coaches.map(coach => (
-              <div key={coach.id} className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm transition hover:shadow-lg hover:-translate-y-1 duration-300">
+              <GlowCard key={coach.id} glowColor="gold" className="overflow-hidden bg-white shadow-sm transition hover:-translate-y-1 duration-300">
                 <div className={`flex items-center gap-4 border-b border-[#C9A84C]/20 bg-gradient-to-br ${coach.accent} p-6`}>
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#C9A84C]/30 bg-[#071226]/60 text-[#C9A84C]">
                     {coach.icon}
@@ -128,7 +132,7 @@ export default function TeamPage() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -139,16 +143,16 @@ export default function TeamPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.std_eyebrow}</div>
           <div className="mb-16 grid gap-8 lg:grid-cols-2">
-            <h2 className="font-serif text-5xl leading-tight md:text-6xl">{m.std_h2}</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{m.std_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{m.std_desc}</p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {standards.map((s, i) => (
-              <div key={i} className="rounded-[28px] border border-[#C9A84C]/20 bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:shadow-md hover:-translate-y-0.5 duration-300">
+              <GlowCard key={i} glowColor="gold" className="bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:-translate-y-0.5 duration-300">
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{s.icon}</div>
                 <h3 className="font-serif text-xl text-white">{s.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{s.desc}</p>
-              </div>
+              </GlowCard>
             ))}
           </div>
         </div>
@@ -156,15 +160,15 @@ export default function TeamPage() {
 
       {/* CTA */}
       <section className="bg-[#071226] px-6 py-20 md:py-24">
-        <div className="mx-auto max-w-4xl rounded-[42px] border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl md:p-20">
+        <GlowCard glowColor="gold" className="mx-auto max-w-4xl rounded-[42px] bg-white/5 p-7 sm:p-10 md:p-12 lg:p-20 text-center backdrop-blur-xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{m.cta_eyebrow}</div>
-          <h2 className="font-serif text-5xl leading-tight text-white md:text-6xl">{m.cta_h2}</h2>
+          <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-white md:text-6xl">{m.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{m.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <MotionButton href="/signup" id="team-cta-btn">{m.cta_btn}</MotionButton>
             <MotionButton href="/programs">{m.cta_btn2}</MotionButton>
           </div>
-        </div>
+        </GlowCard>
       </section>
     </main>
   );
