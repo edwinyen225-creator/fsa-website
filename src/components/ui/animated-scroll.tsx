@@ -168,13 +168,15 @@ export default function AnimatedScroll() {
                   maskImage: card.mask,
                 }}
               >
+                {/* dim overlay */}
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,10,20,0.45)' }} />
                 <div
                   style={{
                     position: 'absolute',
                     left: 20,
                     right: 20,
                     ...(card.textVAlign === 'top'
-                      ? { top: '28%' }
+                      ? { top: '38%' }
                       : card.textVAlign === 'middle'
                       ? { top: '50%', transform: 'translateY(-50%)' }
                       : { bottom: '22%' }),
@@ -184,20 +186,20 @@ export default function AnimatedScroll() {
                     style={{
                       display: 'inline-flex',
                       flexDirection: 'column',
-                      background: 'rgba(4,10,20,0.62)',
+                      background: 'rgba(4,10,20,0.55)',
                       backdropFilter: 'blur(14px)',
                       WebkitBackdropFilter: 'blur(14px)',
-                      borderRadius: 7,
-                      padding: '9px 14px',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      maxWidth: '82%',
+                      borderRadius: 9,
+                      padding: '13px 18px',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      maxWidth: '88%',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-                      <span style={{ fontFamily: 'monospace', fontSize: 9, color: GOLD, letterSpacing: '0.12em' }}>{card.num}</span>
-                      <span className="font-serif" style={{ fontSize: 13, color: '#fff', letterSpacing: '-0.02em' }}>{card.title}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 5 }}>
+                      <span style={{ fontFamily: 'monospace', fontSize: 11, color: GOLD, letterSpacing: '0.12em' }}>{card.num}</span>
+                      <span className="font-serif" style={{ fontSize: 16, color: '#fff', letterSpacing: '-0.02em' }}>{card.title}</span>
                     </div>
-                    <span className="font-sans" style={{ fontSize: 11, color: 'rgba(255,255,255,0.48)', lineHeight: 1.5 }}>{card.desc}</span>
+                    <span className="font-sans" style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.55 }}>{card.desc}</span>
                   </div>
                 </div>
               </div>
