@@ -719,11 +719,11 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
           @media (max-width: 900px) {
             .fx-content {
-              grid-template-columns: 1fr; row-gap: 3vh;
+              grid-template-columns: 1fr;
               place-items: center;
             }
-            .fx-left, .fx-right, .fx-center { height: auto; }
-            .fx-left, .fx-right { justify-items: center; }
+            .fx-left, .fx-right { display: none; }
+            .fx-center { height: 100vh; width: 100%; }
             .fx-track { transform: none !important; }
           }
 

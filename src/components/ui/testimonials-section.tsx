@@ -136,7 +136,26 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      <div className="relative flex h-[520px] w-full flex-row items-center justify-center overflow-hidden gap-1.5 [perspective:500px]">
+      {/* Mobile: two flat horizontal rows */}
+      <div className="sm:hidden flex flex-col gap-4 overflow-hidden">
+        <Marquee pauseOnHover repeat={4} className="[--duration:40s] [--gap:1rem]">
+          {testimonials.map((r) => (
+            <div key={r.name + 'mA'} className="w-64 shrink-0">
+              <TestimonialCard {...r} />
+            </div>
+          ))}
+        </Marquee>
+        <Marquee pauseOnHover reverse repeat={4} className="[--duration:48s] [--gap:1rem]">
+          {testimonials.map((r) => (
+            <div key={r.name + 'mB'} className="w-64 shrink-0">
+              <TestimonialCard {...r} />
+            </div>
+          ))}
+        </Marquee>
+      </div>
+
+      {/* Desktop: 3D angled vertical columns */}
+      <div className="hidden sm:flex relative h-[520px] w-full flex-row items-center justify-center overflow-hidden gap-1.5 [perspective:500px]">
         <div
           className="flex flex-row items-center gap-6"
           style={{
