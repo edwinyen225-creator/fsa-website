@@ -42,9 +42,27 @@ export default function Home() {
               <MotionButton href="/signup">{t.hero_cta_primary}</MotionButton>
               <MotionButton href="/programs">{t.hero_cta_secondary}</MotionButton>
             </div>
+
+            {/* Mobile-only: static feature pills (replaces orbital on phones) */}
+            <div className="lg:hidden mt-10 flex flex-col gap-3">
+              {[
+                { icon: Globe,  title: t.strip_f1_title },
+                { icon: Cpu,    title: t.strip_f2_title },
+                { icon: Users,  title: t.strip_f3_title },
+                { icon: Layers, title: t.strip_f4_title },
+                { icon: Map,    title: t.strip_f5_title },
+              ].map(({ icon: Icon, title }, i) => (
+                <div key={i} className="flex items-center gap-3" style={{ opacity: 1 - i * 0.12 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: '50%', border: '1px solid rgba(201,168,76,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Icon size={14} strokeWidth={1.5} color="#C9A84C" />
+                  </div>
+                  <span className="font-sans text-sm text-white/70">{title}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Right: orbital timeline */}
+          {/* Right: orbital timeline (desktop only) */}
           <div className="hidden lg:block w-1/2 h-[90vh] translate-x-40">
             <RadialOrbitalTimeline
               timelineData={[
@@ -63,7 +81,8 @@ export default function Home() {
       <TestimonialsSection />
 
       {/* ── 3. Animated Features Scroll ── */}
-      <section className="h-screen">
+      {/* desktop: h-screen keeps snap-scroll; mobile: AnimatedScroll renders its own free-scroll layout */}
+      <section className="sm:h-screen">
         <AnimatedScroll />
       </section>
 
