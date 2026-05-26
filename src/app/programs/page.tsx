@@ -303,22 +303,65 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* Cinematic Programs Scroll */}
-      <FullScreenScrollFX
-        sections={fxSections}
-        colors={{
-          text: "rgba(245,245,245,0.9)",
-          overlay: "rgba(4,10,20,0.05)",
-          pageBg: "#040A14",
-          stageBg: "#040A14",
-        }}
-        fontFamily="'Helvetica Neue', Arial, sans-serif"
-        showProgress={true}
-        durations={{ change: 0.7, snap: 800 }}
-        bgTransition="fade"
-        gap={0}
-        gridPaddingX={3}
-      />
+      {/* Cinematic Programs Scroll — desktop only */}
+      <div className="hidden md:block">
+        <FullScreenScrollFX
+          sections={fxSections}
+          colors={{
+            text: "rgba(245,245,245,0.9)",
+            overlay: "rgba(4,10,20,0.05)",
+            pageBg: "#040A14",
+            stageBg: "#040A14",
+          }}
+          fontFamily="'Helvetica Neue', Arial, sans-serif"
+          showProgress={true}
+          durations={{ change: 0.7, snap: 800 }}
+          bgTransition="fade"
+          gap={0}
+          gridPaddingX={3}
+        />
+      </div>
+
+      {/* Mobile program cards */}
+      <div className="md:hidden bg-[#040A14] px-5 py-12 flex flex-col gap-6">
+        {programs.map((prog, idx) => (
+          <div
+            key={prog.id}
+            className="rounded-2xl border border-white/10 overflow-hidden"
+            style={{ background: bgGradients[idx] }}
+          >
+            {/* Gold top line */}
+            <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, #C9A84C 30%, #E4C261 50%, #C9A84C 70%, transparent)" }} />
+
+            <div className="px-6 pt-6 pb-7">
+              {/* Eyebrow */}
+              <p className="mb-3 text-[0.6rem] uppercase tracking-[0.32em] text-[#C9A84C]">
+                {prog.ages} — {prog.number}
+              </p>
+
+              {/* Title */}
+              <h2 className="font-serif text-2xl leading-snug text-white/95 mb-4">
+                {prog.name}
+              </h2>
+
+              {/* Tagline */}
+              <p className="text-sm leading-relaxed text-white/50 mb-5">
+                {prog.tagline}
+              </p>
+
+              {/* Focus points */}
+              <ul className="flex flex-col gap-1.5">
+                {prog.focus.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-white/65">
+                    <span className="mt-[0.35rem] text-[0.4rem] text-[#C9A84C] flex-shrink-0">◆</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* What students create */}
       <section className="bg-[#F4F7FA] px-6 py-20 md:py-24 text-[#071226]">

@@ -7,6 +7,7 @@ export const homepageTranslations = {
     hero_h1_line1: "Personalised English, Chinese",
     hero_h1_highlight: "& Future Skills",
     hero_h1_line2: "Coaching.",
+    nav_home: "Home",
     nav_parents: "For Parents",
     nav_team: "Team",
     nav_contact: "Contact",
@@ -227,6 +228,7 @@ export const homepageTranslations = {
     hero_h1_line1: "英語・中国語・",
     hero_h1_highlight: "未来スキル",
     hero_h1_line2: "を個別に学ぶ。",
+    nav_home: "ホーム",
     nav_parents: "保護者向け",
     nav_team: "チーム",
     nav_contact: "お問い合わせ",
@@ -443,6 +445,7 @@ export const homepageTranslations = {
   },
   "zh-TW": {
     // Legacy mapping omitted for brevity, mapping everything accurately based on JP/EN context
+    nav_home: "首頁",
     nav_programs: "課程",
     nav_parents: "家長專區",
     nav_team: "團隊",
@@ -645,6 +648,7 @@ export const homepageTranslations = {
   },
   "zh-CN": {
     // Legacy keys
+    nav_home: "首页",
     nav_programs: "课程",
     nav_parents: "家长专区",
     nav_team: "团队",

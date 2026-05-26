@@ -9,7 +9,7 @@ import { homepageTranslations } from "@/lib/homepage-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { motion } from "framer-motion";
 import { MenuContainer, MenuItem } from "@/components/ui/fluid-menu";
-import { Menu as MenuIcon, X, BookOpen, Users, Globe, Phone } from "lucide-react";
+import { Menu as MenuIcon, X, BookOpen, Users, Globe, Phone, Home } from "lucide-react";
 
 export function LanguageSwitcher({ locale, onChange }: { locale: Locale; onChange: (l: Locale) => void }) {
   const [open, setOpen] = useState(false);
@@ -142,6 +142,7 @@ export function Navbar() {
                   </div>
                 }
               />
+              <MenuItem href="/"         label={t.nav_home}     icon={<Home     size={22} strokeWidth={1.5} />} />
               <MenuItem href="/programs" label={t.nav_programs} icon={<BookOpen size={22} strokeWidth={1.5} />} />
               <MenuItem href="/parents"  label={t.nav_parents}  icon={<Users    size={22} strokeWidth={1.5} />} />
               <MenuItem href="/team"     label={t.nav_team}     icon={<Globe    size={22} strokeWidth={1.5} />} />
