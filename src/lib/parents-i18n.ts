@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/i18n";
 export const par = {
   en: {
     badge: "For Parents", tagline: "Tokyo · Global",
-    h1: "For parents who want more than traditional education.",
+    h1a: "For parents who want more than", h1_gold: "traditional education.",
     sub: "Future Skill Academy helps students build the communication, AI literacy, research, presentation, and project skills they will need in the modern world.",
     nav_why:"Why FSA", nav_programs:"Programs", nav_parents:"For Parents", nav_contact:"Contact", nav_cta:"Free Trial",
     // Why cards
@@ -36,7 +36,7 @@ export const par = {
   },
   ja: {
     badge:"保護者の方へ", tagline:"東京 · グローバル",
-    h1:"従来の教育以上を求める保護者の方へ。",
+    h1a:"従来の教育以上を求める", h1_gold:"保護者の方へ。",
     sub:"Future Skill Academyは、現代社会で必要なコミュニケーション・AIリテラシー・リサーチ・プレゼン・プロジェクトスキルを生徒が身につけられるよう支援します。",
     nav_why:"なぜFSA", nav_programs:"プログラム", nav_parents:"保護者の方へ", nav_contact:"お問い合わせ", nav_cta:"無料体験",
     why_eyebrow:"なぜ保護者がFSAを選ぶのか", why_h2:"どんな試験よりも長続きするスキル。",
@@ -64,7 +64,7 @@ export const par = {
   },
   "zh-TW": {
     badge:"給家長", tagline:"東京 · 全球",
-    h1:"為想要更多的家長而設。",
+    h1a:"為想要更多的", h1_gold:"家長而設。",
     sub:"Future Skill Academy幫助學生建立現代世界所需的溝通、AI素養、研究、簡報與專案技能。",
     nav_why:"為什麼FSA", nav_programs:"課程", nav_parents:"給家長", nav_contact:"聯絡我們", nav_cta:"免費體驗",
     why_eyebrow:"為什麼家長選擇FSA", why_h2:"比任何考試都持久的技能。",
@@ -92,7 +92,7 @@ export const par = {
   },
   "zh-CN": {
     badge:"给家长", tagline:"东京 · 全球",
-    h1:"为想要更多的家长而设。",
+    h1a:"为想要更多的", h1_gold:"家长而设。",
     sub:"Future Skill Academy帮助学生建立现代世界所需的沟通、AI素养、研究、演示与项目技能。",
     nav_why:"为什么FSA", nav_programs:"课程", nav_parents:"给家长", nav_contact:"联系我们", nav_cta:"免费体验",
     why_eyebrow:"为什么家长选择FSA", why_h2:"比任何考试都持久的技能。",

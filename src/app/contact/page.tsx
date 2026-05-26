@@ -8,7 +8,7 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 
 const ct = {
   en: {
-    badge: "Contact FSA", h1: "Get in touch.", sub: "Have a question about programs, scheduling, or pricing? We'd love to hear from you.",
+    badge: "Contact FSA", h1a: "Get", h1_gold: "in touch.", sub: "Have a question about programs, scheduling, or pricing? We'd love to hear from you.",
     methods_eyebrow: "Reach Us", methods_h2: "How to contact FSA.",
     email_label: "Email", email_val: "hello@futureskillacademy.com", email_desc: "For general enquiries, program questions, and parent consultations.",
     line_label: "LINE", line_val: "@futureskillacademy", line_desc: "Prefer messaging? Reach us on LINE — we respond within 1 business day.",
@@ -20,7 +20,7 @@ const ct = {
     tagline: "Tokyo · Global",
   },
   ja: {
-    badge: "FSAへのお問い合わせ", h1: "お気軽にご連絡ください。", sub: "プログラム・スケジュール・料金についてのご質問をお待ちしています。",
+    badge: "FSAへのお問い合わせ", h1a: "お気軽に", h1_gold: "ご連絡ください。", sub: "プログラム・スケジュール・料金についてのご質問をお待ちしています。",
     methods_eyebrow: "連絡方法", methods_h2: "FSAへの連絡方法。",
     email_label: "メール", email_val: "hello@futureskillacademy.com", email_desc: "一般的なお問い合わせ、プログラムに関するご質問、保護者相談はこちら。",
     line_label: "LINE", line_val: "@futureskillacademy", line_desc: "メッセージをご希望の方はLINEでどうぞ — 1営業日以内に返信します。",
@@ -32,7 +32,7 @@ const ct = {
     tagline: "東京 · グローバル",
   },
   "zh-TW": {
-    badge: "聯絡FSA", h1: "與我們聯繫。", sub: "有關課程、時間安排或費用的問題，歡迎隨時聯絡我們。",
+    badge: "聯絡FSA", h1a: "與我們", h1_gold: "聯繫。", sub: "有關課程、時間安排或費用的問題，歡迎隨時聯絡我們。",
     methods_eyebrow: "聯絡方式", methods_h2: "如何聯繫FSA。",
     email_label: "電子郵件", email_val: "hello@futureskillacademy.com", email_desc: "一般詢問、課程問題及家長諮詢請發送至此。",
     line_label: "LINE", line_val: "@futureskillacademy", line_desc: "喜歡傳訊息？透過LINE聯繫我們——我們在1個工作日內回覆。",
@@ -44,7 +44,7 @@ const ct = {
     tagline: "東京 · 全球",
   },
   "zh-CN": {
-    badge: "联系FSA", h1: "与我们联系。", sub: "有关课程、时间安排或费用的问题，欢迎随时联系我们。",
+    badge: "联系FSA", h1a: "与我们", h1_gold: "联系。", sub: "有关课程、时间安排或费用的问题，欢迎随时联系我们。",
     methods_eyebrow: "联系方式", methods_h2: "如何联系FSA。",
     email_label: "电子邮件", email_val: "hello@futureskillacademy.com", email_desc: "一般询问、课程问题及家长咨询请发送至此。",
     line_label: "LINE", line_val: "@futureskillacademy", line_desc: "喜欢发消息？通过LINE联系我们——我们在1个工作日内回复。",
@@ -85,7 +85,9 @@ export default function ContactPage() {
         <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{c.badge}</div>
-          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{c.h1}</h1>
+          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">
+            {c.h1a} <span className="text-[#C9A84C]">{c.h1_gold}</span>
+          </h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/65">{c.sub}</p>
         </div>
       </section>

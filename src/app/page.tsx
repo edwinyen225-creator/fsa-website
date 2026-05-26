@@ -33,7 +33,7 @@ export default function Home() {
           {/* Left: text + CTAs */}
           <div className="w-full lg:w-1/2">
             <h1 className="font-serif text-4xl md:text-5xl lg:text-[4.5rem] leading-[1.15] text-white tracking-tight mb-8">
-              {t.hero_eyebrow}<br />
+              {t.hero_h1a} <span className="text-[#C9A84C]">{t.hero_h1_gold}</span><br />
               <span className="text-xl md:text-2xl lg:text-[1.75rem] font-medium leading-[1.6] text-white/90 mt-6 block">
                 {t.hero_heading}
               </span>

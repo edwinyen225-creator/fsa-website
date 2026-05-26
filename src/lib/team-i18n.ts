@@ -3,7 +3,7 @@ import type { Locale } from "./i18n";
 const tt = {
   en: {
     badge: "The FSA Team",
-    h1: "Meet the people behind Future Skill Academy.",
+    h1a: "Meet the people behind", h1_gold: "Future Skill Academy.",
     sub: "FSA is built by international educators, coaches, and mentors who help students develop practical future-ready skills.",
     // Program Lead
     lead_label: "Program Lead",
@@ -51,7 +51,7 @@ const tt = {
   },
   ja: {
     badge: "FSAチーム",
-    h1: "Future Skill Academyを支える人々。",
+    h1a: "Future Skill Academyを", h1_gold: "支える人々。",
     sub: "FSAは、実践的な未来のスキルを育てることに情熱を持つ国際的な教育者・コーチ・メンターによって構築されています。",
     lead_label: "プログラムリード",
     lead_name: "Edwin Yen",
@@ -93,7 +93,7 @@ const tt = {
   },
   "zh-TW": {
     badge: "FSA團隊",
-    h1: "認識Future Skill Academy背後的人。",
+    h1a: "認識", h1_gold: "Future Skill Academy背後的人。",
     sub: "FSA由致力於幫助學生發展實用未來技能的國際教育者、教練與導師共同打造。",
     lead_label: "課程主任",
     lead_name: "Edwin Yen",
@@ -135,7 +135,7 @@ const tt = {
   },
   "zh-CN": {
     badge: "FSA团队",
-    h1: "认识Future Skill Academy背后的人。",
+    h1a: "认识", h1_gold: "Future Skill Academy背后的人。",
     sub: "FSA由致力于帮助学生发展实用未来技能的国际教育者、教练与导师共同打造。",
     lead_label: "课程主任",
     lead_name: "Edwin Yen",

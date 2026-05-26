@@ -120,6 +120,7 @@ export const homepageTranslations = {
     
     // 1. Hero
     hero_eyebrow: "Build the future in your hands.",
+    hero_h1a: "Build the future", hero_h1_gold: "in your hands.",
     hero_heading: "World-class English and future skills. Unleash your potential with personalised learning.",
     hero_cta_primary: "Book Free Consultation",
     hero_cta_secondary: "View Programs",
@@ -339,6 +340,7 @@ export const homepageTranslations = {
     
     // 1. Hero
     hero_eyebrow: "未来をつくる力を、あなたの手に。",
+    hero_h1a: "未来をつくる力を、", hero_h1_gold: "あなたの手に。",
     hero_heading: "世界で通用する英語力と、未来に必要なスキルを。一人ひとりに合わせた学びで、可能性を解き放つ。",
     hero_cta_primary: "無料相談を予約する",
     hero_cta_secondary: "プログラムを見る",
@@ -556,6 +558,7 @@ export const homepageTranslations = {
 
     // --- NEW EXACT HOMEPAGE KEYS ---
     hero_eyebrow: "把創造未來的力量交到您手中。",
+    hero_h1a: "把創造未來的力量", hero_h1_gold: "交到您手中。",
     hero_heading: "掌握世界通用的英語與未來技能。透過量身打造的學習，釋放無限潛能。",
     hero_cta_primary: "預約免費諮詢",
     hero_cta_secondary: "查看課程",
@@ -757,6 +760,7 @@ export const homepageTranslations = {
 
     // --- NEW EXACT HOMEPAGE KEYS ---
     hero_eyebrow: "把创造未来的力量交到您手中。",
+    hero_h1a: "把创造未来的力量", hero_h1_gold: "交到您手中。",
     hero_heading: "掌握世界通用的英语与未来技能。通过量身定制的学习，释放无限潜能。",
     hero_cta_primary: "预约免费咨询",
     hero_cta_secondary: "查看课程",

@@ -56,7 +56,9 @@ export default function ParentsPage() {
         <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{t.badge}</div>
-          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">{t.h1}</h1>
+          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">
+            {t.h1a} <span className="text-[#C9A84C]">{t.h1_gold}</span>
+          </h1>
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/65 md:text-xl">{t.sub}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <MotionButton href="/signup" id="par-hero-cta">{t.cta_btn1}</MotionButton>
