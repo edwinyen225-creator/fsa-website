@@ -72,7 +72,6 @@ export function MenuItem({ children, onClick, disabled = false, icon, href }: Me
 
 export function MenuContainer({ children }: { children: React.ReactNode }) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const childrenArray = React.Children.toArray(children)
 
@@ -88,55 +87,52 @@ export function MenuContainer({ children }: { children: React.ReactNode }) {
 
   return (
     <div ref={containerRef} className="fixed top-4 left-4 z-[60]" data-expanded={isExpanded}>
-      <div className="relative">
-        {/* Trigger — always visible */}
-        <div
-          className="relative w-12 h-12 flex items-center justify-center cursor-pointer z-50 text-[#C9A84C]/70 hover:text-[#C9A84C] transition-colors duration-200"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          {childrenArray[0]}
-        </div>
+      {/* Trigger — always visible, no backdrop */}
+      <div
+        className="relative w-12 h-12 flex items-center justify-center cursor-pointer z-50 text-[#C9A84C]/70 hover:text-[#C9A84C] transition-colors duration-200"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        {childrenArray[0]}
+      </div>
 
-        {/* Expanding items */}
-        {childrenArray.slice(1).map((child, index) => {
-          const el = child as React.ReactElement<MenuItemProps>
-          const label = el.props.label
-          const isHovered = hoveredItem === index
+      {/* Expanding panel — sits below trigger, backdrop wraps content */}
+      <div
+        className="mt-2 overflow-hidden"
+        style={{
+          maxHeight: isExpanded ? `${(childrenArray.length - 1) * 48 + 16}px` : "0px",
+          opacity: isExpanded ? 1 : 0,
+          transition: "max-height 300ms cubic-bezier(0.4,0,0.2,1), opacity 200ms ease",
+          pointerEvents: isExpanded ? "auto" : "none",
+        }}
+      >
+        <div className="relative rounded-[20px] bg-[#061128]/85 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.45)] py-2 px-1">
+          {childrenArray.slice(1).map((child, index) => {
+            const el = child as React.ReactElement<MenuItemProps>
+            const label = el.props.label
+            const href = el.props.href
 
-          return (
-            <div
-              key={index}
-              className="absolute top-0 left-0 flex items-center"
-              style={{
-                transform: `translateY(${isExpanded ? (index + 1) * 52 : 0}px)`,
-                opacity: isExpanded ? 1 : 0,
-                zIndex: 40 - index,
-                transition: `transform 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity ${isExpanded ? "300ms" : "350ms"}`,
-                pointerEvents: isExpanded ? "auto" : "none",
-              }}
-              onMouseEnter={() => setHoveredItem(index)}
-              onMouseLeave={() => setHoveredItem(null)}
-            >
-              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center">
-                {child}
-              </div>
-
-              {/* Label */}
-              {label && (
-                <span
-                  className="ml-3 text-sm font-medium text-[#C9A84C] whitespace-nowrap pointer-events-none select-none"
-                  style={{
-                    opacity: isHovered ? 1 : 0,
-                    transform: isHovered ? "translateX(0)" : "translateX(-6px)",
-                    transition: "opacity 180ms ease, transform 180ms ease",
-                  }}
-                >
-                  {label}
+            const inner = (
+              <div className="flex items-center gap-2 px-3 py-2.5 w-full">
+                <span className="w-7 h-7 flex items-center justify-center text-[#C9A84C]/80 flex-shrink-0">
+                  {el.props.icon}
                 </span>
-              )}
-            </div>
-          )
-        })}
+                {label && (
+                  <span className="text-sm font-medium text-white/90 whitespace-nowrap">{label}</span>
+                )}
+              </div>
+            )
+
+            return href ? (
+              <Link key={index} href={href} className="block rounded-xl hover:bg-white/5 transition-colors duration-150">
+                {inner}
+              </Link>
+            ) : (
+              <div key={index} className="block rounded-xl">
+                {inner}
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

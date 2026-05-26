@@ -149,7 +149,7 @@ export function Navbar() {
             </MenuContainer>
           </div>
 
-          <Link href="/" className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-4 ml-12 lg:ml-0">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
             <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
           </div>

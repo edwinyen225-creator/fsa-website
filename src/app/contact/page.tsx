@@ -8,7 +8,7 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 
 const ct = {
   en: {
-    badge: "Contact FSA", h1a: "Get", h1_gold: "in touch.", sub: "Have a question about programs, scheduling, or pricing? We'd love to hear from you.",
+    badge: "Contact FSA", h1a: "Get in", h1_gold: "touch.", sub: "Have a question about programs, scheduling, or pricing? We'd love to hear from you.",
     methods_eyebrow: "Reach Us", methods_h2: "How to contact FSA.",
     email_label: "Email", email_val: "hello@futureskillacademy.com", email_desc: "For general enquiries, program questions, and parent consultations.",
     line_label: "LINE", line_val: "@futureskillacademy", line_desc: "Prefer messaging? Reach us on LINE — we respond within 1 business day.",
