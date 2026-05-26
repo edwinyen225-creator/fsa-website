@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
 import { homepageTranslations } from "@/lib/homepage-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { MenuContainer, MenuItem } from "@/components/ui/fluid-menu";
 import { Menu as MenuIcon, X, BookOpen, Users, Globe, Phone } from "lucide-react";
 
@@ -127,27 +127,29 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#061128]/90 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
-          {/* Fluid nav menu */}
-          <MenuContainer>
-            <MenuItem
-              icon={
-                <div className="relative w-6 h-6">
-                  <div className="absolute inset-0 transition-all duration-300 ease-in-out origin-center opacity-100 scale-100 rotate-0 [div[data-expanded=true]_&]:opacity-0 [div[data-expanded=true]_&]:scale-0 [div[data-expanded=true]_&]:rotate-180">
-                    <MenuIcon size={24} strokeWidth={1.5} />
+          {/* Fluid nav menu — mobile only */}
+          <div className="lg:hidden">
+            <MenuContainer>
+              <MenuItem
+                icon={
+                  <div className="relative w-6 h-6">
+                    <div className="absolute inset-0 transition-all duration-300 ease-in-out origin-center opacity-100 scale-100 rotate-0 [div[data-expanded=true]_&]:opacity-0 [div[data-expanded=true]_&]:scale-0 [div[data-expanded=true]_&]:rotate-180">
+                      <MenuIcon size={24} strokeWidth={1.5} />
+                    </div>
+                    <div className="absolute inset-0 transition-all duration-300 ease-in-out origin-center opacity-0 scale-0 -rotate-180 [div[data-expanded=true]_&]:opacity-100 [div[data-expanded=true]_&]:scale-100 [div[data-expanded=true]_&]:rotate-0">
+                      <X size={24} strokeWidth={1.5} />
+                    </div>
                   </div>
-                  <div className="absolute inset-0 transition-all duration-300 ease-in-out origin-center opacity-0 scale-0 -rotate-180 [div[data-expanded=true]_&]:opacity-100 [div[data-expanded=true]_&]:scale-100 [div[data-expanded=true]_&]:rotate-0">
-                    <X size={24} strokeWidth={1.5} />
-                  </div>
-                </div>
-              }
-            />
-            <MenuItem href="/programs" label={t.nav_programs} icon={<BookOpen size={22} strokeWidth={1.5} />} />
-            <MenuItem href="/parents"  label={t.nav_parents}  icon={<Users    size={22} strokeWidth={1.5} />} />
-            <MenuItem href="/team"     label={t.nav_team}     icon={<Globe    size={22} strokeWidth={1.5} />} />
-            <MenuItem href="/contact"  label={t.nav_contact}  icon={<Phone    size={22} strokeWidth={1.5} />} />
-          </MenuContainer>
+                }
+              />
+              <MenuItem href="/programs" label={t.nav_programs} icon={<BookOpen size={22} strokeWidth={1.5} />} />
+              <MenuItem href="/parents"  label={t.nav_parents}  icon={<Users    size={22} strokeWidth={1.5} />} />
+              <MenuItem href="/team"     label={t.nav_team}     icon={<Globe    size={22} strokeWidth={1.5} />} />
+              <MenuItem href="/contact"  label={t.nav_contact}  icon={<Phone    size={22} strokeWidth={1.5} />} />
+            </MenuContainer>
+          </div>
 
-          <Link href="/" className="flex items-center gap-4 ml-12 sm:ml-0">
+          <Link href="/" className="flex items-center gap-4">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
             <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
           </div>
