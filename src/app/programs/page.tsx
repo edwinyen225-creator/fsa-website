@@ -9,6 +9,8 @@ import { usePT } from "@/lib/programs-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { EditorialList } from "@/components/ui/editorial-list";
+import { GoldTicker } from "@/components/ui/gold-ticker";
 
 // SVG icons
 const IconMic = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0M12 21v-4M8 21h8"/></svg>);
@@ -267,14 +269,7 @@ export default function ProgramsPage() {
             <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{p.out_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{p.out_desc}</p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {outputs.map((item, i) => (
-              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-8 transition hover:-translate-y-1 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{item.icon}</div>
-                <p className="font-serif text-xl text-white">{item.label}</p>
-              </GlowCard>
-            ))}
-          </div>
+          <GoldTicker items={outputs.map((o) => o.label)} />
         </div>
       </section>
 
@@ -286,15 +281,7 @@ export default function ProgramsPage() {
             <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{p.fmt_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{p.fmt_desc}</p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {format.map((item, i) => (
-              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-8 transition hover:-translate-y-0.5 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{item.icon}</div>
-                <h3 className="font-serif text-xl text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/60">{item.desc}</p>
-              </GlowCard>
-            ))}
-          </div>
+          <EditorialList items={format.map(({ title, desc }) => ({ title, desc }))} />
         </div>
       </section>
 

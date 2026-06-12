@@ -64,7 +64,7 @@ export function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/8 pt-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/8 pt-12 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white/35">
             © {new Date().getFullYear()} Future Skill Academy — Tokyo
           </p>

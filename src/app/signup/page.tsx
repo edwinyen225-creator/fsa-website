@@ -10,9 +10,6 @@ import { GlowCard } from "@/components/ui/spotlight-card";
 const FORM_URL = "https://forms.gle/REPLACE_THIS_WITH_REAL_FORM_LINK";
 
 // SVG icons
-const IconForm = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>);
-const IconChat = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
-const IconPlay = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>);
 const IconCheck = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5"><path d="M20 6L9 17l-5-5"/></svg>);
 
 export default function SignupPage() {
@@ -22,9 +19,9 @@ export default function SignupPage() {
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
   const steps = [
-    { number: "01", icon: <IconForm />, label: s.step1_label, title: s.step1_title, desc: s.step1_desc },
-    { number: "02", icon: <IconChat />, label: s.step2_label, title: s.step2_title, desc: s.step2_desc },
-    { number: "03", icon: <IconPlay />, label: s.step3_label, title: s.step3_title, desc: s.step3_desc },
+    { number: "01", label: s.step1_label, title: s.step1_title, desc: s.step1_desc },
+    { number: "02", label: s.step2_label, title: s.step2_title, desc: s.step2_desc },
+    { number: "03", label: s.step3_label, title: s.step3_title, desc: s.step3_desc },
   ];
   const benefits = [s.benefit1, s.benefit2, s.benefit3, s.benefit4];
 
@@ -54,18 +51,21 @@ export default function SignupPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{s.proc_eyebrow}</div>
           <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{s.proc_h2}</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {steps.map((step) => (
-              <GlowCard key={step.number} glowColor="gold" customSize className="p-10">
-                <div className="absolute inset-0 overflow-hidden rounded-[32px] pointer-events-none">
-                  <div className="absolute top-6 right-8 font-serif text-7xl text-white/5 leading-none select-none">{step.number}</div>
+          <div className="relative">
+            {/* Connecting line behind the step circles */}
+            <div className="absolute top-7 left-[12%] right-[12%] hidden h-px bg-gradient-to-r from-[#C9A84C]/15 via-[#C9A84C]/50 to-[#C9A84C]/15 md:block" />
+            <div className="grid gap-12 md:grid-cols-3 md:gap-8">
+              {steps.map((step) => (
+                <div key={step.number} className="relative flex flex-col items-start md:items-center md:text-center">
+                  <div className="premium-step-number relative mb-7 flex h-14 w-14 items-center justify-center rounded-full font-serif text-lg text-[#E3D1A9]">
+                    {step.number}
+                  </div>
+                  <div className="mb-2 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{step.label}</div>
+                  <h3 className="font-serif text-2xl text-white leading-snug">{step.title}</h3>
+                  <p className="mt-4 max-w-xs leading-relaxed text-white/60">{step.desc}</p>
                 </div>
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#C9A84C]/30 bg-[#0B2352] text-[#C9A84C]">{step.icon}</div>
-                <div className="mb-2 text-xs uppercase tracking-[0.3em] text-[#C9A84C]">{step.label}</div>
-                <h3 className="font-serif text-2xl text-white leading-snug">{step.title}</h3>
-                <p className="mt-4 leading-relaxed text-white/60">{step.desc}</p>
-              </GlowCard>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

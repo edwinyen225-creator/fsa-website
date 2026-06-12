@@ -8,6 +8,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
 import { FloatingPaths } from "@/components/ui/background-paths";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { EditorialList } from "@/components/ui/editorial-list";
 
 // SVG icons
 const IconGlobe = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>);
@@ -148,15 +149,7 @@ export default function TeamPage() {
             <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{m.std_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{m.std_desc}</p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {standards.map((s, i) => (
-              <GlowCard key={i} glowColor="gold" className="bg-gradient-to-br from-[#0B2352] to-[#071226] p-8 transition hover:-translate-y-0.5 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{s.icon}</div>
-                <h3 className="font-serif text-xl text-white">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/60">{s.desc}</p>
-              </GlowCard>
-            ))}
-          </div>
+          <EditorialList items={standards.map(({ title, desc }) => ({ title, desc }))} />
         </div>
       </section>
 

@@ -6,13 +6,9 @@ import { usePar } from "@/lib/parents-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import { FloatingPaths } from "@/components/ui/background-paths";
-const IconTarget  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
-const IconGlobe   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>);
-const IconMic     = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0M12 21v-4M8 21h8"/></svg>);
-const IconLayers  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>);
-const IconUsers   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>);
+import { EditorialList } from "@/components/ui/editorial-list";
+import { GoldTicker } from "@/components/ui/gold-ticker";
 const IconCheck   = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5"><path d="M20 6L9 17l-5-5"/></svg>);
-const IconFile    = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>);
 const IconChevron = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4 transition-transform duration-200"><path d="M6 9l6 6 6-6"/></svg>);
 
 function FAQItem({ q, a }: { q: string; a: string }) {
@@ -46,11 +42,11 @@ export default function ParentsPage() {
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
 
   const whyCards = [
-    { icon: <IconTarget />, title: t.w1_t, desc: t.w1_d },
-    { icon: <IconGlobe />,  title: t.w2_t, desc: t.w2_d },
-    { icon: <IconMic />,    title: t.w3_t, desc: t.w3_d },
-    { icon: <IconLayers />, title: t.w4_t, desc: t.w4_d },
-    { icon: <IconUsers />,  title: t.w5_t, desc: t.w5_d },
+    { title: t.w1_t, desc: t.w1_d },
+    { title: t.w2_t, desc: t.w2_d },
+    { title: t.w3_t, desc: t.w3_d },
+    { title: t.w4_t, desc: t.w4_d },
+    { title: t.w5_t, desc: t.w5_d },
   ];
   const outputs = [t.out1, t.out2, t.out3, t.out4, t.out5];
   const faqs = [
@@ -85,15 +81,7 @@ export default function ParentsPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-4 text-sm uppercase tracking-[0.35em] text-[#C9A84C]">{t.why_eyebrow}</div>
           <h2 className="mb-16 font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.why_h2}</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {whyCards.map((c, i) => (
-              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-8 transition hover:-translate-y-1 duration-300">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]">{c.icon}</div>
-                <h3 className="font-serif text-lg text-white">{c.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/60">{c.desc}</p>
-              </GlowCard>
-            ))}
-          </div>
+          <EditorialList items={whyCards} />
         </div>
       </section>
 
@@ -139,14 +127,7 @@ export default function ParentsPage() {
             <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.out_h2}</h2>
             <p className="self-end text-xl leading-relaxed text-slate-600">{t.out_desc}</p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {outputs.map((o, i) => (
-              <GlowCard key={i} glowColor="gold" customSize className="bg-[#071226] p-7 transition hover:-translate-y-0.5 duration-300">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C9A84C]"><IconFile /></div>
-                <p className="font-serif text-base text-white">{o}</p>
-              </GlowCard>
-            ))}
-          </div>
+          <GoldTicker items={outputs} />
         </div>
       </section>
 
