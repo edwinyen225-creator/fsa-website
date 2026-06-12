@@ -59,6 +59,8 @@ const ct = {
 
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
+import LineButton from "@/components/ui/line-button";
+import { LINE_URL } from "@/lib/site";
 
 const IconEmail = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>);
 const IconLine  = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
@@ -72,7 +74,7 @@ export default function ContactPage() {
 
   const contacts = [
     { icon: <IconEmail />, label: c.email_label, val: c.email_val, desc: c.email_desc, href: `mailto:${c.email_val}` },
-    { icon: <IconLine  />, label: c.line_label,  val: c.line_val,  desc: c.line_desc,  href: "https://line.me/R/" },
+    { icon: <IconLine  />, label: c.line_label,  val: c.line_val,  desc: c.line_desc,  href: LINE_URL },
     { icon: <IconMap   />, label: c.location_label, val: c.location_val, desc: c.location_desc, href: "#" },
   ];
 
@@ -85,8 +87,8 @@ export default function ContactPage() {
         <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{c.badge}</div>
-          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">
-            {c.h1a} <span className="text-[#C9A84C]">{c.h1_gold}</span>
+          <h1 className="font-serif text-4xl leading-[1.1] tracking-[-0.02em] text-white md:text-5xl lg:text-[4.25rem]">
+            {c.h1a} <span className="italic text-[#C9A84C]">{c.h1_gold}</span>
           </h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/65">{c.sub}</p>
         </div>
@@ -122,8 +124,8 @@ export default function ContactPage() {
           <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-white md:text-6xl">{c.cta_h2}</h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/65">{c.cta_desc}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <LineButton id="contact-line-btn">{ht.nav_line_chat}</LineButton>
             <MotionButton href="/signup" id="contact-cta-btn">{c.cta_btn}</MotionButton>
-            <MotionButton href="/programs">{c.cta_btn2}</MotionButton>
           </div>
         </GlowCard>
       </section>

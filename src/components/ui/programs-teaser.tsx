@@ -4,6 +4,7 @@ import Link from "next/link";
 import MotionButton from "@/components/ui/motion-button";
 import { useLanguage } from "@/hooks/useLanguage";
 import { homepageTranslations } from "@/lib/homepage-i18n";
+import { usePT } from "@/lib/programs-i18n";
 
 /**
  * Compact programs teaser — replaces the full-screen scroll deep-dive on the
@@ -12,11 +13,13 @@ import { homepageTranslations } from "@/lib/homepage-i18n";
 export function ProgramsTeaser() {
   const { locale } = useLanguage();
   const t = homepageTranslations[locale];
+  const pt = usePT(locale);
 
+  // Same featured trio (and names) as the /programs panels — no naming drift
   const cards = [
-    { number: "01", title: t.prog_c1_title, sub: t.prog_c1_sub, desc: t.prog_c1_desc },
-    { number: "02", title: t.prog_c2_title, sub: t.prog_c2_sub, desc: t.prog_c2_desc },
-    { number: "03", title: t.prog_c3_title, sub: t.prog_c3_sub, desc: t.prog_c3_desc },
+    { number: "01", title: t.prog1_name, sub: t.prog1_status, desc: pt.p1_tagline },
+    { number: "02", title: t.prog4_name, sub: t.prog4_status, desc: pt.p4_tagline },
+    { number: "03", title: t.prog3_name, sub: t.prog3_status, desc: pt.p3_tagline },
   ];
 
   return (

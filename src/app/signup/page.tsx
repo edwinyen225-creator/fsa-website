@@ -37,8 +37,8 @@ export default function SignupPage() {
         <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{s.badge}</div>
-          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">
-            {s.h1a} <span className="text-[#C9A84C]">{s.gold}</span> {s.h1b}
+          <h1 className="font-serif text-4xl leading-[1.1] tracking-[-0.02em] text-white md:text-5xl lg:text-[4.25rem]">
+            {s.h1a} <span className="italic text-[#C9A84C]">{s.gold}</span> {s.h1b}
           </h1>
           <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl">{s.sub}</p>
           <div className="mt-10">

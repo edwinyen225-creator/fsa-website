@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import MotionButton from "@/components/ui/motion-button";
 import { usePar } from "@/lib/parents-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -22,7 +23,19 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <span className="font-serif text-xl text-white">{q}</span>
         <span className={`flex-shrink-0 text-[#C9A84C] ${open ? "rotate-180" : ""} transition-transform duration-200`}><IconChevron /></span>
       </button>
-      {open && <p className="pb-6 leading-relaxed text-white/60">{a}</p>}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="pb-6 leading-relaxed text-white/60">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -56,8 +69,8 @@ export default function ParentsPage() {
         <FloatingPaths position={-1} />
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <div className="mb-6 inline-flex rounded-full border border-[#C9A84C]/35 px-5 py-2 text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{t.badge}</div>
-          <h1 className="font-sans text-4xl font-medium leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[4rem]">
-            {t.h1a} <span className="text-[#C9A84C]">{t.h1_gold}</span>
+          <h1 className="font-serif text-4xl leading-[1.1] tracking-[-0.02em] text-white md:text-5xl lg:text-[4.25rem]">
+            {t.h1a} <span className="italic text-[#C9A84C]">{t.h1_gold}</span>
           </h1>
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/65 md:text-xl">{t.sub}</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
