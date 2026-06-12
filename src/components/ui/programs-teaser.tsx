@@ -30,24 +30,29 @@ export function ProgramsTeaser() {
           <h2 className="font-serif text-4xl sm:text-5xl leading-tight md:text-6xl">{t.prog_h2}</h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {cards.map((card) => (
+        {/* Editorial menu — linked ruled rows instead of cards */}
+        <div>
+          {cards.map((card, i) => (
             <Link
               key={card.number}
               href="/programs"
-              className="premium-card-light group block border p-8 transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A84C]"
+              className={`group grid items-center gap-4 border-t border-[#040A14]/10 py-8 md:grid-cols-[110px_minmax(0,1.1fr)_minmax(0,1.5fr)_56px] md:gap-8 md:py-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A84C] ${
+                i === cards.length - 1 ? "border-b border-[#040A14]/10" : ""
+              }`}
             >
-              <div className="premium-step-number mb-7 flex h-11 w-11 items-center justify-center rounded-full font-serif text-sm text-[#E3D1A9]">
-                {card.number}
+              <span className="font-serif text-3xl italic text-[#C9A84C] md:text-4xl">{card.number}</span>
+              <div>
+                <div className="mb-1.5 text-[0.65rem] uppercase tracking-[0.3em] text-[#C9A84C]">{card.sub}</div>
+                <h3 className="font-serif text-2xl leading-snug text-[#071226] transition-transform duration-300 group-hover:translate-x-1 md:text-3xl">
+                  {card.title}
+                </h3>
               </div>
-              <div className="mb-1.5 text-[0.65rem] uppercase tracking-[0.3em] text-[#C9A84C]">{card.sub}</div>
-              <h3 className="light-card-title font-serif mb-3">{card.title}</h3>
-              <p className="light-card-body text-slate-600">{card.desc}</p>
-              <div className="mt-6 inline-flex items-center gap-2 text-sm text-[#8E7A4E] transition-transform duration-300 group-hover:translate-x-1">
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5">
+              <p className="leading-relaxed text-slate-600">{card.desc}</p>
+              <span className="hidden justify-self-end text-[#8E7A4E] transition-transform duration-300 group-hover:translate-x-1.5 md:block">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth={1.6} className="h-5 w-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2 7h10M8 3l4 4-4 4" />
                 </svg>
-              </div>
+              </span>
             </Link>
           ))}
         </div>
