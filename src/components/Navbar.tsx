@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import MotionButton from "@/components/ui/motion-button";
 import { usePathname } from "next/navigation";
 import { type Locale, localeLabels, localeNames } from "@/lib/i18n";
@@ -151,9 +152,14 @@ export function Navbar() {
           </div>
 
           <Link href="/" className="flex items-center gap-4 ml-12 lg:ml-0">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A84C]/50 bg-[#081327]">
-            <span className="font-serif text-sm text-[#C9A84C]">FSA</span>
-          </div>
+          <Image
+            src="/images/fsa-logo.png"
+            alt="Future Skill Academy"
+            width={900}
+            height={985}
+            priority
+            className="h-12 w-auto"
+          />
           <div className="hidden sm:block">
             <div className="font-serif text-xl tracking-wide">Future Skill Academy</div>
           </div>

@@ -83,8 +83,9 @@ export default function RadialOrbitalTimeline({
     const angle = ((index / total) * 360 + rotationAngle) % 360;
     const radius = 180;
     const radian = (angle * Math.PI) / 180;
-    const x = radius * Math.cos(radian) + centerOffset.x;
-    const y = radius * Math.sin(radian) + centerOffset.y;
+    // Round to 3 decimals so the SSR markup matches the client render (avoids hydration mismatch)
+    const x = Math.round((radius * Math.cos(radian) + centerOffset.x) * 1000) / 1000;
+    const y = Math.round((radius * Math.sin(radian) + centerOffset.y) * 1000) / 1000;
     const zIndex = Math.round(100 + 50 * Math.cos(radian));
     const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
     return { x, y, zIndex, opacity };

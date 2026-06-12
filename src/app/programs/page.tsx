@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import MotionButton from "@/components/ui/motion-button";
-import { FullScreenScrollFX } from "@/components/ui/full-screen-scroll-fx";
 import { FloatingPaths } from "@/components/ui/background-paths";
-import { SparklesCore } from "@/components/ui/sparkles";
 
 import { usePT } from "@/lib/programs-i18n";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -24,13 +23,24 @@ const IconGlobe = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IconTarget = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>);
 const IconMap = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><path d="M9 3v15M15 6v15"/></svg>);
 const IconTracks = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-6 w-6"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>);
+const IconChat = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>);
 
 export default function ProgramsPage() {
   const { locale } = useLanguage();
   const p = usePT(locale);
   const ht = homepageTranslations[locale];
+  const [selectedProgIdx, setSelectedProgIdx] = useState<number | null>(null);
+  const programsSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => { document.documentElement.lang = locale; }, [locale]);
+
+  // Keep the programs section in view when toggling between panels and detail
+  const selectProgram = (idx: number | null) => {
+    setSelectedProgIdx(idx);
+    requestAnimationFrame(() => {
+      programsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   const programs = [
     { id: "general-language",   number: "01", icon: <IconMic />,    name: ht.prog1_name, ages: ht.prog1_status, tagline: p.p1_tagline, focus: [p.p1_f1,p.p1_f2,p.p1_f3,p.p1_f4,p.p1_f5], outcome: p.p1_outcome },
@@ -39,6 +49,9 @@ export default function ProgramsPage() {
     { id: "future-portfolio",   number: "04", icon: <IconLayers />, name: ht.prog4_name, ages: ht.prog4_status, tagline: p.p4_tagline, focus: [p.p4_f1,p.p4_f2,p.p4_f3,p.p4_f4,p.p4_f5], outcome: p.p4_outcome },
     { id: "future-cohort",      number: "05", icon: <IconUsers />,  name: ht.prog5_name, ages: ht.prog5_status, tagline: p.p5_tagline, focus: [p.p5_f1,p.p5_f2,p.p5_f3,p.p5_f4,p.p5_f5], outcome: p.p5_outcome },
   ];
+
+  // Featured programs shown in the image panel section (English, Portfolio, AI)
+  const featuredPrograms = [programs[0], programs[3], programs[2]];
 
   const outputs = [
     { icon: <IconSlides />, label: p.out1 }, { icon: <IconDoc />, label: p.out2 },
@@ -52,235 +65,7 @@ export default function ProgramsPage() {
     { icon: <IconTracks />, title: p.fmt5_t, desc: p.fmt5_d },
   ];
 
-  // Background gradient per program — subtle variation on dark navy
-  const bgGradients = [
-    "radial-gradient(ellipse at 30% 50%, #0D2057 0%, #071226 55%, #040A14 100%)",
-    "radial-gradient(ellipse at 70% 40%, #091E45 0%, #071226 55%, #040A14 100%)",
-    "radial-gradient(ellipse at 50% 60%, #0C1D48 0%, #071226 55%, #040A14 100%)",
-    "radial-gradient(ellipse at 25% 35%, #0A1B3F 0%, #071226 55%, #040A14 100%)",
-    "radial-gradient(ellipse at 60% 55%, #0B1C42 0%, #071226 55%, #040A14 100%)",
-  ];
-
-  const fxSections = programs.map((prog, idx) => ({
-    id: prog.id,
-    background: "",
-    renderBackground: (_active: boolean, _prev: boolean) => (
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: bgGradients[idx],
-          transition: "opacity 0.7s ease",
-        }}
-      />
-    ),
-    leftLabel: (
-      <span
-        style={{
-          fontFamily: "Georgia, 'Times New Roman', serif",
-          fontSize: "clamp(1rem, 2vw, 1.5rem)",
-          letterSpacing: "0.05em",
-          fontWeight: 400,
-          color: "rgba(245,245,245,0.85)",
-        }}
-      >
-        {prog.number}
-      </span>
-    ),
-    rightLabel: (
-      <span
-        style={{
-          fontFamily: "'Helvetica Neue', Arial, sans-serif",
-          fontSize: "clamp(0.65rem, 1.1vw, 0.85rem)",
-          fontWeight: 400,
-          letterSpacing: "0.06em",
-          textTransform: "uppercase" as const,
-          textAlign: "right" as const,
-          display: "block",
-          lineHeight: 1.3,
-          color: "rgba(245,245,245,0.6)",
-          maxWidth: "14ch",
-        }}
-      >
-        {prog.name}
-      </span>
-    ),
-    title: (
-      <div
-        style={{
-          textTransform: "none",
-          fontFamily: "Georgia, 'Times New Roman', serif",
-          textAlign: "center",
-          padding: "0 clamp(1rem, 5vw, 4rem)",
-          maxWidth: "min(600px, 88vw)",
-          letterSpacing: "normal",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {/* ── TOP: eyebrow + program name ── */}
-        <div style={{ paddingTop: "5rem" }}>
-          <p
-            style={{
-              fontFamily: "'Helvetica Neue', Arial, sans-serif",
-              fontSize: "0.62rem",
-              letterSpacing: "0.38em",
-              color: "#C9A84C",
-              fontWeight: 400,
-              textTransform: "uppercase",
-              margin: "0 0 0.9rem",
-            }}
-          >
-            {prog.ages} — {prog.number}
-          </p>
-          <p
-            style={{
-              fontFamily: "Georgia, 'Times New Roman', serif",
-              fontSize: "clamp(1.6rem, 3.2vw, 2.8rem)",
-              fontWeight: 400,
-              lineHeight: 1.12,
-              letterSpacing: "-0.02em",
-              color: "rgba(245,245,245,0.96)",
-              margin: 0,
-            }}
-          >
-            {prog.name}
-          </p>
-        </div>
-
-        {/* ── SPARKLES — centered, wider than title column ── */}
-        <div
-          style={{
-            position: "relative",
-            width: "calc(100% + 320px)",
-            height: "220px",
-            marginTop: "1.5rem",
-            flexShrink: 0,
-          }}
-        >
-          {/* Sparkle particles with radial fade on all edges — no solid overlay */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              WebkitMaskImage:
-                "radial-gradient(ellipse 65% 80% at 50% 0%, black 0%, transparent 100%)",
-              maskImage:
-                "radial-gradient(ellipse 65% 80% at 50% 0%, black 0%, transparent 100%)",
-            }}
-          >
-            <SparklesCore
-              id={`sparkles-${prog.id}`}
-              background="transparent"
-              minSize={0.4}
-              maxSize={1}
-              particleDensity={1200}
-              className="w-full h-full"
-              particleColor="#FFFFFF"
-              speed={1}
-            />
-          </div>
-
-          {/* Glowing gold line */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "10%",
-              right: "10%",
-              height: "2px",
-              background:
-                "linear-gradient(to right, transparent, #C9A84C 30%, #E4C261 50%, #C9A84C 70%, transparent)",
-              filter: "blur(1.5px)",
-              pointerEvents: "none",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "10%",
-              right: "10%",
-              height: "1px",
-              background:
-                "linear-gradient(to right, transparent, #C9A84C 30%, #E4C261 50%, #C9A84C 70%, transparent)",
-              pointerEvents: "none",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "28%",
-              right: "28%",
-              height: "7px",
-              background:
-                "linear-gradient(to right, transparent, #E4C261 50%, transparent)",
-              filter: "blur(4px)",
-              pointerEvents: "none",
-            }}
-          />
-        </div>
-
-        {/* ── BOTTOM: tagline + focus — pushed further down ── */}
-        <div style={{ marginTop: "0rem" }}>
-          <p
-            style={{
-              fontFamily: "'Helvetica Neue', Arial, sans-serif",
-              fontSize: "0.82rem",
-              lineHeight: 1.75,
-              color: "rgba(245,245,245,0.5)",
-              fontWeight: 300,
-              margin: "0 auto 1.6rem",
-              maxWidth: "36ch",
-            }}
-          >
-            {prog.tagline}
-          </p>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "inline-block",
-              textAlign: "left",
-            }}
-          >
-            {prog.focus.map((f) => (
-              <li
-                key={f}
-                style={{
-                  fontFamily: "'Helvetica Neue', Arial, sans-serif",
-                  fontSize: "0.76rem",
-                  color: "rgba(245,245,245,0.62)",
-                  marginBottom: "0.38rem",
-                  paddingLeft: "1.1rem",
-                  position: "relative",
-                  fontWeight: 300,
-                  lineHeight: 1.55,
-                  letterSpacing: "0.01em",
-                }}
-              >
-                <span
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    color: "#C9A84C",
-                    fontSize: "0.45rem",
-                    top: "0.42rem",
-                  }}
-                >
-                  ◆
-                </span>
-                {f}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    ),
-  }));
+  const selected = selectedProgIdx !== null ? featuredPrograms[selectedProgIdx] : null;
 
   return (
     <main className="min-h-screen bg-[#040A14] text-white">
@@ -303,65 +88,176 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      {/* Cinematic Programs Scroll — desktop only */}
-      <div className="hidden md:block">
-        <FullScreenScrollFX
-          sections={fxSections}
-          colors={{
-            text: "rgba(245,245,245,0.9)",
-            overlay: "rgba(4,10,20,0.05)",
-            pageBg: "#040A14",
-            stageBg: "#040A14",
-          }}
-          fontFamily="'Helvetica Neue', Arial, sans-serif"
-          showProgress={true}
-          durations={{ change: 0.7, snap: 800 }}
-          bgTransition="fade"
-          gap={0}
-          gridPaddingX={3}
-        />
-      </div>
+      {/* Image Panel Programs Section */}
+      <section id="scroll" ref={programsSectionRef} className="relative scroll-mt-20">
+        <AnimatePresence mode="wait">
+          {selectedProgIdx === null ? (
+            /* ── Three panels ── */
+            <motion.div
+              key="panels"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="flex flex-col md:flex-row"
+              style={{ height: "100svh" }}
+            >
+              {featuredPrograms.map((prog, i) => (
+                <div
+                  key={prog.id}
+                  className="relative flex-1 overflow-hidden cursor-pointer group"
+                  onClick={() => selectProgram(i)}
+                >
+                  {/* Divider — horizontal between stacked panels on mobile, vertical on desktop */}
+                  {i > 0 && (
+                    <div className="absolute left-0 top-0 right-0 h-px md:right-auto md:bottom-0 md:h-auto md:w-px bg-white/20 z-10" />
+                  )}
 
-      {/* Mobile program cards */}
-      <div className="md:hidden bg-[#040A14] px-5 py-12 flex flex-col gap-6">
-        {programs.map((prog, idx) => (
-          <div
-            key={prog.id}
-            className="rounded-2xl border border-white/10 overflow-hidden"
-            style={{ background: bgGradients[idx] }}
-          >
-            {/* Gold top line */}
-            <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, #C9A84C 30%, #E4C261 50%, #C9A84C 70%, transparent)" }} />
+                  {/* Image with zoom on hover */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/placeholder-class.jpg"
+                    alt={prog.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                  />
 
-            <div className="px-6 pt-6 pb-7">
-              {/* Eyebrow */}
-              <p className="mb-3 text-[0.6rem] uppercase tracking-[0.32em] text-[#C9A84C]">
-                {prog.ages} — {prog.number}
-              </p>
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent pointer-events-none" />
 
-              {/* Title */}
-              <h2 className="font-serif text-2xl leading-snug text-white/95 mb-4">
-                {prog.name}
-              </h2>
+                  {/* Class label */}
+                  <div
+                    className="absolute bottom-5 left-6 md:bottom-8 md:left-8 text-white font-light"
+                    style={{
+                      fontSize: "clamp(1.15rem, 1.8vw, 1.75rem)",
+                      letterSpacing: "-0.01em",
+                      textShadow: "0 1px 8px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    {prog.name}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          ) : (
+            /* ── Expanded program detail ── */
+            <motion.div
+              key="expanded"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              {/* Hero image */}
+              <div className="relative" style={{ height: "42vh" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/placeholder-class.jpg"
+                  alt={selected?.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-transparent pointer-events-none" />
+                <div
+                  className="absolute bottom-8 left-10 text-white font-light"
+                  style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
+                >
+                  {selected?.name}
+                </div>
+                {/* Section counter */}
+                <div className="absolute top-5 right-6 text-white/30 text-xs font-mono tracking-widest">
+                  0.{(selectedProgIdx ?? 0) + 1}
+                </div>
+                {/* Back to panels */}
+                <button
+                  onClick={() => selectProgram(null)}
+                  className="absolute top-5 left-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/30 px-4 py-2 text-[0.65rem] uppercase tracking-[0.25em] text-white/80 backdrop-blur-sm transition-colors duration-200 hover:border-white/50 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C9A84C] active:opacity-70"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" className="h-3 w-3">
+                    <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Back
+                </button>
+              </div>
 
-              {/* Tagline */}
-              <p className="text-sm leading-relaxed text-white/50 mb-5">
-                {prog.tagline}
-              </p>
+              {/* Detail content */}
+              <div className="bg-[#fbfaf6] px-8 py-12 md:px-14" style={{ minHeight: "58vh" }}>
+                <div className="mx-auto max-w-6xl">
+                  {/* Eyebrow */}
+                  <div className="flex items-center gap-3 mb-10 text-[0.65rem] uppercase tracking-[0.35em] text-[#C9A84C]">
+                    <div className="h-px w-8 bg-[#C9A84C]" />
+                    Our Programs
+                  </div>
 
-              {/* Focus points */}
-              <ul className="flex flex-col gap-1.5">
-                {prog.focus.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-white/65">
-                    <span className="mt-[0.35rem] text-[0.4rem] text-[#C9A84C] flex-shrink-0">◆</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
+                  {/* Cards grid */}
+                  <div className="grid grid-cols-1 gap-5 md:grid-cols-[2fr_3fr]">
+                    {/* Left: dark Materials card */}
+                    <div
+                      className="bg-[#040A14] rounded-2xl p-8 flex flex-col justify-between text-white"
+                      style={{ minHeight: "220px" }}
+                    >
+                      <div className="text-[#C9A84C]">
+                        <IconLayers />
+                      </div>
+                      <h3
+                        className="font-light text-white"
+                        style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}
+                      >
+                        Materials
+                      </h3>
+                    </div>
+
+                    {/* Right: two white info cards */}
+                    <div className="flex flex-col gap-4">
+                      <div className="bg-white rounded-2xl p-7 shadow-[0_1px_4px_rgba(0,0,0,0.06)] border border-slate-100/80">
+                        <div className="text-slate-300 mb-4">
+                          <IconDoc />
+                        </div>
+                        <p
+                          className="font-light text-[#040A14] leading-snug"
+                          style={{ fontSize: "clamp(1rem, 1.5vw, 1.3rem)" }}
+                        >
+                          {selected?.tagline}
+                        </p>
+                      </div>
+                      <div className="bg-white rounded-2xl p-7 shadow-[0_1px_4px_rgba(0,0,0,0.06)] border border-slate-100/80">
+                        <div className="text-slate-300 mb-4">
+                          <IconChat />
+                        </div>
+                        <p
+                          className="font-light text-[#040A14] leading-snug"
+                          style={{ fontSize: "clamp(1rem, 1.5vw, 1.3rem)" }}
+                        >
+                          {selected?.outcome}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Continue — returns to panels */}
+                <div className="text-center mt-14">
+                  <button
+                    onClick={() => selectProgram(null)}
+                    className="group inline-flex flex-col items-center gap-1.5"
+                  >
+                    <span
+                      className="text-[0.6rem] uppercase tracking-[0.38em] text-[#040A14]/40 transition-colors duration-200 group-hover:text-[#040A14]/70"
+                    >
+                      Continue
+                    </span>
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className="h-3.5 w-3.5 text-[#040A14]/30 transition-colors duration-200 group-hover:text-[#040A14]/60"
+                    >
+                      <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
 
       {/* What students create */}
       <section className="bg-[#F4F7FA] px-6 py-20 md:py-24 text-[#071226]">

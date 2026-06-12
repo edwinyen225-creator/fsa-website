@@ -9,8 +9,11 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { ShaderAnimation } from "@/components/ui/shader-lines";
 import { IcosahedronCanvas } from "@/components/ui/geometric-blur-mesh";
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
-import AnimatedScroll from "@/components/ui/animated-scroll";
 import TestimonialsSection from "@/components/ui/testimonials-section";
+import ProgramsTeaser from "@/components/ui/programs-teaser";
+import LearnerShowcase from "@/components/ui/learner-showcase";
+import CoachesStrip from "@/components/ui/coaches-strip";
+import FinalCTA from "@/components/ui/final-cta";
 
 export default function Home() {
   const { locale } = useLanguage();
@@ -32,12 +35,12 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 w-full pt-20 flex items-center">
           {/* Left: text + CTAs */}
           <div className="w-full lg:w-1/2">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-[4.5rem] leading-[1.15] text-white tracking-tight mb-8">
-              {t.hero_h1a} <span className="text-[#C9A84C]">{t.hero_h1_gold}</span><br />
-              <span className="text-xl md:text-2xl lg:text-[1.75rem] font-medium leading-[1.6] text-white/90 mt-6 block">
-                {t.hero_heading}
-              </span>
+            <h1 className="font-serif text-[2.7rem] md:text-6xl lg:text-[4.75rem] leading-[1.08] tracking-[-0.02em] text-white">
+              {t.hero_h1a} <span className="italic text-[#C9A84C]">{t.hero_h1_gold}</span>
             </h1>
+            <p className="mt-7 max-w-md text-lg md:text-xl font-light leading-[1.7] text-white/70">
+              {t.hero_heading}
+            </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mt-10">
               <MotionButton href="/signup">{t.hero_cta_primary}</MotionButton>
               <MotionButton href="/programs">{t.hero_cta_secondary}</MotionButton>
@@ -77,14 +80,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. Testimonials ── */}
+      {/* ── 2. Proof: what learners create ── */}
+      <LearnerShowcase />
+
+      {/* ── 3. Programs teaser → /programs ── */}
+      <ProgramsTeaser />
+
+      {/* ── 4. Coaches teaser ── */}
+      <CoachesStrip />
+
+      {/* ── 5. Testimonials ── */}
       <TestimonialsSection />
 
-      {/* ── 3. Animated Features Scroll ── */}
-      {/* desktop: h-screen keeps snap-scroll; mobile: AnimatedScroll renders its own free-scroll layout */}
-      <section className="sm:h-screen">
-        <AnimatedScroll />
-      </section>
+      {/* ── 6. Final CTA ── */}
+      <FinalCTA />
 
     </main>
   );

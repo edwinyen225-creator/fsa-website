@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, Inter } from "next/font/google";
+import { Geist_Mono, Playfair_Display, Jost, Shippori_Mincho, Zen_Kaku_Gothic_New } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { MobileCTABar } from "@/components/ui/mobile-cta-bar";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -22,10 +18,27 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+// Body sans — geometric, refined; pairs with Playfair's editorial serif
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+// Japanese companions — elegant mincho for headings, clean gothic for body.
+// next/font self-hosts all charsets; JP glyphs load on demand (preload: false).
+const shippori = Shippori_Mincho({
+  variable: "--font-shippori",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  preload: false,
+});
+
+const zenKaku = Zen_Kaku_Gothic_New({
+  variable: "--font-zen-kaku",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -72,13 +85,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${geistMono.variable} ${playfair.variable} ${jost.variable} ${shippori.variable} ${zenKaku.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <LanguageProvider>
           <Navbar />
           {children}
+          <Footer />
           <MobileCTABar />
         </LanguageProvider>
       </body>
