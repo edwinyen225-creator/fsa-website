@@ -86,10 +86,12 @@ export function MenuContainer({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div ref={containerRef} className="fixed top-4 left-4 z-[60]" data-expanded={isExpanded}>
+    // pointer-events-none keeps the container's invisible box (as wide as the
+    // hidden panel) from swallowing taps meant for the logo behind it
+    <div ref={containerRef} className="fixed top-4 left-4 z-[60] pointer-events-none" data-expanded={isExpanded}>
       {/* Trigger — always visible, no backdrop */}
       <div
-        className="relative w-12 h-12 flex items-center justify-center cursor-pointer z-50 text-[#C9A84C]/70 hover:text-[#C9A84C] transition-colors duration-200"
+        className="pointer-events-auto relative w-12 h-12 flex items-center justify-center cursor-pointer z-50 text-[#C9A84C]/70 hover:text-[#C9A84C] transition-colors duration-200"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         {childrenArray[0]}
